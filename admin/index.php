@@ -219,6 +219,8 @@ else {
             foreach (['telephone', 'whatsapp', 'email', 'email_notifications', 'adresse', 'zone', 'horaires', 'annees', 'hero_titre', 'hero_texte', 'facebook', 'instagram', 'linkedin', 'aa_accueil', 'raison_sociale', 'forme_juridique', 'capital', 'identifiant_unique', 'matricule_fiscal', 'directeur_publication'] as $k) $r[$k] = post($k);
             $r['whatsapp'] = preg_replace('/\D/', '', $r['whatsapp']);
             $r['hero_lien'] = post('hero_lien');
+            $vals = (array)($_POST['chiffre_valeur'] ?? []); $libs = (array)($_POST['chiffre_libelle'] ?? []); $r['chiffres'] = [];
+            for ($i = 0; $i < 4; $i++) { $v = mb_substr(trim((string)($vals[$i] ?? '')), 0, 12); $l = mb_substr(trim((string)($libs[$i] ?? '')), 0, 60); if ($v !== '' || $l !== '') $r['chiffres'][] = ['valeur' => $v, 'libelle' => $l]; }
             if (!empty($_POST['retirer_hero_image'])) $r['hero_image'] = '';
             if ($src = traiter_image($_FILES['hero_image'] ?? [], 'accueil')) $r['hero_image'] = $src;
             enregistrer('reglages', $r); flash('Réglages enregistrés.'); aller('p=reglages');

@@ -251,7 +251,7 @@
       if (!e.isIntersecting) return; io.unobserve(e.target);
       var el = e.target, n = +el.dataset.compte, t0 = null;
       if (n < 2) return;
-      (function pas(t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1100); el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(pas); })(performance.now());
+      (function pas(t) { if (!t0) t0 = t; var p = Math.min(1, (t - t0) / 1100); el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3))) + (el.dataset.suite || ''); if (p < 1) requestAnimationFrame(pas); })(performance.now());
     }); }, { threshold: 0.6 });
     nombres.forEach(function (el) { io.observe(el); });
   }

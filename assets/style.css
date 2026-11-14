@@ -507,7 +507,7 @@ h1 b,h2 b{font-weight:700;color:var(--sauge-f)}
 .xh-etq i{width:10px;height:10px;border-radius:50% 50% 50% 0;background:var(--sauge)}
 
 /* chiffres */
-.xn{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding:90px var(--pad) 70px}
+.xn{display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:24px;padding:90px var(--pad) 70px}
 .xn div{border-top:1.5px solid var(--trait);padding-top:22px}
 .xn b{display:block;font-weight:300;font-size:clamp(54px,7vw,116px);line-height:1;letter-spacing:-.05em;color:var(--sauge-f);font-variant-numeric:tabular-nums}
 .xn span{display:block;margin-top:10px;font-size:16px;font-weight:700;color:var(--ardoise)}

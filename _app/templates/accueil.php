@@ -11,8 +11,9 @@ $n = 0; $mots = function (string $s) use (&$n): string { $o = ''; foreach (preg_
 $phare = $aa ?: ($vedette[0] ?? null);
 $annees = trim((string)($r['annees'] ?? '')); $anneesOk = $annees !== '' && !str_contains($annees, 'XX');
 $manifeste = ($anneesOk ? "Depuis $annees ans, nous" : 'Nous') . " dessinons, fabriquons et posons les pharmacies de Tunisie, avec une seule équipe du premier relevé à la dernière vitrine.";
-$chiffres = [[count($reals), 'réalisations à découvrir'], [count($servs), 'expertises réunies'], [count($themesAvecImages), 'thèmes de vitrines'], [1, 'seul interlocuteur']];
-if ($anneesOk && ctype_digit($annees)) array_unshift($chiffres, [(int)$annees, "ans d'expérience"]) && array_pop($chiffres);
+$chiffres = chiffres_auto();
+$perso = array_values(array_filter((array)($r['chiffres'] ?? []), fn($c) => trim((string)($c['valeur'] ?? '')) !== '' && trim((string)($c['libelle'] ?? '')) !== ''));
+if ($perso) $chiffres = array_map(fn($c) => [trim((string)$c['valeur']), trim((string)$c['libelle'])], $perso);
 ?>
 <section class="xh">
   <h1 class="xh-t" aria-label="<?= h($titre) ?>"><span aria-hidden="true"><?= $mots($t1) ?><?php if ($t2): ?><b><?= $mots($t2) ?></b><?php endif; ?></span></h1>
@@ -28,8 +29,8 @@ if ($heroImg || $phare): ?>
   <?php if ($lien): ?><a class="xh-etq" href="<?= url('realisations/' . $lien['slug']) ?>"><i></i><?= h($lien['titre']) ?></a><?php endif; ?>
 </div>
 <?php endif; ?>
-<section class="xn" aria-label="PharmaChance en chiffres">
-  <?php foreach ($chiffres as [$v, $l]): ?><div><b data-compte="<?= (int)$v ?>"><?= (int)$v ?></b><span><?= h($l) ?></span></div><?php endforeach; ?>
+<section class="xn" aria-label="PharmaChance en chiffres" style="--n:<?= max(1, min(4, count($chiffres))) ?>">
+  <?php foreach ($chiffres as [$v, $l]): $v = (string)$v; $n = preg_match('/^\d+/', $v, $mm) ? $mm[0] : ''; ?><div><b<?= $n !== '' ? ' data-compte="' . (int)$n . '" data-suite="' . h(substr($v, strlen($n))) . '"' : '' ?>><?= h($v) ?></b><span><?= h($l) ?></span></div><?php endforeach; ?>
 </section>
 <div class="xm" aria-hidden="true"><span class="defile-mot"><?= str_repeat('Conseils <i></i> Agencement <i></i> Merchandising <i></i> Vitrines <i></i> ', 4) ?></span></div>
 <section class="xa">

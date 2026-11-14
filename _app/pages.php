@@ -28,3 +28,13 @@ function legal_manquant(): array {
         if (trim($r[$k] ?? '') === '') $m[] = $l;
     return $m;
 }
+
+/* Chiffres par défaut du bandeau de l'accueil, calculés depuis le contenu du site. */
+function chiffres_auto(): array
+{
+    $annees = trim((string)(reglages()['annees'] ?? ''));
+    $themes = array_filter(themes(), fn($t) => !empty($t['images']));
+    $c = [[count(realisations()), 'réalisations à découvrir'], [count(services()), 'expertises réunies'], [count($themes), 'thèmes de vitrines'], [1, 'seul interlocuteur']];
+    if (ctype_digit($annees)) { array_unshift($c, [(int)$annees, "ans d'expérience"]); array_pop($c); }
+    return $c;
+}

@@ -517,6 +517,16 @@ case 'reglages':
         <?php endif; ?></select></label>
     </section>
     <section class="bloc">
+      <h2>Bandeau des chiffres <small>sous la grande photo de l'accueil, jusqu'à 4 chiffres</small></h2>
+      <p class="aide">Écrivez un nombre (vous pouvez ajouter un signe après : 500+, 98 %) et le texte affiché en dessous. Une ligne vide est masquée. Si toutes les lignes sont vides, le site revient aux chiffres calculés automatiquement.</p>
+      <?php $ch = array_values((array)($g['chiffres'] ?? [])); if (!$ch) $ch = array_map(fn($x) => ['valeur' => (string)$x[0], 'libelle' => $x[1]], chiffres_auto()); for ($i = 0; $i < 4; $i++): $c = $ch[$i] ?? []; ?>
+      <div class="ligne-chiffre g2" style="grid-template-columns:1fr 2fr">
+        <label>Chiffre <?= $i + 1 ?><input name="chiffre_valeur[]" value="<?= h($c['valeur'] ?? '') ?>" placeholder="<?= ['26', '18', '7', '10'][$i] ?>" maxlength="12"></label>
+        <label>Texte<input name="chiffre_libelle[]" value="<?= h($c['libelle'] ?? '') ?>" placeholder="<?= ["ans d'expérience", 'réalisations à découvrir', 'expertises réunies', 'thèmes de vitrines'][$i] ?>" maxlength="60"></label>
+      </div>
+      <?php endfor; ?>
+    </section>
+    <section class="bloc">
       <h2>Réseaux sociaux <small>laisser vide pour masquer</small></h2>
       <label>Facebook<input type="url" name="facebook" value="<?= h($g['facebook'] ?? '') ?>" placeholder="https://facebook.com/…"></label>
       <label>Instagram<input type="url" name="instagram" value="<?= h($g['instagram'] ?? '') ?>" placeholder="https://instagram.com/…"></label>
