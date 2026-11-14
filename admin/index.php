@@ -38,15 +38,16 @@ if (!utilisateurs()) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         verifier_csrf();
         $email = post('email'); $mdp = (string)($_POST['mdp'] ?? ''); $mdp2 = (string)($_POST['mdp2'] ?? '');
-        $code = trim((string)(@file_get_contents(DATA_DIR . '/code-installation.txt') ?: @file_get_contents(SEED_DIR . '/code-installation.txt')));
-        if ($code === '' || !hash_equals($code, post('code'))) { noter_echec($_SERVER['REMOTE_ADDR'] ?? ''); $erreur = "Code d'installation incorrect."; }
+        $hc = trim((string)(@file_get_contents(DATA_DIR . '/code-installation.hash') ?: @file_get_contents(SEED_DIR . '/code-installation.hash')));
+        $saisi = strtoupper(trim(post('code')));
+        if ($hc === '' || !password_verify($saisi, $hc)) { noter_echec($_SERVER['REMOTE_ADDR'] ?? ''); $erreur = "Code d'installation incorrect."; }
         elseif (!tentatives_ok($_SERVER['REMOTE_ADDR'] ?? '')) $erreur = 'Trop de tentatives. Réessayez dans 15 minutes.';
         elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) $erreur = 'Adresse e-mail invalide.';
         elseif (mb_strlen($mdp) < 10) $erreur = 'Le mot de passe doit faire au moins 10 caractères.';
         elseif ($mdp !== $mdp2) $erreur = 'Les deux mots de passe ne sont pas identiques.';
         else {
             enregistrer('comptes', [['id' => bin2hex(random_bytes(6)), 'nom' => post('nom') ?: 'Administrateur', 'email' => mb_strtolower($email), 'hash' => password_hash($mdp, PASSWORD_DEFAULT), 'cree' => date('c')]]);
-            @unlink(DATA_DIR . '/code-installation.txt');
+            @unlink(DATA_DIR . '/code-installation.hash');
             flash('Compte créé. Connectez-vous.'); aller('p=connexion');
         }
     }
