@@ -1,0 +1,3 @@
+# Contenus du client : stockés hors du dépôt (../pharmachance-donnees)
+uploads/
+*.bak.json

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 560" font-family="Comfortaa, system-ui, sans-serif">
+<title>Zones chaudes et zones froides d'une officine</title>
+<defs><radialGradient id="c1" cx="20%" cy="90%" r="60%"><stop offset="0" stop-color="#649B88" stop-opacity=".75"/><stop offset="1" stop-color="#649B88" stop-opacity="0"/></radialGradient>
+<radialGradient id="c2" cx="62%" cy="45%" r="35%"><stop offset="0" stop-color="#649B88" stop-opacity=".7"/><stop offset="1" stop-color="#649B88" stop-opacity="0"/></radialGradient></defs>
+<rect x="20" y="20" width="960" height="520" rx="28" fill="#F6F9F7" stroke="#B9CBC3" stroke-width="3"/>
+<rect x="20" y="20" width="960" height="520" rx="28" fill="url(#c1)"/><rect x="20" y="20" width="960" height="520" rx="28" fill="url(#c2)"/>
+<g fill="#3B6A59"><rect x="700" y="140" width="34" height="70" rx="8"/><rect x="700" y="240" width="34" height="70" rx="8"/><rect x="700" y="340" width="34" height="70" rx="8"/></g>
+<text x="717" y="120" text-anchor="middle" font-size="16" font-weight="700" fill="#2C5244">Comptoirs</text>
+<rect x="60" y="520" width="140" height="20" rx="4" fill="#3B6A59"/><text x="130" y="505" text-anchor="middle" font-size="18" font-weight="700" fill="#2C5244">Entrée</text>
+<g font-size="20" font-weight="700"><text x="250" y="440" fill="#2C5244">Zone chaude</text><text x="250" y="466" font-size="15" font-weight="400" fill="#2C5244">saison, nouveautés</text>
+<text x="520" y="300" fill="#2C5244" text-anchor="middle">Zone chaude</text><text x="520" y="326" text-anchor="middle" font-size="15" font-weight="400" fill="#2C5244">file d'attente, impulsion</text>
+<text x="70" y="90" fill="#7a817e">Zone froide</text><text x="70" y="116" font-size="15" font-weight="400" fill="#7a817e">univers de destination : bébé, orthopédie</text>
+<text x="930" y="510" text-anchor="end" fill="#7a817e">Zone froide</text></g>
+</svg>

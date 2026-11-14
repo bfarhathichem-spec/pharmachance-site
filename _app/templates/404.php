@@ -1,0 +1,2 @@
+<section class="entete"><div class="t"><p class="fil"><a href="<?= url() ?>">Accueil</a></p><h1>Cette page n'existe pas</h1></div><p class="intro">Le lien est peut-être ancien. Voici où aller ensuite.</p></section>
+<section class="wrap" style="padding-bottom:120px"><div class="btns"><a class="btn plein" href="<?= url() ?>">Retour à l'accueil</a><a class="btn ligne" href="<?= url('realisations') ?>">Voir les réalisations</a><a class="btn ligne" href="<?= url('contact') ?>">Nous contacter</a></div></section>

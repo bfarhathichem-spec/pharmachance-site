@@ -1,0 +1,271 @@
+[
+ {
+  "slug": "creation-complete",
+  "cle": "creation",
+  "nom": "Création complète",
+  "court": "Du local vide à l'officine prête à ouvrir.",
+  "intro": "Vous avez un local brut, un garage ou un espace commercial vide ? Nous le transformons en pharmacie prête à accueillir vos patients, avec une seule équipe du début à la fin.",
+  "besoins": [
+   "Vous ouvrez votre première officine",
+   "Vous déménagez dans un local qui n'a jamais été une pharmacie",
+   "Vous voulez un seul interlocuteur jusqu'à l'ouverture"
+  ],
+  "comprend": [
+   "Transformation d'un local brut, d'un garage ou d'un espace commercial vide",
+   "Organisation des espaces",
+   "Travaux nécessaires à la transformation",
+   "Agencement intérieur",
+   "Installation du mobilier et des équipements d'aménagement",
+   "Réalisation de l'environnement extérieur"
+  ],
+  "image": "img/interieur.jpg",
+  "cadrage": "50% 60%",
+  "publie": true,
+  "ordre": 1,
+  "accroche": "La création complète de pharmacie consiste à transformer un local vide (local brut, garage, espace commercial) en officine prête à recevoir ses patients : plan, travaux, mobilier, façade et vitrine, avec une seule équipe du premier relevé à l'ouverture.",
+  "texte": "## Une officine pensée de zéro\n\nDans une création, toute l'officine s'organise autour de votre façon de travailler. Nous partons du relevé précis du local pour dessiner les trois zones de l'officine : l'espace de vente, la zone des comptoirs et le back-office (stockage, préparation, réception des commandes, bureau).\n\nLe plan est présenté en image avant le moindre travail. Vous le corrigez jusqu'à ce qu'il vous ressemble, puis vous le validez.\n\n## Ce que nous coordonnons pour vous\n\n- Les travaux d'aménagement intérieur : cloisons, sols, faux plafonds, peintures.\n- Les réseaux à prévoir avant le mobilier : électricité, éclairage, climatisation, informatique.\n- Le mobilier sur mesure : comptoirs, linéaires muraux, gondoles, rangements du back-office.\n- L'extérieur : façade, enseigne lumineuse bilingue, croix, vitrophanie.\n- La première vitrine, qui annonce l'ouverture au quartier.\n\n## Pourquoi un seul interlocuteur\n\nQuand le menuisier, l'électricien et l'enseigniste ne se parlent pas, les retards s'enchaînent. PharmaChance coordonne l'ensemble, reste votre contact unique et vous tient informé de l'avancement.",
+  "faq": [
+   {
+    "q": "Combien de temps faut-il pour créer une pharmacie clé en main ?",
+    "r": "La durée dépend de l'état du local, de la surface et des travaux nécessaires. Nous établissons un planning précis après la visite et le relevé, et vous le validez avec le devis."
+   },
+   {
+    "q": "Peut-on transformer un garage en pharmacie ?",
+    "r": "Oui, PharmaChance transforme régulièrement des locaux bruts, des garages ou des espaces commerciaux vides en officines. Les règles d'ouverture d'une officine sont à vérifier auprès du ministère de la Santé et du Conseil de l'Ordre des pharmaciens."
+   },
+   {
+    "q": "Que comprend une création de pharmacie clé en main ?",
+    "r": "L'étude et le plan, les travaux d'aménagement, le mobilier sur mesure, la façade et l'enseigne, et la première vitrine, coordonnés par une seule équipe."
+   }
+  ]
+ },
+ {
+  "slug": "amenagement-renovation",
+  "cle": "renovation",
+  "nom": "Aménagement et rénovation",
+  "court": "Moderniser et réorganiser votre officine.",
+  "intro": "Votre pharmacie a vieilli, la circulation est mal pensée, l'espace manque ? Nous la modernisons, en partie ou entièrement.",
+  "besoins": [
+   "Votre officine ne reflète plus votre activité",
+   "Les patients circulent mal ou attendent au mauvais endroit",
+   "Vous venez de reprendre une pharmacie"
+  ],
+  "comprend": [
+   "Rénovation complète ou partielle",
+   "Modernisation des pharmacies existantes",
+   "Réorganisation des espaces",
+   "Optimisation des surfaces commerciales",
+   "Amélioration de la circulation et de l'expérience client"
+  ],
+  "image": "img/facade-nord-hilton.jpg",
+  "cadrage": "50% 40%",
+  "publie": true,
+  "ordre": 2,
+  "accroche": "La rénovation de pharmacie modernise une officine existante, en partie ou entièrement : nouvelle organisation de l'espace de vente, nouveaux comptoirs, nouvel éclairage, nouvelle façade, souvent sans fermer l'officine.",
+  "texte": "## Quand rénover son officine\n\nUne rénovation s'impose quand l'espace ne suit plus l'activité : patients qui attendent au mauvais endroit, parapharmacie peu visible, comptoirs mal placés, façade qui a vieilli. La reprise d'une pharmacie est aussi le bon moment pour affirmer une nouvelle identité.\n\n## Rénover sans fermer\n\nNous découpons le chantier en zones. Pendant qu'une partie se transforme derrière une cloison provisoire, l'autre continue d'accueillir les patients. Les travaux bruyants sont faits hors des heures d'ouverture et le mobilier est fabriqué à l'avance pour être posé rapidement.\n\n## Rénovation partielle ou complète\n\nUne rénovation partielle porte sur un point précis : l'éclairage, les linéaires, les comptoirs ou la façade seule. Une rénovation complète reprend tout l'espace, le mobilier, les sols et plafonds, la façade et l'enseigne.\n\nDans les deux cas, vous voyez le résultat en image avant de valider.",
+  "faq": [
+   {
+    "q": "Peut-on rénover une pharmacie sans la fermer ?",
+    "r": "Oui, dans la plupart des cas. Le chantier est découpé en zones, les travaux bruyants se font hors des heures d'ouverture et le mobilier est préparé à l'avance."
+   },
+   {
+    "q": "Par quoi commencer une rénovation de pharmacie ?",
+    "r": "Par un relevé de l'existant et un échange sur ce qui gêne au quotidien. Nous proposons ensuite un plan en image, que vous validez avant les travaux."
+   },
+   {
+    "q": "Une rénovation partielle est-elle utile ?",
+    "r": "Souvent. Un nouvel éclairage, des linéaires réorganisés ou une nouvelle façade changent nettement la perception de l'officine pour un budget limité."
+   }
+  ]
+ },
+ {
+  "slug": "enseignes-facades",
+  "cle": "facades",
+  "nom": "Enseignes et façades",
+  "court": "Être vu et reconnu depuis la rue.",
+  "intro": "Votre façade est la première chose que voit un patient. Nous concevons et réalisons des enseignes et des façades qui rendent votre pharmacie visible et reconnaissable.",
+  "besoins": [
+   "Votre pharmacie passe inaperçue depuis la rue",
+   "Votre enseigne est abîmée ou datée",
+   "Vous changez d'identité visuelle"
+  ],
+  "comprend": [
+   "Consultation initiale pour comprendre vos besoins et vos objectifs",
+   "Conception personnalisée, avec visualisation du projet",
+   "Fabrication dans notre atelier",
+   "Installation professionnelle",
+   "Habillage des façades et modernisation des devantures"
+  ],
+  "image": "img/facade-kchaou.jpg",
+  "cadrage": "50% 30%",
+  "publie": true,
+  "ordre": 3,
+  "accroche": "Une enseigne de pharmacie efficace se lit de loin, de jour comme de nuit, en français et en arabe. PharmaChance conçoit, fabrique dans son atelier et pose les enseignes lumineuses, croix, caducées et habillages de façade des officines en Tunisie.",
+  "texte": "## Être vu depuis la rue\n\nLa façade est la première image de votre pharmacie. Un passant la reconnaît à sa couleur et à sa lumière avant d'en lire le nom : nous travaillons donc ensemble la couleur de la façade, l'éclairage et la lisibilité de l'enseigne.\n\n## Ce que nous réalisons\n\n- Enseignes lumineuses en lettres découpées rétroéclairées ou en caisson, bilingues français et arabe.\n- Caducée et croix de pharmacie, visibles de loin et de nuit.\n- Habillage de façade : bardage, encadrement d'entrée en couleur, mise en valeur de l'angle de rue.\n- Vitrophanie pleine ou micro-perforée sur les vitres.\n\n## De la conception à la pose\n\nAprès un échange sur vos objectifs, nous préparons une image de votre future façade. Une fois validée, l'enseigne est fabriquée dans notre atelier puis installée par nos équipes, dépose de l'ancienne comprise. Les autorisations municipales pour l'enseigne relèvent du propriétaire de l'officine ; nous vous indiquons ce dont vous avez besoin.",
+  "faq": [
+   {
+    "q": "Quelle enseigne choisir pour une pharmacie en Tunisie ?",
+    "r": "Une enseigne lumineuse bilingue, en français et en arabe, avec la croix ou le caducée bien visibles, lisible de jour comme de nuit et cohérente avec les couleurs de la façade."
+   },
+   {
+    "q": "PharmaChance fabrique-t-elle les enseignes ?",
+    "r": "Oui. Les enseignes sont conçues puis fabriquées dans notre atelier, et installées par nos équipes, dépose de l'ancienne enseigne comprise."
+   },
+   {
+    "q": "Comment rendre une pharmacie plus visible ?",
+    "r": "Avec une couleur forte qui encadre l'entrée, une enseigne lumineuse lisible de loin et une vitrine de saison qui donne une raison d'entrer."
+   }
+  ]
+ },
+ {
+  "slug": "vitrines-thematiques",
+  "cle": "vitrines",
+  "nom": "Vitrines thématiques",
+  "court": "Une vitrine pour chaque saison.",
+  "intro": "La vitrine est votre première communication. Nous créons des vitrines saisonnières qui attirent le regard des passants, mettent en avant vos services et préservent l'intimité de l'officine.",
+  "besoins": [
+   "Vous voulez animer votre vitrine au fil des saisons",
+   "Vous lancez une campagne (grippe, solaire, capillaire…)",
+   "Votre vitrine expose l'intérieur sans le mettre en valeur"
+  ],
+  "comprend": [
+   "Audit dans votre officine",
+   "Étude du projet et prise de mesures",
+   "Présentation du projet en situation, avec corrections si besoin",
+   "Validation du projet",
+   "Fabrication et installation, dépose de l'existant comprise"
+  ],
+  "image": "img/vitrine-fleurs.jpg",
+  "cadrage": "50% 55%",
+  "publie": true,
+  "ordre": 4,
+  "accroche": "Une vitrine thématique de pharmacie est un décor saisonnier (vitrophanie, illustrations, décor en volume) qui annonce un conseil : grippe, solaire, allergies, rentrée, Ramadan. PharmaChance la conçoit aux dimensions de vos vitres, la fabrique et la pose.",
+  "texte": "## Pourquoi changer de vitrine\n\nLa vitrine est visible jour et nuit, par tous les passants. Une vitrine qui suit les saisons montre que la pharmacie suit l'actualité de ses patients, prépare le conseil au comptoir et préserve l'intimité de l'espace de vente.\n\n## Les thèmes de l'année\n\nGrippe et vaccination, immunité et vitamines, allergies de printemps, protection solaire, moustiques, soins capillaires, rentrée scolaire, stress et sommeil, Ramadan, fin d'année : chaque thème existe en plusieurs versions et s'adapte à vos couleurs. Retrouvez-les sur la page [Thèmes des vitrines](vitrines).\n\n## Comment nous travaillons\n\n1. Audit de votre vitrine et prise de mesures.\n2. Création adaptée à vos vitres et à votre façade.\n3. Présentation du projet en situation, avec corrections si besoin.\n4. Fabrication puis pose, dépose de l'ancienne vitrine comprise.\n\nPrévoyez la commande quelques semaines avant la saison visée : le message doit être en place quand les patients en ont besoin.",
+  "faq": [
+   {
+    "q": "À quelle fréquence changer la vitrine d'une pharmacie ?",
+    "r": "Quatre à six fois par an, en suivant les saisons et les campagnes de santé."
+   },
+   {
+    "q": "Qu'est-ce que la vitrophanie ?",
+    "r": "Un adhésif imprimé posé sur la vitre. Plein, il masque l'intérieur ; micro-perforé, il laisse passer la lumière. Il se remplace facilement à chaque saison."
+   },
+   {
+    "q": "Combien de temps à l'avance commander une vitrine de saison ?",
+    "r": "Quelques semaines avant la date souhaitée, le temps de créer, valider, fabriquer et poser la vitrine."
+   }
+  ]
+ },
+ {
+  "slug": "merchandising",
+  "cle": "merchandising",
+  "nom": "Merchandising",
+  "court": "Des rayons qui guident le patient.",
+  "intro": "Un rayon bien organisé guide le patient et met en avant vos gammes. Nous étudions votre espace de vente pour qu'il travaille pour vous.",
+  "besoins": [
+   "Vos linéaires sont pleins mais peu lisibles",
+   "Certaines gammes ne se vendent pas",
+   "Vous voulez dynamiser l'espace de vente"
+  ],
+  "comprend": [
+   "Optimisation des espaces de vente",
+   "Organisation des rayonnages",
+   "Aménagement des espaces de présentation"
+  ],
+  "image": "img/rayons.jpg",
+  "cadrage": "50% 50%",
+  "publie": true,
+  "ordre": 5,
+  "accroche": "Le merchandising en pharmacie consiste à organiser les rayons de parapharmacie pour guider le patient : univers par besoin, zones chaudes et froides, hauteurs de présentation, signalétique et rayon de saison.",
+  "texte": "## Des rayons lisibles\n\nLe patient cherche d'abord une réponse à un besoin. Nous organisons les linéaires par univers de besoin (peau sensible, bébé, solaire, remèdes naturels…) avec une signalétique claire au-dessus de chacun.\n\n## Les principes que nous appliquons\n\n- Zones chaudes (entrée, file d'attente, abords des comptoirs) pour la saison, les nouveautés et les achats d'impulsion.\n- Zones froides (fond, angles) pour les univers de destination qui attirent le patient à travers l'officine.\n- Hauteurs : produits à mettre en avant à hauteur des yeux, meilleures ventes à hauteur des mains, grands formats en bas.\n- Lumière dirigée sur les linéaires.\n\n## Le merchandising commence au plan\n\nLa profondeur des étagères, la hauteur des gondoles et l'emplacement des comptoirs conditionnent la présentation. Nous l'étudions donc dès le dessin de l'agencement. Pour aller plus loin, lisez notre article [Merchandising en officine](articles/merchandising-officine-organiser-rayons).",
+  "faq": [
+   {
+    "q": "Comment organiser les rayons d'une pharmacie ?",
+    "r": "Par univers de besoin plutôt que par marque, avec une signalétique lisible, les produits phares à hauteur des yeux et un rayon de saison près de l'entrée."
+   },
+   {
+    "q": "Qu'est-ce qu'une zone chaude en pharmacie ?",
+    "r": "Un endroit où passent tous les patients : l'entrée, la file d'attente et les abords des comptoirs."
+   },
+   {
+    "q": "Le merchandising est-il possible sans changer le mobilier ?",
+    "r": "Oui. Une réorganisation des univers, une nouvelle signalétique et un meilleur éclairage améliorent déjà la lisibilité de l'espace de vente."
+   }
+  ]
+ },
+ {
+  "slug": "agencement",
+  "cle": "agencement",
+  "nom": "Agencement",
+  "court": "Comptoirs, mobilier et rangements sur mesure.",
+  "intro": "Nous dessinons le mobilier de votre pharmacie : comptoirs, linéaires et rangements, pensés pour votre surface et votre façon de travailler.",
+  "besoins": [
+   "Vos comptoirs sont mal placés ou peu pratiques",
+   "Vous manquez de rangement",
+   "Vous voulez un mobilier cohérent avec votre image"
+  ],
+  "comprend": [
+   "Mobilier et agencement",
+   "Plans détaillés des comptoirs, avec gestion des câbles et accès PMR",
+   "Optimisation des rayonnages pour une gestion fluide des stocks"
+  ],
+  "image": "img/comptoirs.jpg",
+  "cadrage": "50% 50%",
+  "publie": true,
+  "ordre": 6,
+  "accroche": "L'agencement de pharmacie désigne le mobilier sur mesure de l'officine : comptoirs, linéaires muraux, gondoles, rangements et back-office, dessinés pour la surface, la circulation des patients et le travail de l'équipe.",
+  "texte": "## Du mobilier dessiné pour votre officine\n\nChaque pharmacie a sa surface, ses contraintes et son équipe. Nous dessinons le mobilier à partir du relevé du local et ajustons chaque élément au centimètre.\n\n## Les comptoirs\n\n- Un poste par personne qui sert en heure de pointe.\n- De la distance entre les postes pour la confidentialité.\n- Le passage des câbles prévu dès le dessin (caisse, terminal de paiement, scanner).\n- Une partie abaissée accessible aux personnes en fauteuil roulant.\n\n## Linéaires, gondoles et back-office\n\nLes linéaires muraux présentent la parapharmacie, les gondoles basses structurent la circulation sans masquer les comptoirs, et le back-office est pensé pour le stock, la préparation et la réception des commandes. Matériaux, couleurs et éclairage sont choisis en cohérence avec la façade.\n\nPour les règles d'un bon comptoir, lisez [Comptoirs de pharmacie : 7 règles](articles/comptoirs-pharmacie-espace-de-vente).",
+  "faq": [
+   {
+    "q": "Qu'est-ce que l'agencement d'une pharmacie ?",
+    "r": "C'est l'ensemble du mobilier de l'officine (comptoirs, linéaires, gondoles, rangements) et son organisation dans l'espace."
+   },
+   {
+    "q": "Combien de postes de comptoir prévoir ?",
+    "r": "Autant que de personnes qui servent en même temps aux heures de pointe."
+   },
+   {
+    "q": "Le mobilier PharmaChance est-il sur mesure ?",
+    "r": "Oui. Il est dessiné à partir du relevé du local, puis fabriqué et posé par nos équipes."
+   }
+  ]
+ },
+ {
+  "slug": "etude-conseil",
+  "cle": "etude",
+  "nom": "Étude et conseil",
+  "court": "Relevé, plans et conseils avant les travaux.",
+  "intro": "Avant d'engager des travaux, nous étudions votre local et votre activité pour vous proposer l'organisation la plus juste.",
+  "besoins": [
+   "Vous hésitez entre plusieurs locaux",
+   "Vous voulez un avis avant de rénover",
+   "Vous avez besoin de plans pour avancer"
+  ],
+  "comprend": [
+   "Étude de l'espace de vente",
+   "Relevé du local",
+   "Plans d'aménagement",
+   "Conseils et accompagnement pour votre pharmacie"
+  ],
+  "image": "img/plan.jpg",
+  "cadrage": "30% 50%",
+  "publie": true,
+  "ordre": 7,
+  "accroche": "L'étude et le conseil en aménagement de pharmacie permettent de décider avant d'engager des travaux : relevé du local, analyse de l'activité, plans d'aménagement et visuel du projet.",
+  "texte": "## Décider sur des bases solides\n\nAvant de signer un bail, de rénover ou d'acheter du mobilier, une étude répond aux bonnes questions : ce local convient-il à une officine ? Où placer les comptoirs ? Combien de linéaires ? Quelle surface pour le stock ?\n\n## Ce que comprend l'étude\n\n- Le relevé précis du local : murs, ouvertures, hauteurs, poteaux, arrivées d'eau et d'électricité.\n- L'analyse de votre activité et de votre équipe.\n- Les plans d'aménagement : espace de vente, comptoirs, back-office, circulation.\n- Le visuel du projet, pour vous projeter et décider.\n\n## Comparer plusieurs locaux\n\nSi vous hésitez entre deux adresses, nous étudions les deux : forme de la surface, longueur de vitrine, accès, réseaux existants. Vous choisissez en connaissant les avantages et les contraintes de chacune.",
+  "faq": [
+   {
+    "q": "Pourquoi faire une étude avant d'aménager une pharmacie ?",
+    "r": "Pour valider le plan, la circulation et le budget avant les travaux : une modification sur plan coûte bien moins qu'une modification sur chantier."
+   },
+   {
+    "q": "Que comprend le relevé d'un local ?",
+    "r": "Les dimensions précises des murs et ouvertures, les hauteurs sous plafond, les poteaux et les arrivées d'eau et d'électricité."
+   },
+   {
+    "q": "PharmaChance peut-elle m'aider à choisir un local ?",
+    "r": "Oui. Nous comparons les locaux envisagés selon leur forme, leur vitrine, leurs accès et leurs réseaux."
+   }
+  ]
+ }
+]

@@ -1,0 +1,159 @@
+[
+ {
+  "slug": "grippe",
+  "nom": "Grippe",
+  "images": [
+   "img/vitrine-grippe.jpg",
+   "img/vitrine-grippe2.jpg",
+   "img/vitrine-grippe3.jpg",
+   "img/vitrine-grippe4.jpg"
+  ],
+  "publie": true,
+  "ordre": 1,
+  "description": "Campagne grippe saisonnière et vaccination antigrippale : rappeler les bons gestes et inviter à se faire vacciner.",
+  "periode": "Octobre à décembre"
+ },
+ {
+  "slug": "immunite",
+  "nom": "Immunité",
+  "images": [
+   "img/vitrine-immunite.jpg",
+   "img/vitrine-immunite2.jpg",
+   "img/vitrine-vitamines.jpg"
+  ],
+  "publie": true,
+  "ordre": 2,
+  "description": "Défenses immunitaires, vitamines et compléments pour traverser la saison froide.",
+  "periode": "Février à mars"
+ },
+ {
+  "slug": "allergie-printemps",
+  "nom": "Allergie / Printemps",
+  "images": [
+   "img/vitrine-fleurs2.jpg",
+   "img/vitrine-fleurs.jpg",
+   "img/vitrine-hiver.jpg"
+  ],
+  "publie": true,
+  "ordre": 3,
+  "description": "Allergies saisonnières : fleurs, pollens et conseils du pharmacien dès les premiers beaux jours.",
+  "periode": "Mars à avril"
+ },
+ {
+  "slug": "capillaire",
+  "nom": "Capillaire",
+  "images": [
+   "img/vitrine-capillaire.jpg",
+   "img/vitrine-capillaire2.jpg"
+  ],
+  "publie": true,
+  "ordre": 4,
+  "description": "Soins capillaires et chute de cheveux, avec un ton léger qui donne envie de demander conseil.",
+  "periode": "Toute l'année"
+ },
+ {
+  "slug": "solaire",
+  "nom": "Solaire",
+  "images": [
+   "img/vitrine-solaire.jpg",
+   "img/vitrine-ete.jpg",
+   "img/vitrine-solaire2.jpg"
+  ],
+  "publie": true,
+  "ordre": 5,
+  "description": "Protection solaire de toute la famille, illustrée pour attirer l'œil des parents.",
+  "periode": "Mai à août"
+ },
+ {
+  "slug": "moustique",
+  "nom": "Moustique",
+  "images": [
+   "img/vitrine-moustique.jpg",
+   "img/vitrine-moustique2.jpg"
+  ],
+  "publie": true,
+  "ordre": 6,
+  "description": "Répulsifs et protection contre les moustiques dès les premières chaleurs.",
+  "periode": "Juin à septembre"
+ },
+ {
+  "slug": "anti-taches",
+  "nom": "Anti-taches",
+  "images": [],
+  "publie": true,
+  "ordre": 7,
+  "description": "Taches pigmentaires et protection de la peau.",
+  "periode": "Toute l'année"
+ },
+ {
+  "slug": "fin-annee",
+  "nom": "Fin d'année",
+  "images": [
+   "img/vitrine-art.jpg"
+  ],
+  "publie": true,
+  "ordre": 8,
+  "description": "Vœux de fin d'année et de nouvel an pour remercier les patients du quartier.",
+  "periode": "Décembre à janvier"
+ },
+ {
+  "slug": "role-pharmacien",
+  "nom": "Rôle du pharmacien",
+  "images": [],
+  "publie": true,
+  "ordre": 9,
+  "description": "Les missions du pharmacien : conseil, prévention, accompagnement.",
+  "periode": "Toute l'année"
+ },
+ {
+  "slug": "ramadan",
+  "nom": "Ramadan",
+  "images": [
+   "img/vitrine-ramadan.jpg"
+  ],
+  "publie": true,
+  "ordre": 10,
+  "description": "Vitrine de fête aux motifs géométriques, sobre et aux couleurs de la pharmacie.",
+  "periode": "Selon le calendrier lunaire"
+ },
+ {
+  "slug": "dentaire",
+  "nom": "Dentaire",
+  "images": [],
+  "publie": true,
+  "ordre": 11,
+  "description": "Hygiène bucco-dentaire de toute la famille.",
+  "periode": "Toute l'année"
+ },
+ {
+  "slug": "autres",
+  "nom": "Autres",
+  "images": [],
+  "publie": true,
+  "ordre": 15,
+  "description": "Thèmes sur mesure selon vos gammes et vos campagnes.",
+  "periode": "Sur demande"
+ },
+ {
+  "slug": "rentree",
+  "nom": "Rentrée scolaire",
+  "images": [
+   "img/vitrine-rentree.jpg"
+  ],
+  "publie": true,
+  "ordre": 13,
+  "description": "Rentrée scolaire : énergie, vitamines et anti-poux pour les parents et les enfants.",
+  "periode": "Septembre"
+ },
+ {
+  "slug": "stress-sommeil",
+  "nom": "Stress et sommeil",
+  "images": [
+   "img/vitrine-rentree2.jpg"
+  ],
+  "publie": true,
+  "ordre": 14,
+  "description": "Stress, sommeil et fatigue : une vitrine qui ouvre la conversation au comptoir.",
+  "periode": "Toute l'année"
+ }
+]

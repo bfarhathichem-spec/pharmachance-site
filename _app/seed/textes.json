@@ -1,0 +1,61 @@
+{
+ "accueil_def": "PharmaChance est une entreprise tunisienne spécialisée dans l'aménagement de pharmacies. Depuis {annees} ans, elle conçoit, fabrique et pose l'agencement des officines : mobilier et comptoirs sur mesure, merchandising, enseignes et façades, vitrines thématiques. Basée à Ennaser 2, à Tunis, l'équipe intervient dans toute la Tunisie, de la création complète d'une officine dans un local brut à la rénovation d'une pharmacie existante, souvent sans fermeture.",
+ "accueil_pourquoi": [
+  [
+   "Une seule équipe",
+   "Du relevé du local à la pose de l'enseigne, un interlocuteur unique coordonne tous les corps de métier."
+  ],
+  [
+   "Le projet en image",
+   "Vous voyez votre future pharmacie avant les travaux et vous la corrigez jusqu'à validation."
+  ],
+  [
+   "Fabrication en atelier",
+   "Mobilier, enseignes et vitrines sont fabriqués puis posés par nos équipes."
+  ],
+  [
+   "Spécialiste de l'officine",
+   "{annees} ans consacrés aux pharmacies : comptoirs, confidentialité, stock, parcours du patient."
+  ]
+ ],
+ "services_intro": "PharmaChance réunit sept expertises consacrées aux pharmacies en Tunisie. Vous pouvez nous confier toute l'officine, de l'étude à l'ouverture, ou seulement la partie qui vous pose problème aujourd'hui : un comptoir, une façade, une vitrine de saison.",
+ "realisations_intro": "Chaque réalisation présentée ici a été conçue, fabriquée et posée par PharmaChance : rénovations de façades, enseignes lumineuses bilingues, espaces de vente, rayonnages, vitrines saisonnières. Utilisez les filtres pour voir les projets par thématique.",
+ "vitrines_intro": "Une vitrine de pharmacie se change quatre à six fois par an. Voici les thèmes que nous proposons, avec la période où les poser. Chaque thème s'adapte aux dimensions de vos vitres et aux couleurs de votre officine.",
+ "articles_intro": "Nos agenceurs partagent leur méthode : ouvrir une pharmacie, la rénover sans fermer, dessiner les comptoirs, organiser les rayons, préparer les vitrines de l'année, rendre la façade visible. Ce sont des conseils concrets, écrits pour des pharmaciens.",
+ "contact_etapes": [
+  [
+   "Vous nous écrivez",
+   "Formulaire, téléphone ou WhatsApp. Une photo du local nous aide beaucoup."
+  ],
+  [
+   "Nous vous rappelons",
+   "Pour comprendre votre projet et organiser la visite."
+  ],
+  [
+   "Visite et relevé",
+   "Nous mesurons le local et écoutons vos besoins sur place."
+  ],
+  [
+   "Devis détaillé",
+   "Prestations, prix et planning, poste par poste."
+  ]
+ ],
+ "contact_faq": [
+  {
+   "q": "Quelles informations préparer avant de nous contacter ?",
+   "r": "La ville et l'adresse du local, sa surface approximative, une ou deux photos (intérieur et façade) et ce que vous souhaitez changer. Un plan, même dessiné à la main, nous aide aussi."
+  },
+  {
+   "q": "Peut-on vous envoyer des photos du local sur WhatsApp ?",
+   "r": "Oui. Le bouton WhatsApp ouvre une conversation avec PharmaChance : envoyez-y vos photos et vos questions, nous vous répondons et organisons la visite."
+  },
+  {
+   "q": "Intervenez-vous en dehors de Tunis ?",
+   "r": "Oui. Notre bureau est à Ennaser 2, à Tunis, et nous intervenons dans toute la Tunisie pour les visites, les chantiers et les poses."
+  },
+  {
+   "q": "Une demande de devis vous engage-t-elle ?",
+   "r": "Non. Le devis vous est remis pour décision. La commande ne devient ferme qu'avec le devis signé et le versement de l'acompte prévu."
+  }
+ ]
+}
