@@ -10,6 +10,7 @@ demarrer_session();
 
 $p = preg_replace('/[^a-z-]/', '', (string)($_GET['p'] ?? 'tableau')) ?: 'tableau';
 $flash = $_SESSION['flash'] ?? null; unset($_SESSION['flash']);
+function flash_sortie(): never { header('Location: ' . url('admin/?sortie=1')); exit; }
 function flash(string $m): void { $_SESSION['flash'] = $m; }
 function aller(string $q): never { header('Location: ' . url('admin/?' . $q)); exit; }
 function post(string $k, string $d = ''): string { return trim((string)($_POST[$k] ?? $d)); }
@@ -92,7 +93,7 @@ if (!utilisateurs()) {
     $page = 'installation';
 }
 /* ---------- Connexion ---------- */
-elseif ($p === 'deconnexion') { session_unset(); session_destroy(); header('Location: ' . url('admin/')); exit; }
+elseif ($p === 'deconnexion') { session_unset(); session_destroy(); setcookie('pc_edition', '0', ['expires' => time() - 3600, 'path' => base() . '/']); setcookie('pc_session', '', ['expires' => time() - 3600, 'path' => base() . '/']); flash_sortie(); }
 elseif (!($moi = utilisateur())) {
     $erreur = '';
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

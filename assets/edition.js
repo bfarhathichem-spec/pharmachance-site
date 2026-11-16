@@ -18,7 +18,7 @@
   /* ---------- Hors mode édition : un simple bouton ---------- */
   if (!conf.edition) {
     var b = el('div', 'pc-ui pc-barre pc-mini');
-    b.innerHTML = '<a class="pc-btn pc-plein" href="#">Modifier cette page</a><a class="pc-btn" href="' + ADMIN + '">Administration</a>';
+    b.innerHTML = '<a class="pc-btn pc-plein" href="#">Modifier cette page</a><a class="pc-btn" href="' + ADMIN + '">Administration</a><a class="pc-btn pc-sortir" href="' + ADMIN + '?p=deconnexion">Se déconnecter</a>';
     b.firstChild.addEventListener('click', function (e) { e.preventDefault(); cookie('1'); location.reload(); });
     document.body.appendChild(b);
     return;
@@ -34,7 +34,8 @@
     + '<div class="pc-actions"><button type="button" class="pc-btn pc-plein pc-enr" disabled>Enregistrer</button>'
     + '<button type="button" class="pc-btn pc-annuler" disabled>Annuler</button>'
     + '<button type="button" class="pc-btn pc-aide-b" aria-expanded="false">Aide</button>'
-    + '<button type="button" class="pc-btn pc-quitter">Quitter</button></div>'
+    + '<button type="button" class="pc-btn pc-quitter">Quitter</button>'
+    + '<a class="pc-btn pc-sortir" href="' + ADMIN + '?p=deconnexion">Se déconnecter</a></div>'
     + '<div class="pc-aide" hidden><p><b>Textes :</b> cliquez sur un texte, écrivez, puis cliquez ailleurs. Un texte identique est modifié partout sur le site (un bouton « Demander un devis », par exemple).</p>'
     + '<p><b>Photos :</b> survolez une photo puis cliquez sur « Changer la photo », ou glissez directement une photo de votre ordinateur sur l\'image.</p>'
     + '<p><b>Sections :</b> survolez une section : sa barre permet de la déplacer (glisser ⠿ ou flèches) ou de la masquer.</p>'
@@ -50,6 +51,10 @@
   }
   barre.querySelector('.pc-aide-b').addEventListener('click', function () {
     var a = barre.querySelector('.pc-aide'); a.hidden = !a.hidden; this.setAttribute('aria-expanded', String(!a.hidden));
+  });
+  barre.querySelector('.pc-sortir').addEventListener('click', function (e) {
+    if (nb && !confirm('Se déconnecter sans enregistrer les ' + nb + ' modification(s) ?')) { e.preventDefault(); return; }
+    nb = 0; cookie('0');
   });
   barre.querySelector('.pc-quitter').addEventListener('click', function () {
     if (nb && !confirm('Quitter sans enregistrer les ' + nb + ' modification(s) ?')) return;

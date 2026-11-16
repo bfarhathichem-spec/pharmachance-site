@@ -42,7 +42,7 @@ function date_fr(string $iso): string { $t = strtotime($iso); return $t ? date('
   <img src="<?= h(url('img/logo-couleur.png')) ?>" alt="PharmaChance" class="logo-c">
   <h1><?= h($titre) ?></h1>
   <?php if ($flash): ?><p class="flash"><?= h($flash) ?></p><?php endif; ?>
-  <?php if (!empty($erreur)): ?><p class="err" role="alert"><?= h($erreur) ?></p><?php endif; ?>
+  <?php if (!empty($erreur)): ?><p class="err" role="alert"><?= h($erreur) ?></p><?php elseif (isset($_GET['sortie'])): ?><p class="flash" role="status">Vous êtes déconnecté.</p><?php endif; ?>
   <form method="post" class="pile">
     <?= champ_csrf() ?>
     <?php if ($page === 'installation'): ?>
