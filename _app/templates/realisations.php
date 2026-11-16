@@ -5,7 +5,7 @@
 <?php $toutes = realisations(); $compte = []; foreach ($toutes as $x) foreach ($x['services'] ?? [] as $c) $compte[$c] = ($compte[$c] ?? 0) + 1;
 $sel = isset($compte[$sel]) ? $sel : 'tous'; ?>
 <span class="ancre-filtres" aria-hidden="true"></span><div class="filtres" role="group" aria-label="Filtrer par thématique" data-initial="<?= h($sel) ?>"><button type="button" data-k="tous" aria-pressed="<?= $sel === 'tous' ? 'true' : 'false' ?>">Tous</button><?php foreach (services() as $s) if (!empty($compte[$s['cle']])): ?><button type="button" data-k="<?= h($s['cle']) ?>" aria-pressed="<?= $sel === $s['cle'] ? 'true' : 'false' ?>"><?= h($s['nom']) ?></button><?php endif; ?></div>
-<div class="grille"><?php foreach ($toutes as $x) echo carte($x); ?></div>
+<div class="grille"<?= en_edition() ? ' data-liste="realisations"' : '' ?>><?php foreach ($toutes as $x) echo carte($x); ?></div>
 <p class="vide">Aucune réalisation publiée pour ce service pour l'instant.</p>
 <p style="margin-top:48px;font-size:17px">Vous cherchez une vitrine en particulier ? <a class="lien" href="<?= url('vitrines') ?>">Voir les vitrines par thème</a></p></section>
 <section class="wrap rt-themes"><h2 class="xt">Nos réalisations <b>par thématique</b></h2>

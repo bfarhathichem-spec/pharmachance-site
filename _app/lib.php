@@ -28,7 +28,13 @@ function base(): string {
     return $b;
 }
 function url(string $chemin = ''): string { return base() . '/' . ltrim($chemin, '/'); }
-function media(string $chemin): string { return $chemin === '' ? '' : url($chemin); }
+function media(string $chemin): string {
+    if ($chemin === '') return '';
+    if (!function_exists('surcharges')) return url($chemin);
+    $ori = $GLOBALS['pc_miniatures'][$chemin] ?? null;           // miniature déjà calculée depuis une photo d'origine
+    $final = $ori !== null ? $chemin : (surcharges()['images'][$chemin] ?? $chemin);
+    return url($final) . (en_edition() ? '#o=' . rawurlencode($ori ?? $chemin) : '');
+}
 
 function slugify(string $s): string {
     $s = mb_strtolower(trim($s));
@@ -168,7 +174,11 @@ function rendre(string $gabarit, array $v = []): void {
     ob_start();
     require APP_DIR . "/templates/$gabarit.php";
     $contenu = ob_get_clean();
+    if (function_exists('ordonner_blocs')) $contenu = ordonner_blocs($gabarit, $contenu);
+    ob_start();
     require APP_DIR . '/templates/layout.php';
+    $page = ob_get_clean();
+    echo function_exists('finaliser_page') ? finaliser_page($page, $gabarit) : $page;
 }
 function lien_wa(string $texte = "Bonjour, je souhaite parler d'un projet de pharmacie."): string {
     return 'https://wa.me/' . preg_replace('/\D/', '', reglages()['whatsapp'] ?? '') . '?text=' . rawurlencode($texte);

@@ -66,7 +66,8 @@ function date_fr(string $iso): string { $t = strtotime($iso); return $t ? date('
 <header class="barre">
   <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">☰</button>
   <a class="marque" href="<?= h(url('admin/')) ?>"><img src="<?= h(url('img/logo-couleur.png')) ?>" alt=""> <span>Administration</span></a>
-  <a class="voir" href="<?= h(url()) ?>" target="_blank" rel="noopener">Voir le site</a>
+  <a class="voir" href="<?= h(url('?edition=1')) ?>">Modifier le site en direct</a>
+  <a class="voir" href="<?= h(url('?edition=0')) ?>" target="_blank" rel="noopener">Voir le site</a>
 </header>
 <nav id="nav" class="nav">
   <?php foreach (['tableau' => 'Tableau de bord', 'demandes' => 'Demandes de devis', 'realisations' => 'Réalisations', 'services' => 'Services', 'themes' => 'Vitrines', 'articles' => 'Articles', 'temoignages' => 'Témoignages', 'pages' => 'Pages légales', 'reglages' => 'Réglages', 'compte' => 'Mon compte', 'aide' => 'Aide'] as $k => $l):
@@ -89,6 +90,11 @@ case 'tableau':
     <a class="tuile" href="<?= h(url('admin/?p=realisations')) ?>"><b><?= count(array_filter($R, fn($r) => !empty($r['publie']))) ?></b> réalisations en ligne sur <?= count($R) ?></a>
     <a class="tuile" href="<?= h(url('admin/?p=temoignages')) ?>"><b><?= count(temoignages()) ?></b> témoignage<?= count(temoignages()) > 1 ? 's' : '' ?> en ligne</a>
   </div>
+  <section class="bloc">
+    <h2>Modifier le site en direct</h2>
+    <p class="aide">Ouvrez n'importe quelle page du site en mode édition : cliquez sur un texte pour le réécrire, glissez une photo sur une image pour la remplacer, faites glisser les sections pour changer leur ordre ou masquez-les. Rien ne change pour les visiteurs tant que vous n'avez pas cliqué sur « Enregistrer ».</p>
+    <p class="rangee"><a class="btn" href="<?= h(url('?edition=1')) ?>">Ouvrir le site en mode édition</a></p>
+  </section>
   <section class="bloc">
     <h2>Actions rapides</h2>
     <p class="rangee"><a class="btn" href="<?= h(url('admin/?p=realisation')) ?>">Ajouter une réalisation</a>

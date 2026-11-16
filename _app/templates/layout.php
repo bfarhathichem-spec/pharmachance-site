@@ -28,7 +28,7 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
 <body>
 <a class="evitement" href="#contenu">Aller au contenu</a>
 <header class="top">
-  <a class="logo" href="<?= url() ?>" aria-label="PharmaChance, accueil"><img src="<?= url('img/logo-couleur.png') ?>" alt="PharmaChance" width="160" height="56"></a>
+  <a class="logo" href="<?= url() ?>" aria-label="PharmaChance, accueil"><img src="<?= h(media('img/logo-couleur.png')) ?>" alt="PharmaChance" width="160" height="56"></a>
   <nav class="nav-bureau" aria-label="Navigation principale">
     <a href="<?= url() ?>"<?= $cur('accueil') ?>>Accueil</a>
     <div class="sous"><a href="<?= url('services') ?>"<?= $cur('services') ?>>Services<svg width="10" height="7" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
@@ -46,7 +46,7 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Ouvrir le menu"><span></span><span></span></button>
 </header>
 <div class="mnav" id="mnav" hidden>
-  <div class="mnav-top"><a href="<?= url() ?>" aria-label="PharmaChance, accueil"><img src="<?= url('img/logo-couleur.png') ?>" alt="PharmaChance"></a><button class="mnav-fermer" type="button" aria-label="Fermer le menu"><span></span><span></span></button></div>
+  <div class="mnav-top"><a href="<?= url() ?>" aria-label="PharmaChance, accueil"><img src="<?= h(media('img/logo-couleur.png')) ?>" alt="PharmaChance"></a><button class="mnav-fermer" type="button" aria-label="Fermer le menu"><span></span><span></span></button></div>
   <nav aria-label="Navigation mobile">
     <a href="<?= url() ?>"<?= $cur('accueil') ?>>Accueil</a>
     <details<?= $actif === 'services' ? ' open' : '' ?>><summary>Services</summary><div class="mserv"><?php foreach ($servs as $s): ?><a href="<?= url('services/' . $s['slug']) ?>"><?= h($s['nom']) ?></a><?php endforeach; ?><a href="<?= url('services') ?>">Tous les services</a></div></details>

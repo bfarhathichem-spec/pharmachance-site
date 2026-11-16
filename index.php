@@ -6,6 +6,7 @@ require $app . '/composants.php';
 require $app . '/seo.php';
 require $app . '/articles.php';
 require $app . '/pages.php';
+require $app . '/edition.php';
 entetes_securite();
 
 $chemin = trim(rawurldecode(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/'), '/');

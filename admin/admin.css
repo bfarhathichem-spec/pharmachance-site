@@ -113,3 +113,4 @@ body.seul{display:grid;place-items:center;min-height:100vh;padding:24px}
 code{background:var(--brume);padding:1px 6px;border-radius:6px;font-size:13px;color:var(--sauge-ff)}
 .aide-format{margin-bottom:12px}
 .aide-l{padding-left:20px;line-height:1.7}.aide-l li{margin-bottom:8px}
+.voir+.voir{margin-left:18px;font-weight:500}

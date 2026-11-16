@@ -6,7 +6,8 @@ const WA_SVG = '<svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="tru
 function carte(array $r, string $cls = ''): string {
     $cats = h(implode(' ', $r['services'] ?? []));
     $ville = trim($r['ville'] ?? '') !== '' ? '<span>' . h($r['ville']) . '</span>' : '';
-    return '<a class="carte ' . h($cls) . '" href="' . url('realisations/' . $r['slug']) . '" data-cat="' . $cats . '">'
+    $item = function_exists('en_edition') && en_edition() ? ' data-item="' . h((string)($r['id'] ?? '')) . '"' : '';
+    return '<a class="carte ' . h($cls) . '" href="' . url('realisations/' . $r['slug']) . '" data-cat="' . $cats . '"' . $item . '>'
         . '<img src="' . h(media(miniature($r['image']))) . '" alt="' . h($r['titre'] . ' : réalisation PharmaChance') . '" loading="lazy" decoding="async" style="object-position:' . h($r['cadrage'] ?? '50% 50%') . '">'
         . '<span class="cap"><b>' . h($r['titre']) . '</b>' . $ville . '</span></a>';
 }

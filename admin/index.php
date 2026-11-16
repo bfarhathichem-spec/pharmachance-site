@@ -4,6 +4,7 @@ $app = is_dir(__DIR__ . '/../../app') ? __DIR__ . '/../../app' : __DIR__ . '/../
 require $app . '/lib.php';
 require $app . '/articles.php';
 require $app . '/pages.php';
+require $app . '/edition.php';
 entetes_securite(true);
 demarrer_session();
 
@@ -31,6 +32,43 @@ function slug_unique(string $nom, string $base, string $sauf = ''): string {
     return $s;
 }
 function vignette(string $src, string $alt = ''): string { return $src ? '<img class="vg" src="' . h(media($src)) . '" alt="' . h($alt) . '">' : '<span class="vg vide">—</span>'; }
+
+function enregistrer_edition(array $d): array {
+    $s = surcharges();
+    $n = 0;
+    foreach ((array)($d['textes'] ?? []) as $ori => $nouv) {
+        $ori = cle_texte((string)$ori); if ($ori === '' || mb_strlen($ori) > 3000 || !is_string($nouv)) continue;
+        $nouv = trim((string)preg_replace('/[\s\x{00A0}]+/u', ' ', strip_tags($nouv)));
+        if (mb_strlen($nouv) > 3000) $nouv = mb_substr($nouv, 0, 3000);
+        if ($nouv === $ori) unset($s['textes'][$ori]); else $s['textes'][$ori] = $nouv;
+        $n++;
+    }
+    foreach ((array)($d['images'] ?? []) as $ori => $nouv) {
+        $ori = (string)$ori; $nouv = (string)$nouv;
+        if (!preg_match('#^(img|uploads)/[A-Za-z0-9/_.-]+$#', $ori) || str_contains($ori, '..')) continue;
+        if ($nouv === '' || $nouv === $ori) { unset($s['images'][$ori]); $n++; continue; }
+        if (!preg_match('#^uploads/\d{4}/\d{2}/[a-z0-9-]+\.jpg$#', $nouv) || !is_file(UPLOAD_DIR . '/' . substr($nouv, 8))) continue;
+        $s['images'][$ori] = $nouv; $n++;
+    }
+    foreach ((array)($d['blocs'] ?? []) as $pg => $c) {
+        if (!preg_match('/^[a-z0-9-]{1,40}$/', (string)$pg) || !is_array($c)) continue;
+        $ok = fn($l) => array_values(array_unique(array_filter(array_map('strval', (array)$l), fn($x) => preg_match('/^[a-z0-9.-]{1,60}$/', $x))));
+        $s['blocs'][$pg] = ['ordre' => $ok($c['ordre'] ?? []), 'masques' => $ok($c['masques'] ?? [])]; $n++;
+    }
+    enregistrer('surcharges', $s);
+    foreach ((array)($d['listes'] ?? []) as $nom => $ids) {
+        if (!in_array($nom, ['realisations', 'services'], true)) continue;
+        $k = cle_id($nom); $ids = array_map('strval', (array)$ids);
+        $l = trier(charger($nom)); $pos = array_flip($ids);
+        $dans = array_values(array_filter($l, fn($x) => isset($pos[(string)($x[$k] ?? '')])));
+        usort($dans, fn($a, $b) => $pos[(string)$a[$k]] <=> $pos[(string)$b[$k]]);
+        $i = 0; $res = [];
+        foreach ($l as $x) $res[] = isset($pos[(string)($x[$k] ?? '')]) ? $dans[$i++] : $x; // les éléments non affichés gardent leur place
+        foreach ($res as $j => &$x) $x['ordre'] = $j + 1; unset($x);
+        enregistrer($nom, $res); $n++;
+    }
+    return ['ok' => true, 'message' => $n ? 'Modifications enregistrées.' : 'Rien à enregistrer.'];
+}
 
 /* ---------- Première connexion : création du compte ---------- */
 if (!utilisateurs()) {
@@ -75,6 +113,17 @@ elseif (!($moi = utilisateur())) {
 /* ---------- Espace connecté ---------- */
 else {
     $page = $p;
+    /* Édition visuelle : photo déposée sur une page, puis enregistrement de toutes les modifications */
+    if ($p === 'edition-image' || $p === 'edition-enregistrer') {
+        header('Content-Type: application/json; charset=utf-8');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !hash_equals($_SESSION['csrf'] ?? '', (string)($_POST['csrf'] ?? ''))) { http_response_code(400); exit(json_encode(['ok' => false, 'message' => 'Session expirée : rechargez la page.'])); }
+        if ($p === 'edition-image') {
+            $src = traiter_image($_FILES['photo'] ?? [], 'photo');
+            if (!$src) { http_response_code(422); exit(json_encode(['ok' => false, 'message' => 'Photo refusée : utilisez un JPEG, PNG ou WebP de moins de 20 Mo.'])); }
+            exit(json_encode(['ok' => true, 'chemin' => $src, 'url' => url($src)]));
+        }
+        exit(json_encode(enregistrer_edition(json_decode((string)($_POST['donnees'] ?? ''), true) ?: [])));
+    }
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         verifier_csrf();
         $a = post('action'); $id = post('id');

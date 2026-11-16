@@ -6,7 +6,8 @@ $aa = trouver($reals, 'slug', $r['aa_accueil'] ?? '');
 if (!$aa || empty($aa['avant'])) foreach ($reals as $x) if (!empty($x['avant'])) { $aa = $x; break; }
 $themesAvecImages = array_values(array_filter(themes(), fn($t) => !empty($t['images'])));
 $titre = (string)($r['hero_titre'] ?? ''); $coupe = mb_strpos($titre, ',');
-$t1 = $coupe !== false ? mb_substr($titre, 0, $coupe + 1) : $titre; $t2 = $coupe !== false ? trim(mb_substr($titre, $coupe + 1)) : '';
+$t1 = tr($coupe !== false ? mb_substr($titre, 0, $coupe + 1) : $titre); $t2 = tr($coupe !== false ? trim(mb_substr($titre, $coupe + 1)) : '');
+$ed = en_edition();
 $n = 0; $mots = function (string $s) use (&$n): string { $o = ''; foreach (preg_split('/\s+/u', trim($s)) as $m) if ($m !== '') $o .= '<span class="m"><span style="--i:' . ($n++) . '">' . h($m) . '</span></span> '; return $o; };
 $phare = $aa ?: ($vedette[0] ?? null);
 $annees = trim((string)($r['annees'] ?? '')); $anneesOk = $annees !== '' && !str_contains($annees, 'XX');
@@ -16,7 +17,8 @@ $perso = array_values(array_filter((array)($r['chiffres'] ?? []), fn($c) => trim
 if ($perso) $chiffres = array_map(fn($c) => [trim((string)$c['valeur']), trim((string)$c['libelle'])], $perso);
 ?>
 <section class="xh">
-  <h1 class="xh-t" aria-label="<?= h($titre) ?>"><span aria-hidden="true"><?= $mots($t1) ?><?php if ($t2): ?><b><?= $mots($t2) ?></b><?php endif; ?></span></h1>
+  <?php if ($ed): ?><h1 class="xh-t xh-fixe"><?= h($t1) ?> <?php if ($t2): ?><b><?= h($t2) ?></b><?php endif; ?></h1>
+  <?php else: ?><h1 class="xh-t" aria-label="<?= h(trim($t1 . ' ' . $t2)) ?>"><span aria-hidden="true"><?= $mots($t1) ?><?php if ($t2): ?><b><?= $mots($t2) ?></b><?php endif; ?></span></h1><?php endif; ?>
   <div class="xh-bas">
     <p><?= h($r['hero_texte'] ?? '') ?></p>
     <div class="btns"><a class="btn plein" href="<?= url('contact') ?>">Demander un devis</a><a class="btn ligne" href="<?= url('realisations') ?>">Voir les réalisations</a></div>
@@ -34,7 +36,7 @@ if ($heroImg || $phare): ?>
 </section>
 <div class="xm" aria-hidden="true"><span class="defile-mot"><?= str_repeat('Conseils <i></i> Agencement <i></i> Merchandising <i></i> Vitrines <i></i> ', 4) ?></span></div>
 <section class="xa">
-  <p class="xa-t allume"><?php foreach (preg_split('/\s+/u', $manifeste) as $m) echo '<i>' . h($m) . '</i> '; ?></p>
+  <?php $manifeste = tr($manifeste); if ($ed): ?><p class="xa-t"><?= h($manifeste) ?></p><?php else: ?><p class="xa-t allume"><?php foreach (preg_split('/\s+/u', $manifeste) as $m) echo '<i>' . h($m) . '</i> '; ?></p><?php endif; ?>
   <div class="xa-col">
     <?php foreach (array_slice($vedette, 1, 3) as $k => $x): ?><a class="xa-im xa-<?= $k ?>" data-par="<?= [0.10, -0.08, 0.14][$k] ?>" href="<?= url('realisations/' . $x['slug']) ?>"><img src="<?= h(media(miniature($x['image']))) ?>" alt="<?= h($x['titre']) ?>" loading="lazy" style="object-position:<?= h($x['cadrage'] ?? '50% 50%') ?>"></a><?php endforeach; ?>
   </div>

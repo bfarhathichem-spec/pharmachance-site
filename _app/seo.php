@@ -53,10 +53,13 @@ function faq_bloc(array $f, string $titre = 'Questions fréquentes'): string {
 /* Miniature WebP 900 px si elle existe (générée à l'envoi ou au déploiement) */
 function miniature(string $src): string {
     if ($src === '') return '';
+    $ori = $src;
+    if (function_exists('surcharges')) $src = surcharges()['images'][$src] ?? $src;
     $m = preg_replace('#^(img|uploads)/(.+)\.(jpe?g|png)$#i', '$1/min/$2.webp', $src);
-    if ($m === $src) return $src;
     $fichier = str_starts_with($m, 'uploads/') ? UPLOAD_DIR . '/' . substr($m, 8) : WWW_DIR . '/' . $m;
-    return is_file($fichier) ? $m : $src;
+    $r = ($m !== $src && is_file($fichier)) ? $m : $src;
+    $GLOBALS['pc_miniatures'][$r] = $ori;
+    return $r;
 }
 
 /* Textes éditoriaux (data/textes.json) avec {annees} remplacé */
