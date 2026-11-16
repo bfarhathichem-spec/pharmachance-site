@@ -62,3 +62,18 @@ html.pc-glisse-en-cours,html.pc-glisse-en-cours *{cursor:grabbing!important;user
   .pc-btn{padding:8px 11px}
 }
 @media print{.pc-ui{display:none!important}}
+
+/* cadres photo avant / après (page d'un projet) */
+.pc-aa-slots{margin:40px auto 0;padding:24px;border:2px dashed #8FC3AA;border-radius:18px;background:#fff}
+.pc-aa-slots h2{margin:0 0 6px;font-size:20px;font-weight:700;color:#1F3029}
+.pc-aa-slots h2 small{font-weight:600;color:#9A5B00;font-size:14px}
+.pc-aa-slots p{margin:0 0 14px;color:#33463E}
+.pc-slots{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pc-slot{position:relative;appearance:none;border:2px dashed #CFE0D7;border-radius:14px;background:#F4F8F6;min-height:220px;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font:inherit;color:#1F3029;padding:0}
+.pc-slot:hover,.pc-slot.pc-depot{border-color:#2E6B54;background:#EAF3EE}
+.pc-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pc-slot span,.pc-slot em{position:relative;background:rgba(255,255,255,.92);border-radius:999px;padding:6px 14px;font-weight:700;font-style:normal}
+.pc-slot em{background:#2E6B54;color:#fff;font-size:13px}
+.pc-slot.pc-modifie{outline:3px solid rgba(255,190,60,.9);outline-offset:2px}
+.pc-fiche{margin-top:14px!important;font-size:14px}.pc-fiche a{color:#2E6B54;font-weight:600}
+@media (max-width:700px){.pc-slots{grid-template-columns:1fr}}

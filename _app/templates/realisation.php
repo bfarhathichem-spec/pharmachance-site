@@ -8,6 +8,9 @@ $gal = array_values(array_filter($p['galerie'] ?? [], fn($g) => $g !== ($p['avan
 <div class="meta"><?php foreach (['ville', 'annee', 'surface'] as $c) if (trim($p[$c] ?? '') !== '') echo '<span>' . h($p[$c]) . '</span>'; foreach ($p['services'] ?? [] as $c) echo '<span>' . h(nom_service($c)) . '</span>'; ?></div></div>
 <div class="intro"><?= paragraphes($p['description'] ?? '') ?></div></section>
 <div class="grand-visuel" data-zoom><img src="<?= h(media($p['image'])) ?>" alt="<?= h($p['titre']) ?>" style="object-position:<?= h($p['cadrage'] ?? '50% 50%') ?>"></div>
+<?php if (en_edition()): ?><section class="pc-ui pc-aa-slots wrap" id="avant-apres"><h2>Photos avant / après de ce projet<?= in_array('facades', $p['services'] ?? [], true) ? ' <small>(obligatoire pour une façade)</small>' : '' ?></h2><p>Cliquez sur un cadre ou glissez-y une photo, puis « Enregistrer ». Prenez les deux photos du même endroit.</p><div class="pc-slots">
+<?php foreach (['avant' => 'Photo avant les travaux', 'apres' => 'Photo après les travaux'] as $k => $l): ?><button type="button" class="pc-slot" data-champ="realisations:<?= h($p['id']) ?>:<?= $k ?>"><?php if (!empty($p[$k])): ?><img src="<?= h(url($p[$k])) ?>" alt=""><?php endif; ?><span><?= $l ?></span><em><?= !empty($p[$k]) ? 'Changer la photo' : 'Ajouter la photo' ?></em></button><?php endforeach; ?>
+</div><p class="pc-fiche"><a href="<?= h(url('admin/?p=realisation&id=' . rawurlencode($p['id']))) ?>">Ouvrir la fiche complète du projet dans l'administration</a> (nom, ville, galerie de photos, services…)</p></section><?php endif; ?>
 <?php $aaHaut = !empty($p['avant']) && in_array('facades', $p['services'] ?? [], true); if ($aaHaut): ?><section class="wrap aa-haut" style="padding-top:56px"><h2 class="h-moy">Avant, après</h2><?= avap($p['avant'], $p['apres'] ?: $p['image']) ?></section><?php endif; ?>
 <section class="wrap def"><p><?= resume_realisation($p) ?></p></section>
 <section class="sec deux">

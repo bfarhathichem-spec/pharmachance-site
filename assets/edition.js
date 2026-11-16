@@ -25,7 +25,7 @@
   }
 
   /* ---------- Mode édition ---------- */
-  var modifs = { textes: {}, images: {}, listes: {} }, blocsModifies = false, nb = 0;
+  var modifs = { textes: {}, images: {}, listes: {}, champs: {} }, blocsModifies = false, nb = 0;
   document.querySelectorAll('details').forEach(function (d) { d.open = true; });
 
   // barre d'outils
@@ -46,7 +46,7 @@
   document.body.appendChild(barre);
   var etat = barre.querySelector('.pc-etat'), bEnr = barre.querySelector('.pc-enr'), bAnn = barre.querySelector('.pc-annuler');
   function compter() {
-    nb = Object.keys(modifs.textes).length + Object.keys(modifs.images).length + Object.keys(modifs.listes).length + (blocsModifies ? 1 : 0);
+    nb = Object.keys(modifs.textes).length + Object.keys(modifs.images).length + Object.keys(modifs.listes).length + Object.keys(modifs.champs).length + (blocsModifies ? 1 : 0);
     etat.textContent = nb ? nb + ' modification' + (nb > 1 ? 's' : '') + ' non enregistrée' + (nb > 1 ? 's' : '') : 'Aucune modification';
     bEnr.disabled = bAnn.disabled = !nb; barre.classList.toggle('pc-sale', !!nb);
   }
@@ -180,6 +180,30 @@
     else toast('Déposez la photo directement sur l\'image à remplacer.');
   });
 
+  /* ---------- Cadres photo d'un projet (avant / après) ---------- */
+  var fichierChamp = el('input', 'pc-ui'); fichierChamp.type = 'file'; fichierChamp.accept = 'image/jpeg,image/png,image/webp'; fichierChamp.hidden = true; document.body.appendChild(fichierChamp);
+  var slotCible = null;
+  function envoyerChamp(f, slot) {
+    if (!/^image\/(jpeg|png|webp)$/.test(f.type)) { toast('Format non pris en charge : utilisez une photo JPEG, PNG ou WebP.', 'pc-attention'); return; }
+    slot.classList.add('pc-envoi'); toast('Envoi de la photo…');
+    var fd = new FormData(); fd.append('csrf', conf.csrf); fd.append('photo', f);
+    fetch(ADMIN + '?p=edition-image', { method: 'POST', body: fd, credentials: 'same-origin' }).then(function (r) { return r.json(); }).then(function (j) {
+      slot.classList.remove('pc-envoi');
+      if (!j.ok) { toast(j.message || 'La photo n\'a pas pu être envoyée.', 'pc-attention'); return; }
+      var im = slot.querySelector('img'); if (!im) { im = document.createElement('img'); im.alt = ''; slot.insertBefore(im, slot.firstChild); }
+      im.src = j.url; slot.querySelector('em').textContent = 'Changer la photo'; slot.classList.add('pc-modifie');
+      modifs.champs[slot.dataset.champ] = j.chemin; compter(); toast('Photo ajoutée. Cliquez sur « Enregistrer » quand les deux photos sont là.');
+    }).catch(function () { slot.classList.remove('pc-envoi'); toast('Connexion perdue pendant l\'envoi. Réessayez.', 'pc-attention'); });
+  }
+  document.querySelectorAll('[data-champ]').forEach(function (slot) {
+    slot.addEventListener('click', function () { slotCible = slot; fichierChamp.click(); });
+    slot.addEventListener('dragover', function (e) { e.preventDefault(); e.stopPropagation(); slot.classList.add('pc-depot'); });
+    slot.addEventListener('dragleave', function () { slot.classList.remove('pc-depot'); });
+    slot.addEventListener('drop', function (e) { e.preventDefault(); e.stopPropagation(); slot.classList.remove('pc-depot'); if (e.dataTransfer.files[0]) envoyerChamp(e.dataTransfer.files[0], slot); });
+  });
+  fichierChamp.addEventListener('change', function () { if (fichierChamp.files[0] && slotCible) envoyerChamp(fichierChamp.files[0], slotCible); fichierChamp.value = ''; });
+  if (location.hash === '#avant-apres') { var ancre = document.getElementById('avant-apres'); if (ancre) setTimeout(function () { ancre.scrollIntoView({ block: 'center' }); }, 300); }
+
   /* ---------- Sections (blocs) ---------- */
   var blocs = function () { return Array.prototype.slice.call(document.querySelectorAll('[data-bloc]')); };
   var outils = el('div', 'pc-ui pc-bloc-outils');
@@ -287,7 +311,7 @@
 
   /* ---------- Enregistrer ---------- */
   bEnr.addEventListener('click', function () {
-    var d = { textes: modifs.textes, images: modifs.images, listes: modifs.listes, blocs: {} };
+    var d = { textes: modifs.textes, images: modifs.images, listes: modifs.listes, champs: modifs.champs, blocs: {} };
     if (blocsModifies) {
       var l = blocs();
       d.blocs[conf.page] = { ordre: l.map(function (b) { return b.dataset.bloc; }), masques: l.filter(function (b) { return b.hasAttribute('data-bloc-masque'); }).map(function (b) { return b.dataset.bloc; }) };

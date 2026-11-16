@@ -112,7 +112,10 @@ case 'tableau':
   </section>
   <?php endif; ?>
   <?php $fi = array_filter(realisations(true), 'facade_incomplete'); if ($fi): ?>
-    <p class="alerte"><?= count($fi) ?> projet<?= count($fi) > 1 ? 's' : '' ?> de façade sans photo avant et après : <?= h(implode(', ', array_map(fn($x) => $x['titre'], $fi))) ?>. <a href="<?= h(url('admin/?p=realisations')) ?>">Les compléter</a></p>
+    <section class="bloc alerte-bloc"><h2>Façades à compléter <small>photo avant et photo après</small></h2>
+      <p class="aide">Cliquez sur « Ajouter les photos » : la page du projet s'ouvre sur le site, déposez la photo avant et la photo après dans les deux cadres, puis cliquez sur « Enregistrer ».</p>
+      <ul class="a-faire"><?php foreach ($fi as $x): ?><li><?= vignette($x['image'] ?? '', $x['titre']) ?><b><?= h($x['titre']) ?></b><a class="btn" href="<?= h(url('realisations/' . $x['slug'] . '?edition=1#avant-apres')) ?>">Ajouter les photos</a><a class="btn-s" href="<?= h(url('admin/?p=realisation&id=' . rawurlencode($x['id']))) ?>">Fiche complète</a></li><?php endforeach; ?></ul>
+    </section>
   <?php endif; ?>
   <?php $mq = legal_manquant(); if ($mq): ?>
     <p class="alerte">Informations légales à compléter pour les mentions légales et les CGV : <?= h(implode(', ', $mq)) ?>. <a href="<?= h(url('admin/?p=reglages#legal')) ?>">Les renseigner</a></p>

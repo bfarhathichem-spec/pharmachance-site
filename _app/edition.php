@@ -95,6 +95,7 @@ function decouper_blocs(string $html): ?array {
         preg_match('~^<[a-z0-9-]+\b[^>]*?\bclass="([^"]*)"~i', $code, $c);
         $base = $t . (isset($c[1]) && trim($c[1]) !== '' ? '.' . preg_split('/\s+/', trim($c[1]))[0] : '');
         $base = strtolower((string)preg_replace('/[^a-z0-9.-]/i', '', $base));
+        if (str_ends_with($base, '.pc-ui')) { $out[] = ['id' => '', 'code' => $code, 'nom' => '', 'fixe' => true]; continue; } // outils d'édition : jamais déplacés
         $vus[$base] = ($vus[$base] ?? 0) + 1;
         $id = $vus[$base] > 1 ? $base . '-' . $vus[$base] : $base;
         $out[] = ['id' => $id, 'code' => $code, 'nom' => nom_bloc($code, $t)];
@@ -114,6 +115,8 @@ function ordonner_blocs(string $page, string $html): string {
     if (!$blocs) return $html;
     $conf = surcharges()['blocs'][$page] ?? [];
     $ordre = array_values((array)($conf['ordre'] ?? [])); $masques = (array)($conf['masques'] ?? []);
+    $fixes = []; foreach ($blocs as $k => $b) if (!empty($b['fixe'])) $fixes[$k] = $b['code'];
+    $blocs = array_values(array_filter($blocs, fn($b) => empty($b['fixe'])));
     $parId = []; foreach ($blocs as $b) $parId[$b['id']] = $b;
     $res = [];
     foreach ($ordre as $id) if (isset($parId[$id])) $res[] = $id;
@@ -122,7 +125,9 @@ function ordonner_blocs(string $page, string $html): string {
         array_splice($res, $p === false ? count($res) : $p + 1, 0, [$b['id']]);
     }
     $edition = en_edition(); $o = '';
+    foreach ($fixes as $k => $code) array_splice($res, min($k, count($res)), 0, ['#fixe' . $k]);
     foreach ($res as $id) {
+        if (str_starts_with($id, '#fixe')) { $o .= $fixes[(int)substr($id, 5)] . "\n"; continue; }
         $b = $parId[$id]; $cache = in_array($id, $masques, true);
         if ($cache && !$edition) continue;
         $code = $b['code'];

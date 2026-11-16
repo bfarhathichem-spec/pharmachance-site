@@ -57,6 +57,13 @@ function enregistrer_edition(array $d): array {
         $s['blocs'][$pg] = ['ordre' => $ok($c['ordre'] ?? []), 'masques' => $ok($c['masques'] ?? [])]; $n++;
     }
     enregistrer('surcharges', $s);
+    foreach ((array)($d['champs'] ?? []) as $cle => $chemin) {
+        [$nom, $id, $champ] = array_pad(explode(':', (string)$cle, 3), 3, '');
+        $chemin = (string)$chemin;
+        if ($nom !== 'realisations' || !in_array($champ, ['avant', 'apres'], true)) continue;
+        if (!preg_match('#^uploads/\d{4}/\d{2}/[a-z0-9-]+\.jpg$#', $chemin) || !is_file(UPLOAD_DIR . '/' . substr($chemin, 8))) continue;
+        maj('realisations', $id, function ($x) use ($champ, $chemin) { $x[$champ] = $chemin; return $x; }); $n++;
+    }
     foreach ((array)($d['listes'] ?? []) as $nom => $ids) {
         if (!in_array($nom, ['realisations', 'services'], true)) continue;
         $k = cle_id($nom); $ids = array_map('strval', (array)$ids);

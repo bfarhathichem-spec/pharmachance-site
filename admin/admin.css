@@ -116,3 +116,4 @@ code{background:var(--brume);padding:1px 6px;border-radius:6px;font-size:13px;co
 .voir+.voir{margin-left:18px;font-weight:500}
 
 .manque{font-style:normal;color:#9A5B00;font-weight:600}
+.a-faire{list-style:none;margin:0;padding:0;display:grid;gap:10px}.a-faire li{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:8px;border:1px solid #E3EEE8;border-radius:12px}.a-faire b{flex:1 1 200px}.a-faire .vg{width:64px;height:48px}
