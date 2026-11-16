@@ -58,3 +58,8 @@ function ajuster_legal(string $slug, string $txt): string {
     }
     return $txt;
 }
+
+/* Projets de façade : une photo avant et une photo après sont attendues */
+function facade_incomplete(array $r): bool {
+    return in_array('facades', $r['services'] ?? [], true) && (empty($r['avant']) || empty($r['apres']));
+}

@@ -178,6 +178,8 @@ else {
             if ($src = traiter_image($_FILES['apres'] ?? [], $r['slug'] . '-apres')) $r['apres'] = $src;
             $r['avant'] ??= ''; $r['apres'] ??= '';
             if ($r['publie'] && !$r['image']) { $r['publie'] = false; flash('Enregistré, mais pas publié : ajoutez au moins une photo.'); }
+            elseif ($r['publie'] && facade_incomplete($r) && empty($ex['publie'])) { $r['publie'] = false; flash('Enregistré, mais pas publié : un projet de façade doit avoir une photo avant et une photo après.'); }
+            elseif (facade_incomplete($r)) flash('Réalisation enregistrée. Pensez à ajouter la photo avant et la photo après de cette façade.');
             else flash($ex ? 'Réalisation enregistrée.' : 'Réalisation créée.');
             if ($ex) { foreach ($l as &$x) if ($x['id'] === $id) $x = $r; unset($x); } else $l[] = $r;
             enregistrer('realisations', $l);

@@ -114,3 +114,5 @@ code{background:var(--brume);padding:1px 6px;border-radius:6px;font-size:13px;co
 .aide-format{margin-bottom:12px}
 .aide-l{padding-left:20px;line-height:1.7}.aide-l li{margin-bottom:8px}
 .voir+.voir{margin-left:18px;font-weight:500}
+
+.manque{font-style:normal;color:#9A5B00;font-weight:600}

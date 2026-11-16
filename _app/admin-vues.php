@@ -111,6 +111,9 @@ case 'tableau':
     </ul>
   </section>
   <?php endif; ?>
+  <?php $fi = array_filter(realisations(true), 'facade_incomplete'); if ($fi): ?>
+    <p class="alerte"><?= count($fi) ?> projet<?= count($fi) > 1 ? 's' : '' ?> de façade sans photo avant et après : <?= h(implode(', ', array_map(fn($x) => $x['titre'], $fi))) ?>. <a href="<?= h(url('admin/?p=realisations')) ?>">Les compléter</a></p>
+  <?php endif; ?>
   <?php $mq = legal_manquant(); if ($mq): ?>
     <p class="alerte">Informations légales à compléter pour les mentions légales et les CGV : <?= h(implode(', ', $mq)) ?>. <a href="<?= h(url('admin/?p=reglages#legal')) ?>">Les renseigner</a></p>
   <?php endif; ?>
@@ -130,7 +133,7 @@ case 'realisations':
     <li>
       <?= ordre('realisations', $r['id'], $i === 0, $i === $n - 1) ?>
       <a class="lien-l" href="<?= h(url('admin/?p=realisation&id=' . rawurlencode($r['id']))) ?>"><?= vignette($r['image'] ?? '', $r['titre']) ?>
-        <span><b><?= h($r['titre']) ?></b><small><?= h(implode(' · ', array_filter([$r['ville'] ?? '', $r['annee'] ?? '']))) ?></small></span></a>
+        <span><b><?= h($r['titre']) ?></b><small><?= h(implode(' · ', array_filter([$r['ville'] ?? '', $r['annee'] ?? '']))) ?><?php if (facade_incomplete($r)): ?> <em class="manque">· Avant / après à ajouter</em><?php endif; ?></small></span></a>
       <span class="actions">
         <?= interrupteur('realisations', $r['id'], 'en_avant', !empty($r['en_avant']), 'Mise en avant', 'Pas en avant') ?>
         <?= interrupteur('realisations', $r['id'], 'publie', !empty($r['publie']), 'En ligne', 'Hors ligne') ?>
@@ -181,8 +184,10 @@ case 'realisation':
     </section>
 
     <section class="bloc">
-      <h2>Avant / après <small>facultatif</small></h2>
-      <p class="aide">Deux photos prises du même point de vue. Elles apparaissent avec le curseur à glisser.</p>
+      <h2>Avant / après <small class="aa-statut"><?= in_array('facades', $r['services'] ?? [], true) ? 'obligatoire pour une façade' : 'facultatif, obligatoire pour une façade' ?></small></h2>
+      <p class="aide">Deux photos prises du même point de vue, par exemple la façade avant les travaux puis la façade terminée. Sur le site, elles s'affichent en haut de la page du projet avec une ligne à faire glisser pour comparer.</p>
+      <script>document.addEventListener('change', function (e) { if (e.target.name !== 'services[]' || e.target.value !== 'facades') return; var t = document.querySelector('.aa-statut'); if (t) t.textContent = e.target.checked ? 'obligatoire pour une façade' : 'facultatif, obligatoire pour une façade'; });</script>
+      <?php if (facade_incomplete($r) && $r['id'] !== ''): ?><p class="alerte">Ce projet de façade n'a pas encore sa photo avant et sa photo après.</p><?php endif; ?>
       <div class="g2">
         <?php foreach (['avant' => 'Photo avant', 'apres' => 'Photo après'] as $k => $l): ?>
         <div><p class="lib"><?= $l ?></p>

@@ -8,13 +8,14 @@ $gal = array_values(array_filter($p['galerie'] ?? [], fn($g) => $g !== ($p['avan
 <div class="meta"><?php foreach (['ville', 'annee', 'surface'] as $c) if (trim($p[$c] ?? '') !== '') echo '<span>' . h($p[$c]) . '</span>'; foreach ($p['services'] ?? [] as $c) echo '<span>' . h(nom_service($c)) . '</span>'; ?></div></div>
 <div class="intro"><?= paragraphes($p['description'] ?? '') ?></div></section>
 <div class="grand-visuel" data-zoom><img src="<?= h(media($p['image'])) ?>" alt="<?= h($p['titre']) ?>" style="object-position:<?= h($p['cadrage'] ?? '50% 50%') ?>"></div>
+<?php $aaHaut = !empty($p['avant']) && in_array('facades', $p['services'] ?? [], true); if ($aaHaut): ?><section class="wrap aa-haut" style="padding-top:56px"><h2 class="h-moy">Avant, après</h2><?= avap($p['avant'], $p['apres'] ?: $p['image']) ?></section><?php endif; ?>
 <section class="wrap def"><p><?= resume_realisation($p) ?></p></section>
 <section class="sec deux">
   <?php if (!empty($p['interventions'])): ?><div><h2 class="h-moy">Ce que nous avons réalisé</h2><ul class="liste"><?php foreach ($p['interventions'] as $x): ?><li><?= h($x) ?></li><?php endforeach; ?></ul></div><?php endif; ?>
   <div><h2 class="h-moy">Services concernés</h2><p style="font-size:18px;line-height:2.1"><?php foreach ($p['services'] ?? [] as $c): ?><a class="lien" href="<?= url('services/' . slug_service($c)) ?>"><?= h(nom_service($c)) ?></a><br><?php endforeach; ?></p>
   <p style="margin-top:20px"><a class="btn plein" href="<?= url('contact?projet=' . rawurlencode($p['services'][0] ?? '')) ?>">Un projet similaire ? Demandez un devis</a></p></div>
 </section>
-<?php if (!empty($p['avant'])): ?><section class="wrap" style="padding-bottom:100px"><h2 class="h-moy">Avant, après</h2><?= avap($p['avant'], $p['apres'] ?: $p['image']) ?></section><?php endif; ?>
+<?php if (!empty($p['avant']) && !$aaHaut): ?><section class="wrap" style="padding-bottom:100px"><h2 class="h-moy">Avant, après</h2><?= avap($p['avant'], $p['apres'] ?: $p['image']) ?></section><?php endif; ?>
 <?php if ($gal): ?><section class="wrap" style="padding-bottom:60px"><h2 class="h-moy">Galerie</h2><?= galerie($gal, $p['titre']) ?></section><?php endif; ?>
 <?= temoignages_bloc($tem) ?>
 <section class="wrap" style="padding-bottom:100px"><nav class="nav-projets" aria-label="Autres réalisations"><a class="lien" href="<?= url('realisations/' . $prev['slug']) ?>">Projet précédent : <?= h($prev['titre']) ?></a><a class="lien" href="<?= url('realisations/' . $next['slug']) ?>">Projet suivant : <?= h($next['titre']) ?></a></nav></section>
