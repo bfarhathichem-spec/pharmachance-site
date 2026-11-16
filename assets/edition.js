@@ -37,6 +37,7 @@
     + '<button type="button" class="pc-btn pc-quitter">Quitter</button>'
     + '<a class="pc-btn pc-sortir" href="' + ADMIN + '?p=deconnexion">Se déconnecter</a></div>'
     + '<div class="pc-aide" hidden><p><b>Textes :</b> cliquez sur un texte, écrivez, puis cliquez ailleurs. Un texte identique est modifié partout sur le site (un bouton « Demander un devis », par exemple).</p>'
+    + '<p><b>Mots qui défilent (accueil) :</b> écrivez les mots séparés par des virgules, par exemple « Conseils, Agencement, Vitrines ».</p>'
     + '<p><b>Photos :</b> survolez une photo puis cliquez sur « Changer la photo », ou glissez directement une photo de votre ordinateur sur l\'image.</p>'
     + '<p><b>Sections :</b> survolez une section : sa barre permet de la déplacer (glisser ⠿ ou flèches) ou de la masquer.</p>'
     + '<p><b>Projets et services :</b> sur les pages Réalisations et Services, glissez une vignette par sa poignée ⠿ pour changer l\'ordre.</p>'

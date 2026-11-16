@@ -34,7 +34,8 @@ if ($heroImg || $phare): ?>
 <section class="xn" aria-label="PharmaChance en chiffres" style="--n:<?= max(1, min(4, count($chiffres))) ?>">
   <?php foreach ($chiffres as [$v, $l]): $v = (string)$v; $n = preg_match('/^\d+/', $v, $mm) ? $mm[0] : ''; ?><div><b<?= $n !== '' ? ' data-compte="' . (int)$n . '" data-suite="' . h(substr($v, strlen($n))) . '"' : '' ?>><?= h($v) ?></b><span><?= h($l) ?></span></div><?php endforeach; ?>
 </section>
-<div class="xm" aria-hidden="true"><span class="defile-mot"><?= str_repeat('Conseils <i></i> Agencement <i></i> Merchandising <i></i> Vitrines <i></i> ', 4) ?></span></div>
+<?php $defile = tr('Conseils, Agencement, Merchandising, Vitrines'); if ($ed): ?><div class="xm" title="Séparez les mots par des virgules"><span><?= h($defile) ?></span></div>
+<?php else: $motsD = array_filter(array_map('trim', explode(',', $defile)), fn($x) => $x !== ''); ?><div class="xm" aria-hidden="true"><span class="defile-mot"><?= str_repeat(implode('', array_map(fn($x) => h($x) . ' <i></i> ', $motsD)), max(2, (int)ceil(16 / max(1, count($motsD))))) ?></span></div><?php endif; ?>
 <section class="xa">
   <?php $manifeste = tr($manifeste); if ($ed): ?><p class="xa-t"><?= h($manifeste) ?></p><?php else: ?><p class="xa-t allume"><?php foreach (preg_split('/\s+/u', $manifeste) as $m) echo '<i>' . h($m) . '</i> '; ?></p><?php endif; ?>
   <div class="xa-col">
