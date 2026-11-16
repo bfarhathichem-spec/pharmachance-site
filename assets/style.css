@@ -735,3 +735,10 @@ footer.xf .bas{gap:12px 20px}
 .rt-l h3{margin:0;font-size:20px}.rt-l h3 a{color:var(--ardoise);text-decoration:none}.rt-l h3 a:hover{color:var(--sauge-f)}
 .rt-l p{margin:0;font-size:16px;line-height:1.65}
 @media (max-width:900px){.rt-l{grid-template-columns:1fr}}
+/* bandeau mesure d'audience */
+.cookies{position:fixed;left:24px;bottom:24px;z-index:60;max-width:440px;background:#fff;border:1px solid var(--trait);border-radius:24px 24px 24px 0;box-shadow:0 14px 44px rgba(47,52,50,.18);padding:22px 24px;display:flex;flex-direction:column;gap:14px}
+.cookies p{margin:0;font-size:15px;line-height:1.55;color:var(--ardoise)}
+.cookies .btns{display:flex;gap:10px;flex-wrap:wrap;margin:0}
+.cookies .btn{padding:11px 22px;font-size:15px}
+.liens-legaux .gerer-cookies{cursor:pointer}
+@media (max-width:700px){.cookies{left:12px;right:12px;bottom:calc(86px + env(safe-area-inset-bottom));max-width:none;padding:18px}}

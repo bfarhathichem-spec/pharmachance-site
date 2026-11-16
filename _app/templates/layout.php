@@ -7,6 +7,7 @@ $desc = $desc ?? '';
 $schemeHost = (((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'pharmachance.com'));
 $canon = $schemeHost . strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
 $ld = $ld ?? ld_graphe();
+$gaId = (function_exists('admin_connecte') && admin_connecte()) ? '' : trim((string)($r['ga_id'] ?? ''));
 $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
 ?><!doctype html>
 <html lang="fr">
@@ -20,6 +21,7 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
 <meta property="og:type" content="<?= h($og_type ?? 'website') ?>"><meta property="og:url" content="<?= h($canon) ?>"><meta property="og:site_name" content="PharmaChance"><meta name="twitter:card" content="summary_large_image"><meta property="og:title" content="<?= h($titre) ?>"><meta property="og:description" content="<?= h($desc) ?>">
 <meta property="og:image" content="<?= h($schemeHost . media($og_image ?? 'img/facade-nord-hilton.jpg')) ?>"><meta property="og:locale" content="fr_TN">
 <meta name="theme-color" content="#FFFFFF">
+<?php if (!empty($r['gsc_verif'])): ?><meta name="google-site-verification" content="<?= h($r['gsc_verif']) ?>"><?php endif; ?>
 <link rel="icon" href="<?= url('img/logo-couleur.png') ?>">
 <link rel="preload" href="<?= url('assets/fonts/comfortaa-latin-700-normal.woff2') ?>" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="<?= url('assets/style.css') ?>?v=<?= @filemtime(WWW_DIR . '/assets/style.css') ?>">
@@ -71,7 +73,7 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
     </div>
   </div>
   <div class="xf-mot" aria-hidden="true">pharmachance</div>
-  <div class="bas"><span>© <?= date('Y') ?> <?= h(nom_legal()) ?><?= !empty($r['annees']) ? ' · ' . h($r['annees']) . " ans d'expérience" : '' ?></span><span class="liens-legaux"><?php foreach (pages_site() as $x): ?><a href="<?= url($x['slug']) ?>"><?= h($x['titre']) ?></a><?php endforeach; ?><a href="<?= url('plan-du-site') ?>">Plan du site</a></span></div>
+  <div class="bas"><span>© <?= date('Y') ?> <?= h(nom_legal()) ?><?= !empty($r['annees']) ? ' · ' . h($r['annees']) . " ans d'expérience" : '' ?></span><span class="liens-legaux"><?php foreach (pages_site() as $x): ?><a href="<?= url($x['slug']) ?>"><?= h($x['titre']) ?></a><?php endforeach; ?><a href="<?= url('plan-du-site') ?>">Plan du site</a><?php if ($gaId): ?><a href="#cookies" class="gerer-cookies">Gérer les cookies</a><?php endif; ?></span></div>
 </footer>
 <a class="wa" href="<?= h(lien_wa()) ?>" target="_blank" rel="noopener" aria-label="Nous écrire sur WhatsApp"><?= WA_SVG ?></a>
 <nav class="barre-bas" aria-label="Actions rapides">
@@ -80,6 +82,7 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
   <a class="plein" href="<?= url('contact') ?>"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H7l-3 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Devis</a>
 </nav>
 <div class="visionneuse" role="dialog" aria-modal="true" aria-label="Photo agrandie"><img alt=""><button class="btn plein" type="button">Fermer</button></div>
+<?php if ($gaId): ?><div class="cookies" role="dialog" aria-live="polite" aria-label="Mesure d'audience" hidden data-ga="<?= h($gaId) ?>"><p>Nous aimerions mesurer la fréquentation du site avec Google Analytics, pour savoir quelles pages vous sont utiles. Rien n'est enregistré sans votre accord. <a class="lien" href="<?= url('cookies') ?>">En savoir plus</a></p><div class="btns"><button type="button" class="btn ligne" data-mesure="non">Refuser</button><button type="button" class="btn plein" data-mesure="oui">Accepter</button></div></div><?php endif; ?>
 <script src="<?= url('assets/site.js') ?>?v=<?= @filemtime(WWW_DIR . '/assets/site.js') ?>" defer></script>
 </body>
 </html>

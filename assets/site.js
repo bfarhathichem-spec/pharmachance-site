@@ -297,3 +297,48 @@
     ouvrir(num, a.getAttribute('href'));
   });
 })();
+
+/* Mesure d'audience Google Analytics : chargée seulement après accord du visiteur */
+(function () {
+  var b = document.querySelector('.cookies'); if (!b) return;
+  var id = b.dataset.ga, K = 'pc_mesure';
+  function lire() { try { return localStorage.getItem(K); } catch (e) { return null; } }
+  function ecrire(v) { try { localStorage.setItem(K, v); } catch (e) {} }
+  function charger() {
+    if (window.pcGa) return; window.pcGa = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', id, { cookie_expires: 33696000 });
+    var s = document.createElement('script'); s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
+    document.head.appendChild(s);
+  }
+  function effacer() {
+    var dom = location.hostname.replace(/^www\./, '');
+    document.cookie.split(';').forEach(function (c) {
+      var n = c.split('=')[0].trim(); if (!/^_ga/.test(n)) return;
+      ['', '; domain=' + dom, '; domain=.' + dom].forEach(function (d) { document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + d; });
+    });
+  }
+  var choix = lire();
+  if (choix === 'oui') charger(); else if (choix !== 'non') b.hidden = false;
+  b.addEventListener('click', function (e) {
+    var x = e.target.closest('[data-mesure]'); if (!x) return;
+    ecrire(x.dataset.mesure); b.hidden = true;
+    if (x.dataset.mesure === 'oui') charger(); else { effacer(); if (window.pcGa) location.reload(); }
+  });
+  document.querySelectorAll('.gerer-cookies').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); b.hidden = false; b.querySelector('[data-mesure="oui"]').focus(); });
+  });
+  // contacts : appels, WhatsApp, demandes de devis
+  function ev(nom, p) { if (window.pcGa && window.gtag) window.gtag('event', nom, p || {}); }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href]'); if (!a) return;
+    var h = a.getAttribute('href');
+    if (h.indexOf('tel:') === 0) ev('clic_appel');
+    else if (h.indexOf('wa.me') > -1) ev('clic_whatsapp');
+    else if (h.indexOf('mailto:') === 0) ev('clic_email');
+  });
+  var f = document.querySelector('form.form'); if (f) f.addEventListener('submit', function () { ev('generate_lead', { formulaire: 'devis' }); });
+})();

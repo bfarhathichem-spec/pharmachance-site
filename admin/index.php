@@ -267,6 +267,8 @@ else {
         case 'reglages':
             $r = reglages();
             foreach (['telephone', 'whatsapp', 'email', 'email_notifications', 'adresse', 'zone', 'horaires', 'annees', 'hero_titre', 'hero_texte', 'facebook', 'instagram', 'linkedin', 'aa_accueil', 'raison_sociale', 'forme_juridique', 'capital', 'identifiant_unique', 'matricule_fiscal', 'directeur_publication'] as $k) $r[$k] = post($k);
+            $ga = strtoupper(post('ga_id')); $r['ga_id'] = preg_match('/^G-[A-Z0-9]{4,16}$/', $ga) ? $ga : '';
+            $gsc = post('gsc_verif'); if (preg_match('/content="([^"]+)"/', $gsc, $mm)) $gsc = $mm[1]; $r['gsc_verif'] = preg_match('/^[A-Za-z0-9_-]{10,80}$/', $gsc) ? $gsc : '';
             $r['whatsapp'] = preg_replace('/\D/', '', $r['whatsapp']);
             $r['hero_lien'] = post('hero_lien');
             $vals = (array)($_POST['chiffre_valeur'] ?? []); $libs = (array)($_POST['chiffre_libelle'] ?? []); $r['chiffres'] = [];
