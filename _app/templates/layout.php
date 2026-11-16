@@ -7,7 +7,7 @@ $desc = $desc ?? '';
 $schemeHost = (((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'pharmachance.com'));
 $canon = $schemeHost . strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
 $ld = $ld ?? ld_graphe();
-$gaId = (function_exists('admin_connecte') && admin_connecte()) ? '' : trim((string)($r['ga_id'] ?? ''));
+$gaId = (function_exists('admin_connecte') && admin_connecte()) ? '' : ga_id();
 $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
 ?><!doctype html>
 <html lang="fr">

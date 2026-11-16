@@ -39,9 +39,12 @@ function chiffres_auto(): array
     return $c;
 }
 
+/* Identifiant Google Analytics : réglage de l'admin, ou celui du site tant que le réglage n'a jamais été enregistré */
+function ga_id(): string { $r = reglages(); return array_key_exists('ga_id', $r) ? trim((string)$r['ga_id']) : 'G-YC1P4DS5KQ'; }
+
 /* Textes légaux complétés automatiquement quand la mesure d'audience est activée */
 function ajuster_legal(string $slug, string $txt): string {
-    if (trim(reglages()['ga_id'] ?? '') === '' || str_contains($txt, 'Google Analytics')) return $txt;
+    if (ga_id() === '' || str_contains($txt, 'Google Analytics')) return $txt;
     if ($slug === 'cookies') {
         $txt = str_replace("Ce site n'utilise aucun cookie publicitaire, aucun outil de mesure d'audience tiers et aucun bouton de réseau social qui vous suivrait. Il n'y a donc rien à accepter.",
             "Ce site n'utilise aucun cookie publicitaire et aucun bouton de réseau social qui vous suivrait. Il mesure sa fréquentation avec Google Analytics, uniquement si vous l'acceptez dans le bandeau affiché à votre première visite.", $txt);

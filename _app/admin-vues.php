@@ -534,7 +534,7 @@ case 'reglages':
     </section>
     <section class="bloc">
       <h2>Google : statistiques et référencement</h2>
-      <label>Identifiant Google Analytics <small>commence par G-, laisser vide pour désactiver la mesure d'audience</small><input name="ga_id" value="<?= h($g['ga_id'] ?? '') ?>" placeholder="G-XXXXXXXXXX" pattern="[Gg]-[A-Za-z0-9]{4,16}"></label>
+      <label>Identifiant Google Analytics <small>commence par G-, laisser vide pour désactiver la mesure d'audience</small><input name="ga_id" value="<?= h(ga_id()) ?>" placeholder="G-XXXXXXXXXX" pattern="[Gg]-[A-Za-z0-9]{4,16}"></label>
       <label>Code de validation Google Search Console <small>facultatif, la balise meta fournie par Google</small><input name="gsc_verif" value="<?= h($g['gsc_verif'] ?? '') ?>" placeholder="&lt;meta name=&quot;google-site-verification&quot; content=&quot;…&quot;&gt;"></label>
       <p class="aide">La mesure d'audience ne démarre que si le visiteur l'accepte dans le bandeau des cookies. Vos propres visites, quand vous êtes connecté, ne sont pas comptées.</p>
     </section>
