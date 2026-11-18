@@ -44,12 +44,15 @@ function enregistrer_edition(array $d): array {
         if ($nouv === $ori) unset($s['textes'][$ori]); else $s['textes'][$ori] = $nouv;
         $n++;
     }
-    foreach ((array)($d['images'] ?? []) as $ori => $nouv) {
-        $ori = (string)$ori; $nouv = (string)$nouv;
-        if (!preg_match('#^(img|uploads)/[A-Za-z0-9/_.-]+$#', $ori) || str_contains($ori, '..')) continue;
-        if ($nouv === '' || $nouv === $ori) { unset($s['images'][$ori]); $n++; continue; }
+    $pgImg = strtolower((string)($d['chemin'] ?? ''));
+    if (preg_match('#^/[a-z0-9/._-]{0,200}$#', $pgImg)) foreach ((array)($d['images'] ?? []) as $cle => $nouv) {
+        [$portee, $ori, $rang] = array_pad(explode('|', (string)$cle, 3), 3, '');
+        $nouv = (string)$nouv;
+        if (!preg_match('/^[a-z0-9.#-]{1,60}$/', $portee) || !preg_match('#^(img|uploads)/[A-Za-z0-9/_.-]+$#', $ori) || str_contains($ori, '..') || !ctype_digit($rang)) continue;
+        $k = "$pgImg|$portee|$ori|$rang";
+        if ($nouv === '' || $nouv === $ori) { unset($s['images_p'][$k]); $n++; continue; }
         if (!preg_match('#^uploads/\d{4}/\d{2}/[a-z0-9-]+\.jpg$#', $nouv) || !is_file(UPLOAD_DIR . '/' . substr($nouv, 8))) continue;
-        $s['images'][$ori] = $nouv; $n++;
+        $s['images_p'][$k] = $nouv; $n++;
     }
     foreach ((array)($d['blocs'] ?? []) as $pg => $c) {
         if (!preg_match('/^[a-z0-9-]{1,40}$/', (string)$pg) || !is_array($c)) continue;

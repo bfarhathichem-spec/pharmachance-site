@@ -11,7 +11,7 @@ function surcharges(?array $nouveau = null): array {
     if ($nouveau !== null) $s = $nouveau;
     if ($s === null) {
         $s = charger('surcharges', []);
-        $s += ['textes' => [], 'images' => [], 'blocs' => []];
+        $s += ['textes' => [], 'images' => [], 'images_p' => [], 'blocs' => []];
     }
     return $s;
 }
@@ -112,7 +112,7 @@ function nom_bloc(string $code, string $tag): string {
 }
 function ordonner_blocs(string $page, string $html): string {
     $blocs = decouper_blocs($html);
-    if (!$blocs) return $html;
+    if (!$blocs) return resoudre_images($html, 'contenu');
     $conf = surcharges()['blocs'][$page] ?? [];
     $ordre = array_values((array)($conf['ordre'] ?? [])); $masques = (array)($conf['masques'] ?? []);
     $fixes = []; foreach ($blocs as $k => $b) if (!empty($b['fixe'])) $fixes[$k] = $b['code'];
@@ -127,10 +127,10 @@ function ordonner_blocs(string $page, string $html): string {
     $edition = en_edition(); $o = '';
     foreach ($fixes as $k => $code) array_splice($res, min($k, count($res)), 0, ['#fixe' . $k]);
     foreach ($res as $id) {
-        if (str_starts_with($id, '#fixe')) { $o .= $fixes[(int)substr($id, 5)] . "\n"; continue; }
+        if (str_starts_with($id, '#fixe')) { $o .= resoudre_images($fixes[(int)substr($id, 5)], 'outils') . "\n"; continue; }
         $b = $parId[$id]; $cache = in_array($id, $masques, true);
         if ($cache && !$edition) continue;
-        $code = $b['code'];
+        $code = resoudre_images($b['code'], $id);
         if ($edition) $code = (string)preg_replace('~^<([a-z0-9-]+)~i', '<$1 data-bloc="' . h($id) . '" data-bloc-nom="' . h($b['nom']) . '"' . ($cache ? ' data-bloc-masque' : ''), $code, 1);
         $o .= $code . "\n";
     }
@@ -138,12 +138,40 @@ function ordonner_blocs(string $page, string $html): string {
 }
 
 /* Fin de rendu : textes surchargés, puis outils d'édition pour les personnes connectées. */
+/* Adresse de la page, pour rattacher chaque photo modifiée à son emplacement exact */
+function page_cle(): string {
+    $c = '/' . trim((string)parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH), '/');
+    $b = base(); if ($b !== '' && str_starts_with($c, $b)) $c = '/' . trim(substr($c, strlen($b)), '/');
+    return strtolower($c);
+}
+/* Chaque photo est indépendante : sa clé est la page, la section qui la contient, la photo d'origine
+   et son rang dans cette section. Déplacer une section ne change donc pas les photos d'emplacement. */
+function resoudre_images(string $html, string $portee, bool $tete = false): string {
+    static $ancienPris = [];
+    $s = surcharges(); $inst = (array)$s['images_p']; $ancien = (array)$s['images'];
+    $pg = page_cle(); $corps = $tete ? stripos($html, '<body') : 0; $cpt = []; $ed = en_edition();
+    return (string)preg_replace_callback('/__PCIMG:([fmd]):([A-Za-z0-9_-]+)__/', function ($m) use ($inst, $ancien, $pg, $portee, $corps, &$cpt, $ed, &$ancienPris) {
+        $v = $m[1][0]; $pos = $m[0][1];
+        $ori = (string)base64_decode(strtr($m[2][0], '-_', '+/'));
+        if ($corps === false || $pos < $corps) $n = -1;            // en-tête (aperçu de partage) : photo d'origine
+        elseif ($v === 'd') $n = $cpt[$ori] ?? 0;                 // lien d'agrandissement : même rang que la vignette qui suit
+        else { $n = $cpt[$ori] ?? 0; $cpt[$ori] = $n + 1; }
+        $cle = "$pg|$portee|$ori|$n";
+        if (isset($inst[$cle])) $nouv = $inst[$cle];
+        elseif ($n >= 0 && isset($ancien[$ori]) && (empty($ancienPris[$ori]) || $ancienPris[$ori] === "$portee|$n")) { $nouv = $ancien[$ori]; $ancienPris[$ori] = "$portee|$n"; } // ancien réglage : premier emplacement seulement
+        else $nouv = $ori;
+        $chemin = $v === 'm' ? min_de($nouv) : $nouv;
+        return url($chemin) . ($ed && $n >= 0 ? '#o=' . rawurlencode("$portee|$ori|$n") : '');
+    }, $html, -1, $c, PREG_OFFSET_CAPTURE);
+}
+
 function finaliser_page(string $html, string $page): string {
+    $html = resoudre_images($html, 'cadre', true);
     $html = appliquer_textes($html);
     if (!admin_connecte()) return $html;
     if (!headers_sent()) header('Cache-Control: private, no-store');
     $v = fn($f) => @filemtime(WWW_DIR . '/assets/' . $f);
-    $conf = ['csrf' => csrf(), 'page' => $page, 'edition' => en_edition(), 'admin' => url('admin/'),
+    $conf = ['csrf' => csrf(), 'page' => $page, 'chemin' => page_cle(), 'edition' => en_edition(), 'admin' => url('admin/'),
         'inverse' => (object)array_flip(array_map('strval', array_filter(surcharges()['textes'], fn($x) => is_string($x) || is_numeric($x))))];
     $outils = '<link rel="stylesheet" href="' . url('assets/edition.css') . '?v=' . $v('edition.css') . '">'
         . '<script id="pc-ed-conf" type="application/json">' . json_encode($conf, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) . '</script>'

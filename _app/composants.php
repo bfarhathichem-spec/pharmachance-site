@@ -37,7 +37,7 @@ function chemin(): string {
 
 function galerie(array $images, string $alt): string {
     $o = '<div class="galerie">';
-    foreach ($images as $i => $im) $o .= '<button type="button" data-src="' . h(media($im)) . '" aria-label="Agrandir la photo"><img src="' . h(media(miniature($im))) . '" alt="' . h($alt) . ', photo ' . ($i + 1) . '" loading="lazy"></button>';
+    foreach ($images as $i => $im) $o .= '<button type="button" data-src="' . h(media($im, 'd')) . '" aria-label="Agrandir la photo"><img src="' . h(media(miniature($im))) . '" alt="' . h($alt) . ', photo ' . ($i + 1) . '" loading="lazy"></button>';
     return $o . '</div>';
 }
 

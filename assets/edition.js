@@ -38,7 +38,7 @@
     + '<a class="pc-btn pc-sortir" href="' + ADMIN + '?p=deconnexion">Se déconnecter</a></div>'
     + '<div class="pc-aide" hidden><p><b>Textes :</b> cliquez sur un texte, écrivez, puis cliquez ailleurs. Un texte identique est modifié partout sur le site (un bouton « Demander un devis », par exemple).</p>'
     + '<p><b>Mots qui défilent (accueil) :</b> écrivez les mots séparés par des virgules, par exemple « Conseils, Agencement, Vitrines ».</p>'
-    + '<p><b>Photos :</b> survolez une photo puis cliquez sur « Changer la photo », ou glissez directement une photo de votre ordinateur sur l\'image.</p>'
+    + '<p><b>Photos :</b> survolez une photo puis cliquez sur « Changer la photo », ou glissez directement une photo de votre ordinateur sur l\'image. Seule cette photo change : les autres emplacements gardent la leur.</p>'
     + '<p><b>Sections :</b> survolez une section : sa barre permet de la déplacer (glisser ⠿ ou flèches) ou de la masquer.</p>'
     + '<p><b>Projets et services :</b> sur les pages Réalisations et Services, glissez une vignette par sa poignée ⠿ pour changer l\'ordre.</p>'
     + '<p>Les liens sont désactivés pendant l\'édition : Ctrl + clic (⌘ + clic sur Mac) pour changer de page. Rien n\'est visible des visiteurs avant « Enregistrer ».</p>'
@@ -139,8 +139,12 @@
     imgCible = img; if (!img) { bImg.hidden = true; return; }
     var r = img.getBoundingClientRect();
     bImg.hidden = false;
-    bImg.style.top = Math.max(8, Math.min(window.innerHeight - 50, Math.min(r.bottom, window.innerHeight) - 50)) + 'px';
-    bImg.style.left = Math.max(8, r.left + 12) + 'px';
+    // au centre de la partie visible de la photo (loin de la barre d'édition et des outils de section)
+    var haut = Math.max(r.top, 70), bas = Math.min(r.bottom, window.innerHeight - 130);
+    var cy = bas > haut ? (haut + bas) / 2 : (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+    var cx = (Math.max(r.left, 0) + Math.min(r.right, window.innerWidth)) / 2;
+    bImg.style.top = Math.round(cy - bImg.offsetHeight / 2) + 'px';
+    bImg.style.left = Math.round(cx - bImg.offsetWidth / 2) + 'px';
   }
   bImg.addEventListener('click', function () { if (imgCible) { fichier.dataset.cible = origine(imgCible); fichier.click(); } });
   fichier.addEventListener('change', function () { if (fichier.files[0]) envoyerPhoto(fichier.files[0], fichier.dataset.cible); fichier.value = ''; });
@@ -311,7 +315,7 @@
 
   /* ---------- Enregistrer ---------- */
   bEnr.addEventListener('click', function () {
-    var d = { textes: modifs.textes, images: modifs.images, listes: modifs.listes, champs: modifs.champs, blocs: {} };
+    var d = { chemin: conf.chemin, textes: modifs.textes, images: modifs.images, listes: modifs.listes, champs: modifs.champs, blocs: {} };
     if (blocsModifies) {
       var l = blocs();
       d.blocs[conf.page] = { ordre: l.map(function (b) { return b.dataset.bloc; }), masques: l.filter(function (b) { return b.hasAttribute('data-bloc-masque'); }).map(function (b) { return b.dataset.bloc; }) };

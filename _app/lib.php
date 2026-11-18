@@ -28,12 +28,12 @@ function base(): string {
     return $b;
 }
 function url(string $chemin = ''): string { return base() . '/' . ltrim($chemin, '/'); }
-function media(string $chemin): string {
+function media(string $chemin, string $sorte = ''): string {
     if ($chemin === '') return '';
-    if (!function_exists('surcharges')) return url($chemin);
-    $ori = $GLOBALS['pc_miniatures'][$chemin] ?? null;           // miniature déjà calculée depuis une photo d'origine
-    $final = $ori !== null ? $chemin : (surcharges()['images'][$chemin] ?? $chemin);
-    return url($final) . (en_edition() ? '#o=' . rawurlencode($ori ?? $chemin) : '');
+    if (empty($GLOBALS['pc_marqueurs'])) return url($chemin);   // admin, sitemap : chemin brut
+    $ori = $GLOBALS['pc_miniatures'][$chemin] ?? null;           // miniature calculée depuis une photo d'origine
+    $v = $sorte !== '' ? $sorte : ($ori !== null ? 'm' : 'f');
+    return '__PCIMG:' . $v . ':' . rtrim(strtr(base64_encode($ori ?? $chemin), '+/', '-_'), '=') . '__';
 }
 
 function slugify(string $s): string {
@@ -170,6 +170,7 @@ function fichiers_multiples(string $champ): array {
 
 /* ---------- Rendu ---------- */
 function rendre(string $gabarit, array $v = []): void {
+    $GLOBALS['pc_marqueurs'] = function_exists('finaliser_page');
     extract($v);
     ob_start();
     require APP_DIR . "/templates/$gabarit.php";

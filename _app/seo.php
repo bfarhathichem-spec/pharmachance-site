@@ -51,15 +51,15 @@ function faq_bloc(array $f, string $titre = 'Questions fréquentes'): string {
 }
 
 /* Miniature WebP 900 px si elle existe (générée à l'envoi ou au déploiement) */
-function miniature(string $src): string {
-    if ($src === '') return '';
-    $ori = $src;
-    if (function_exists('surcharges')) $src = surcharges()['images'][$src] ?? $src;
+function min_de(string $src): string {
     $m = preg_replace('#^(img|uploads)/(.+)\.(jpe?g|png)$#i', '$1/min/$2.webp', $src);
     $fichier = str_starts_with($m, 'uploads/') ? UPLOAD_DIR . '/' . substr($m, 8) : WWW_DIR . '/' . $m;
-    $r = ($m !== $src && is_file($fichier)) ? $m : $src;
-    $GLOBALS['pc_miniatures'][$r] = $ori;
-    return $r;
+    return ($m !== $src && is_file($fichier)) ? $m : $src;
+}
+function miniature(string $src): string {
+    if ($src === '') return '';
+    if (!empty($GLOBALS['pc_marqueurs'])) { $r = 'min:' . $src; $GLOBALS['pc_miniatures'][$r] = $src; return $r; }
+    return min_de($src);
 }
 
 /* Textes éditoriaux (data/textes.json) avec {annees} remplacé */
