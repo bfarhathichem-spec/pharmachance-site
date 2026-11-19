@@ -157,9 +157,10 @@
   ],
   "avant": "",
   "apres": "",
-  "en_avant": true,
+  "en_avant": false,
   "publie": true,
-  "ordre": 6
+  "ordre": 6,
+  "secteur": "commerces"
  },
  {
   "id": "r07",

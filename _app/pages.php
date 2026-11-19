@@ -63,3 +63,16 @@ function ajuster_legal(string $slug, string $txt): string {
 function facade_incomplete(array $r): bool {
     return in_array('facades', $r['services'] ?? [], true) && (empty($r['avant']) || empty($r['apres']));
 }
+
+/* Corrections de contenu appliquées une seule fois aux données du site en ligne */
+function migrations(): void {
+    $fait = charger('migrations', []);
+    if (in_array('magenta-autres-secteurs', $fait, true)) return;
+    $sec = charger('secteurs', []);
+    if (!trouver($sec, 'slug', 'commerces')) { $sec[] = ['slug' => 'commerces', 'nom' => 'Commerces et boutiques', 'intro' => '', 'ordre' => count($sec) + 1, 'publie' => true]; enregistrer('secteurs', $sec); }
+    $l = charger('realisations');
+    foreach ($l as &$x) if (($x['image'] ?? '') === 'img/facade-magenta.jpg' && ($x['secteur'] ?? '') === '') { $x['secteur'] = 'commerces'; $x['en_avant'] = false; }
+    unset($x);
+    enregistrer('realisations', $l);
+    $fait[] = 'magenta-autres-secteurs'; enregistrer('migrations', $fait);
+}
