@@ -67,12 +67,16 @@ function facade_incomplete(array $r): bool {
 /* Corrections de contenu appliquées une seule fois aux données du site en ligne */
 function migrations(): void {
     $fait = charger('migrations', []);
-    if (in_array('magenta-autres-secteurs', $fait, true)) return;
+    if (in_array('magenta-autres-secteurs-2', $fait, true)) return;
     $sec = charger('secteurs', []);
     if (!trouver($sec, 'slug', 'commerces')) { $sec[] = ['slug' => 'commerces', 'nom' => 'Commerces et boutiques', 'intro' => '', 'ordre' => count($sec) + 1, 'publie' => true]; enregistrer('secteurs', $sec); }
     $l = charger('realisations');
-    foreach ($l as &$x) if (($x['image'] ?? '') === 'img/facade-magenta.jpg' && ($x['secteur'] ?? '') === '') { $x['secteur'] = 'commerces'; $x['en_avant'] = false; }
+    $trouve = false;
+    foreach ($l as &$x) if (($x['image'] ?? '') === 'img/facade-magenta.jpg') { $trouve = true; if (($x['secteur'] ?? '') === '') { $x['secteur'] = 'commerces'; $x['en_avant'] = false; } }
     unset($x);
+    if (!$trouve) $l[] = ['id' => 'r03', 'slug' => 'boutique-magenta', 'titre' => 'Boutique Magenta : entrée et habillage floral', 'ville' => '', 'annee' => '', 'surface' => '', 'services' => ['facades'],
+        'description' => 'Une entrée de boutique mise en scène avec une arche florale et des oriflammes assortis.', 'interventions' => ["Habillage de l'entrée", 'Décor floral', 'Signalétique extérieure'],
+        'image' => 'img/facade-magenta.jpg', 'cadrage' => '50% 40%', 'galerie' => ['img/facade-magenta.jpg'], 'avant' => '', 'apres' => '', 'en_avant' => false, 'publie' => true, 'ordre' => count($l) + 1, 'secteur' => 'commerces'];
     enregistrer('realisations', $l);
-    $fait[] = 'magenta-autres-secteurs'; enregistrer('migrations', $fait);
+    $fait[] = 'magenta-autres-secteurs-2'; enregistrer('migrations', $fait);
 }
