@@ -77,7 +77,13 @@ function trouver(array $l, string $champ, string $val): ?array { foreach ($l as 
 
 function reglages(): array { static $r = null; return $r ??= charger('reglages', []); }
 function services(bool $tous = false): array { $s = charger('services'); return $tous ? trier($s) : publies($s); }
-function realisations(bool $tous = false): array { $s = charger('realisations'); return $tous ? trier($s) : publies($s); }
+/* Réalisations : sans précision, les pharmacies seulement ; les autres secteurs ont leurs propres pages */
+function realisations(bool $tous = false): array { $s = charger('realisations'); return $tous ? trier($s) : array_values(array_filter(publies($s), fn($x) => ($x['secteur'] ?? '') === '')); }
+function realisations_autres(string $secteur = ''): array { return array_values(array_filter(publies(charger('realisations')), fn($x) => ($x['secteur'] ?? '') !== '' && ($secteur === '' || $x['secteur'] === $secteur))); }
+function secteurs(bool $tous = false): array { $s = charger('secteurs', []); return $tous ? trier($s) : publies($s); }
+/* secteurs en ligne qui ont au moins un projet publié */
+function secteurs_actifs(): array { $a = realisations_autres(); return array_values(array_filter(secteurs(), fn($s) => (bool)array_filter($a, fn($x) => $x['secteur'] === $s['slug']))); }
+function lien_realisation(array $r): string { return ($r['secteur'] ?? '') === '' ? 'realisations/' . $r['slug'] : 'autres-secteurs/' . $r['secteur'] . '/' . $r['slug']; }
 function themes(bool $tous = false): array { $s = charger('themes'); return $tous ? trier($s) : publies($s); }
 function temoignages(bool $tous = false): array { $s = charger('temoignages'); return $tous ? trier($s) : publies($s); }
 function nom_service(string $cle): string { foreach (charger('services') as $s) if ($s['cle'] === $cle) return $s['nom']; return $cle; }

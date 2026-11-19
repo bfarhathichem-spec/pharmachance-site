@@ -7,7 +7,7 @@ function carte(array $r, string $cls = ''): string {
     $cats = h(implode(' ', $r['services'] ?? []));
     $ville = trim($r['ville'] ?? '') !== '' ? '<span>' . h($r['ville']) . '</span>' : '';
     $item = function_exists('en_edition') && en_edition() ? ' data-item="' . h((string)($r['id'] ?? '')) . '"' : '';
-    return '<a class="carte ' . h($cls) . '" href="' . url('realisations/' . $r['slug']) . '" data-cat="' . $cats . '"' . $item . '>'
+    return '<a class="carte ' . h($cls) . '" href="' . url(lien_realisation($r)) . '" data-cat="' . $cats . '"' . $item . '>'
         . '<img src="' . h(media(miniature($r['image']))) . '" alt="' . h($r['titre'] . ' : réalisation PharmaChance') . '" loading="lazy" decoding="async" style="object-position:' . h($r['cadrage'] ?? '50% 50%') . '">'
         . '<span class="cap"><b>' . h($r['titre']) . '</b>' . $ville . '</span></a>';
 }
@@ -46,7 +46,7 @@ function temoignages_bloc(array $liste): string {
     $o = '<section class="sec avis"><h2>Ils nous font confiance</h2><div class="avis-liste">';
     foreach ($liste as $t) {
         $r = !empty($t['realisation']) ? trouver(realisations(), 'id', $t['realisation']) : null;
-        $lien = $r ? '<a class="avis-lien" href="' . h(url('realisations/' . $r['slug'])) . '">Voir le projet</a>' : '';
+        $lien = $r ? '<a class="avis-lien" href="' . h(url(lien_realisation($r))) . '">Voir le projet</a>' : '';
         $img = !empty($t['image']) ? '<img src="' . h(media($t['image'])) . '" alt="" loading="lazy">' : '';
         $o .= '<figure class="avis-carte"><blockquote>' . paragraphes($t['texte'] ?? '') . '</blockquote><figcaption>' . $img . '<span><b>' . h($t['nom'] ?? '') . '</b>' . h($t['etablissement'] ?? '') . $lien . '</span></figcaption></figure>';
     }

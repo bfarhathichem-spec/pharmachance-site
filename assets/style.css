@@ -742,3 +742,7 @@ footer.xf .bas{gap:12px 20px}
 .cookies .btn{padding:11px 22px;font-size:15px}
 .liens-legaux .gerer-cookies{cursor:pointer}
 @media (max-width:700px){.cookies{left:12px;right:12px;bottom:calc(86px + env(safe-area-inset-bottom));max-width:none;padding:18px}}
+/* autres secteurs */
+.filtre-lien{display:inline-block;font:700 15px 'Comfortaa',sans-serif;padding:12px 20px;border-radius:999px;border:2px solid var(--trait);background:#fff;color:var(--gris);text-decoration:none;margin:0 8px 8px 0}
+.filtre-lien:hover{border-color:var(--logo);color:var(--sauge-f)}
+.secteur-bloc{padding-bottom:72px}.secteur-intro{max-width:70ch;font-size:18px;margin:0 0 28px}

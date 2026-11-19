@@ -1,10 +1,11 @@
 <?php
-$liste = realisations(); $i = 0; foreach ($liste as $k => $x) if ($x['slug'] === $p['slug']) $i = $k;
+$sect = ($p['secteur'] ?? '') !== '' ? trouver(secteurs(true), 'slug', $p['secteur']) : null;
+$liste = $sect ? realisations_autres($sect['slug']) : realisations(); $i = 0; foreach ($liste as $k => $x) if ($x['slug'] === $p['slug']) $i = $k;
 $prev = $liste[($i - 1 + count($liste)) % count($liste)]; $next = $liste[($i + 1) % count($liste)];
 $tem = array_values(array_filter(temoignages(), fn($t) => ($t['realisation'] ?? '') === $p['slug']));
 $gal = array_values(array_filter($p['galerie'] ?? [], fn($g) => $g !== ($p['avant'] ?? '')));
 ?>
-<section class="entete"><div class="t"><p class="fil"><a href="<?= url() ?>">Accueil</a> / <a href="<?= url('realisations') ?>">Réalisations</a> / <?= h($p['titre']) ?></p><h1><?= h($p['titre']) ?></h1>
+<section class="entete"><div class="t"><p class="fil"><a href="<?= url() ?>">Accueil</a> / <?php if ($sect): ?><a href="<?= url('autres-secteurs') ?>">Autres secteurs</a> / <a href="<?= url('autres-secteurs/' . $sect['slug']) ?>"><?= h($sect['nom']) ?></a><?php else: ?><a href="<?= url('realisations') ?>">Réalisations</a><?php endif; ?> / <?= h($p['titre']) ?></p><h1><?= h($p['titre']) ?></h1>
 <div class="meta"><?php foreach (['ville', 'annee', 'surface'] as $c) if (trim($p[$c] ?? '') !== '') echo '<span>' . h($p[$c]) . '</span>'; foreach ($p['services'] ?? [] as $c) echo '<span>' . h(nom_service($c)) . '</span>'; ?></div></div>
 <div class="intro"><?= paragraphes($p['description'] ?? '') ?></div></section>
 <div class="grand-visuel" data-zoom><img src="<?= h(media($p['image'])) ?>" alt="<?= h($p['titre']) ?>" style="object-position:<?= h($p['cadrage'] ?? '50% 50%') ?>"></div>
@@ -21,7 +22,7 @@ $gal = array_values(array_filter($p['galerie'] ?? [], fn($g) => $g !== ($p['avan
 <?php if (!empty($p['avant']) && !$aaHaut): ?><section class="wrap" style="padding-bottom:100px"><h2 class="h-moy">Avant, après</h2><?= avap($p['avant'], $p['apres'] ?: $p['image']) ?></section><?php endif; ?>
 <?php if ($gal): ?><section class="wrap" style="padding-bottom:60px"><h2 class="h-moy">Galerie</h2><?= galerie($gal, $p['titre']) ?></section><?php endif; ?>
 <?= temoignages_bloc($tem) ?>
-<section class="wrap" style="padding-bottom:100px"><nav class="nav-projets" aria-label="Autres réalisations"><a class="lien" href="<?= url('realisations/' . $prev['slug']) ?>">Projet précédent : <?= h($prev['titre']) ?></a><a class="lien" href="<?= url('realisations/' . $next['slug']) ?>">Projet suivant : <?= h($next['titre']) ?></a></nav></section>
+<section class="wrap" style="padding-bottom:100px"><nav class="nav-projets" aria-label="Autres réalisations"><a class="lien" href="<?= url(lien_realisation($prev)) ?>">Projet précédent : <?= h($prev['titre']) ?></a><a class="lien" href="<?= url(lien_realisation($next)) ?>">Projet suivant : <?= h($next['titre']) ?></a></nav></section>
 <?php $sp = trouver(services(), 'cle', $p['services'][0] ?? ''); if ($sp && !empty($sp['accroche'])): ?><section class="wrap serv-autres"><h2 class="h-moy">À propos de ce type de projet</h2><p><?= h($sp['accroche']) ?> <a class="lien" href="<?= url('services/' . $sp['slug']) ?>">En savoir plus sur « <?= h($sp['nom']) ?> »</a></p></section><?php endif; ?>
 <?php if ($sp && !empty($sp['faq'])): ?><section class="wrap faq" style="padding-top:0"><h2 class="h-moy">Questions fréquentes</h2><?php foreach ($sp['faq'] as $f): ?><details><summary><?= h($f['q']) ?></summary><p><?= h($f['r']) ?></p></details><?php endforeach; ?></section><div style="height:100px"></div><?php endif; ?>
 <?= cta('Un projet similaire ?') ?>

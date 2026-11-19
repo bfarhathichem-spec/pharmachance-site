@@ -39,6 +39,20 @@ case 'realisations':
             'ld' => ld_graphe(['@type' => 'CreativeWork', 'name' => $p['titre'], 'description' => $p['description'] ?? '', 'creator' => ['@id' => hote() . url() . '#entreprise'], 'image' => array_map(fn($g) => hote() . media($g), $p['galerie'] ?: [$p['image']]), 'about' => array_map('nom_service', $p['services'] ?? [])], ld_ariane([['Réalisations', 'realisations'], [$p['titre'], null]]))]);
     } else rendre('realisations', ['titre' => 'Réalisations : façades, vitrines et agencements de pharmacies en Tunisie | PharmaChance', 'desc' => 'Façades, enseignes, vitrines et agencements de pharmacies réalisés par PharmaChance en Tunisie, classés par thématique.', 'actif' => 'realisations', 'ld' => ld_graphe(ld_ariane([['Réalisations', null]]))]);
     break;
+case 'autres-secteurs':
+    $sec = isset($parts[1]) ? trouver(secteurs(), 'slug', $parts[1]) : null;
+    if (isset($parts[1]) && !$sec) { page404(); break; }
+    if (isset($parts[2])) {
+        $p = trouver(realisations_autres($sec['slug']), 'slug', $parts[2]);
+        if (!$p) { page404(); break; }
+        rendre('realisation', ['p' => $p, 'titre' => $p['titre'] . ' : ' . mb_strtolower($sec['nom']) . ' | PharmaChance', 'desc' => mb_substr($p['description'] ?? '', 0, 155), 'actif' => 'secteurs', 'og_image' => $p['image'],
+            'ld' => ld_graphe(['@type' => 'CreativeWork', 'name' => $p['titre'], 'description' => $p['description'] ?? '', 'creator' => ['@id' => hote() . url() . '#entreprise'], 'image' => array_map(fn($g) => hote() . media($g), $p['galerie'] ?: [$p['image']])], ld_ariane([['Autres secteurs', 'autres-secteurs'], [$sec['nom'], 'autres-secteurs/' . $sec['slug']], [$p['titre'], null]]))]);
+    } elseif ($sec) {
+        rendre('secteur', ['sec' => $sec, 'titre' => $sec['nom'] . ' : nos réalisations | PharmaChance', 'desc' => mb_substr(trim($sec['intro'] ?? '') ?: 'Les réalisations de PharmaChance dans le secteur ' . mb_strtolower($sec['nom']) . ', en Tunisie.', 0, 158), 'actif' => 'secteurs', 'ld' => ld_graphe(ld_ariane([['Autres secteurs', 'autres-secteurs'], [$sec['nom'], null]]))]);
+    } else {
+        rendre('secteurs', ['titre' => 'Hôtels, écoles, pâtisseries : nos réalisations hors pharmacie | PharmaChance', 'desc' => "Au-delà des pharmacies, PharmaChance aménage aussi hôtels, écoles, pâtisseries et autres lieux recevant du public en Tunisie.", 'actif' => 'secteurs', 'ld' => ld_graphe(ld_ariane([['Autres secteurs', null]]))]);
+    }
+    break;
 case 'vitrines':
     rendre('vitrines', ['titre' => 'Vitrines de pharmacie par thème : grippe, solaire, Ramadan… | PharmaChance', 'desc' => "Vitrines de pharmacie saisonnières conçues, fabriquées et posées par PharmaChance : grippe, immunité, allergies, solaire, moustiques, capillaire, rentrée, Ramadan.", 'actif' => 'vitrines', 'ld' => ld_graphe(ld_ariane([['Vitrines', null]]))]);
     break;
@@ -84,8 +98,9 @@ case 'sitemap.xml':
     foreach (articles() as $a) $u[] = 'articles/' . $a['slug'];
     foreach (services() as $s) $u[] = 'services/' . $s['slug'];
     foreach (realisations() as $p) $u[] = 'realisations/' . $p['slug'];
+    if (secteurs_actifs()) { $u[] = 'autres-secteurs'; foreach (secteurs_actifs() as $x) $u[] = 'autres-secteurs/' . $x['slug']; foreach (realisations_autres() as $p) $u[] = lien_realisation($p); }
     echo '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-    $lm = date('Y-m-d', max(array_map(fn($f) => @filemtime(DATA_DIR . "/$f.json") ?: 0, ['services', 'realisations', 'themes', 'reglages', 'articles', 'pages'])));
+    $lm = date('Y-m-d', max(array_map(fn($f) => @filemtime(DATA_DIR . "/$f.json") ?: 0, ['services', 'realisations', 'themes', 'reglages', 'articles', 'pages', 'secteurs'])));
     foreach ($u as $x) echo '<url><loc>' . h($hote . url($x)) . '</loc><lastmod>' . $lm . '</lastmod></url>';
     echo '</urlset>';
     break;

@@ -75,7 +75,8 @@ function texte_site(string $cle) {
 /* Résumé « en bref » d'une réalisation, construit à partir de ses données */
 function resume_realisation(array $p): string {
     $serv = array_map('nom_service', $p['services'] ?? []);
-    $o = h($p['titre']) . ' est une réalisation de PharmaChance, agenceur de pharmacies en Tunisie';
+    $sec = ($p['secteur'] ?? '') !== '' ? trouver(secteurs(true), 'slug', $p['secteur']) : null;
+    $o = h($p['titre']) . ' est une réalisation de PharmaChance' . ($sec ? ', dans le secteur « ' . h($sec['nom']) . ' »' : ', agenceur de pharmacies en Tunisie');
     if (trim($p['ville'] ?? '') !== '') $o .= ', à ' . h($p['ville']);
     if (trim($p['annee'] ?? '') !== '') $o .= ' (' . h($p['annee']) . ')';
     $o .= '.';

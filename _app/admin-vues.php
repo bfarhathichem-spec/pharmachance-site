@@ -1,6 +1,6 @@
 <?php
 /* Vues de l'administration. Variables disponibles : $page, $flash, $erreur, $moi */
-$titres = ['tableau' => 'Tableau de bord', 'realisations' => 'Réalisations', 'realisation' => 'Réalisation', 'services' => 'Services', 'service' => 'Service',
+$titres = ['tableau' => 'Tableau de bord', 'realisations' => 'Réalisations', 'realisation' => 'Réalisation', 'secteurs' => 'Autres secteurs', 'secteur' => 'Secteur', 'services' => 'Services', 'service' => 'Service',
     'themes' => 'Vitrines', 'theme' => 'Thème de vitrine', 'temoignages' => 'Témoignages', 'temoignage' => 'Témoignage', 'articles' => 'Articles', 'article' => 'Article', 'pages' => 'Pages légales', 'page' => 'Page légale', 'demandes' => 'Demandes de devis',
     'demande' => 'Demande', 'reglages' => 'Réglages', 'compte' => 'Mon compte', 'aide' => 'Aide', 'connexion' => 'Connexion', 'installation' => 'Créer le compte administrateur'];
 $titre = $titres[$page] ?? 'Page introuvable';
@@ -70,7 +70,7 @@ function date_fr(string $iso): string { $t = strtotime($iso); return $t ? date('
   <a class="voir" href="<?= h(url('?edition=0')) ?>" target="_blank" rel="noopener">Voir le site</a>
 </header>
 <nav id="nav" class="nav">
-  <?php foreach (['tableau' => 'Tableau de bord', 'demandes' => 'Demandes de devis', 'realisations' => 'Réalisations', 'services' => 'Services', 'themes' => 'Vitrines', 'articles' => 'Articles', 'temoignages' => 'Témoignages', 'pages' => 'Pages légales', 'reglages' => 'Réglages', 'compte' => 'Mon compte', 'aide' => 'Aide'] as $k => $l):
+  <?php foreach (['tableau' => 'Tableau de bord', 'demandes' => 'Demandes de devis', 'realisations' => 'Réalisations', 'secteurs' => 'Autres secteurs', 'services' => 'Services', 'themes' => 'Vitrines', 'articles' => 'Articles', 'temoignages' => 'Témoignages', 'pages' => 'Pages légales', 'reglages' => 'Réglages', 'compte' => 'Mon compte', 'aide' => 'Aide'] as $k => $l):
     $actif = $page === $k || $page === rtrim($k, 's') || ($k === 'themes' && $page === 'theme'); ?>
     <a href="<?= h(url('admin/?p=' . $k)) ?>"<?= $actif ? ' aria-current="page"' : '' ?>><?= h($l) ?><?= $k === 'demandes' && $nouv ? ' <span class="badge">' . $nouv . '</span>' : '' ?></a>
   <?php endforeach; ?>
@@ -136,7 +136,7 @@ case 'realisations':
     <li>
       <?= ordre('realisations', $r['id'], $i === 0, $i === $n - 1) ?>
       <a class="lien-l" href="<?= h(url('admin/?p=realisation&id=' . rawurlencode($r['id']))) ?>"><?= vignette($r['image'] ?? '', $r['titre']) ?>
-        <span><b><?= h($r['titre']) ?></b><small><?= h(implode(' · ', array_filter([$r['ville'] ?? '', $r['annee'] ?? '']))) ?><?php if (facade_incomplete($r)): ?> <em class="manque">· Avant / après à ajouter</em><?php endif; ?></small></span></a>
+        <span><b><?= h($r['titre']) ?></b><small><?= h(implode(' · ', array_filter([$r['ville'] ?? '', $r['annee'] ?? '']))) ?><?php if (($r['secteur'] ?? '') !== ''): $sx = trouver(secteurs(true), 'slug', $r['secteur']); ?> <em class="etiq-sec">· <?= h($sx['nom'] ?? $r['secteur']) ?></em><?php endif; ?><?php if (facade_incomplete($r)): ?> <em class="manque">· Avant / après à ajouter</em><?php endif; ?></small></span></a>
       <span class="actions">
         <?= interrupteur('realisations', $r['id'], 'en_avant', !empty($r['en_avant']), 'Mise en avant', 'Pas en avant') ?>
         <?= interrupteur('realisations', $r['id'], 'publie', !empty($r['publie']), 'En ligne', 'Hors ligne') ?>
@@ -147,15 +147,18 @@ case 'realisations':
 <?php break;
 
 case 'realisation':
-  $r = trouver(charger('realisations'), 'id', (string)($_GET['id'] ?? '')) ?? ['id' => '', 'titre' => '', 'slug' => '', 'ville' => '', 'annee' => date('Y'), 'surface' => '', 'description' => '', 'interventions' => [], 'services' => [], 'galerie' => [], 'image' => '', 'avant' => '', 'apres' => '', 'cadrage' => '50% 50%', 'publie' => true, 'en_avant' => false];
+  $r = trouver(charger('realisations'), 'id', (string)($_GET['id'] ?? '')) ?? ['id' => '', 'titre' => '', 'slug' => '', 'ville' => '', 'annee' => date('Y'), 'surface' => '', 'description' => '', 'interventions' => [], 'services' => [], 'galerie' => [], 'image' => '', 'avant' => '', 'apres' => '', 'cadrage' => '50% 50%', 'publie' => true, 'en_avant' => false, 'secteur' => preg_replace('/[^a-z0-9-]/', '', (string)($_GET['secteur'] ?? ''))];
   $neuf = $r['id'] === ''; ?>
   <p class="fil"><a href="<?= h(url('admin/?p=realisations')) ?>">Réalisations</a></p>
   <div class="tete"><h1><?= $neuf ? 'Nouvelle réalisation' : h($r['titre']) ?></h1>
-    <?php if (!$neuf && !empty($r['publie'])): ?><a class="btn-s" target="_blank" rel="noopener" href="<?= h(url('realisations/' . $r['slug'])) ?>">Voir sur le site</a><?php endif; ?></div>
+    <?php if (!$neuf && !empty($r['publie'])): ?><a class="btn-s" target="_blank" rel="noopener" href="<?= h(url(lien_realisation($r))) ?>">Voir sur le site</a><?php endif; ?></div>
   <form method="post" enctype="multipart/form-data" class="fiche">
     <?= champ_csrf() ?><input type="hidden" name="action" value="realisation"><input type="hidden" name="id" value="<?= h($r['id']) ?>">
     <section class="bloc">
       <h2>Le projet</h2>
+      <label>Secteur <small>une pharmacie apparaît dans « Réalisations », les autres secteurs dans « Autres secteurs »</small>
+        <select name="secteur"><option value="">Pharmacie</option><?php foreach (secteurs(true) as $sx): ?><option value="<?= h($sx['slug']) ?>"<?= ($r['secteur'] ?? '') === $sx['slug'] ? ' selected' : '' ?>><?= h($sx['nom']) ?></option><?php endforeach; ?></select></label>
+      <p class="aide"><a href="<?= h(url('admin/?p=secteur')) ?>">Ajouter un secteur</a> (hôtel, école, restaurant…) s'il n'est pas dans la liste.</p>
       <label>Nom du projet<input name="titre" required value="<?= h($r['titre']) ?>" placeholder="Pharmacie du Lac"></label>
       <div class="g3">
         <label>Ville<input name="ville" value="<?= h($r['ville']) ?>" placeholder="Tunis"></label>
@@ -262,6 +265,36 @@ case 'service':
 <?php break;
 
 /* ================= THÈMES DE VITRINES ================= */
+case 'secteurs':
+  $L = secteurs(true); $n = count($L); $R = charger('realisations'); ?>
+  <div class="tete"><h1>Autres secteurs</h1><a class="btn" href="<?= h(url('admin/?p=secteur')) ?>">Ajouter un secteur</a></div>
+  <p class="aide">Les secteurs hors pharmacie : hôtels, écoles, pâtisseries… Pour y montrer un projet, ouvrez <a href="<?= h(url('admin/?p=realisation')) ?>">une réalisation</a> et choisissez son secteur. Le menu « Autres secteurs » apparaît sur le site dès qu'un projet d'un secteur en ligne est publié.</p>
+  <ul class="lignes">
+  <?php foreach ($L as $i => $sx): $nb = count(array_filter($R, fn($x) => ($x['secteur'] ?? '') === $sx['slug'] && !empty($x['publie']))); ?>
+    <li><?= ordre('secteurs', $sx['slug'], $i === 0, $i === $n - 1) ?>
+      <a class="lien-l" href="<?= h(url('admin/?p=secteur&id=' . rawurlencode($sx['slug']))) ?>"><span><b><?= h($sx['nom']) ?></b><small><?= $nb ?> projet<?= $nb > 1 ? 's' : '' ?> en ligne</small></span></a>
+      <span class="actions"><a class="btn-s" href="<?= h(url('admin/?p=realisation&secteur=' . rawurlencode($sx['slug']))) ?>">Ajouter un projet</a><?= interrupteur('secteurs', $sx['slug'], 'publie', !empty($sx['publie']), 'En ligne', 'Hors ligne') ?></span></li>
+  <?php endforeach; ?>
+  </ul>
+<?php break;
+
+case 'secteur':
+  $sx = trouver(charger('secteurs', []), 'slug', (string)($_GET['id'] ?? '')) ?? ['slug' => '', 'nom' => '', 'intro' => '', 'publie' => true];
+  $neuf = $sx['slug'] === ''; ?>
+  <p class="fil"><a href="<?= h(url('admin/?p=secteurs')) ?>">Autres secteurs</a></p>
+  <h1><?= $neuf ? 'Nouveau secteur' : h($sx['nom']) ?></h1>
+  <form method="post" class="fiche">
+    <?= champ_csrf() ?><input type="hidden" name="action" value="secteur"><input type="hidden" name="id" value="<?= h($sx['slug']) ?>">
+    <section class="bloc">
+      <label>Nom du secteur <small>tel qu'il s'affiche sur le site</small><input name="nom" required value="<?= h($sx['nom']) ?>" placeholder="Restaurants et cafés"></label>
+      <label>Texte d'introduction <small>facultatif, deux ou trois phrases sur ce que vous faites dans ce secteur</small><textarea name="intro" rows="3"><?= h($sx['intro'] ?? '') ?></textarea></label>
+      <label class="case"><input type="checkbox" name="publie" value="1"<?= !empty($sx['publie']) ? ' checked' : '' ?>> En ligne sur le site</label>
+    </section>
+    <div class="pied-f"><button class="btn"><?= $neuf ? 'Créer le secteur' : 'Enregistrer' ?></button></div>
+  </form>
+  <?php if (!$neuf): ?><div class="zone-danger"><?= bouton_post('supprimer', 'secteurs', $sx['slug'], 'Supprimer ce secteur', 'btn-danger', '', 'Supprimer le secteur « ' . $sx['nom'] . ' » ?') ?></div><?php endif; ?>
+<?php break;
+
 case 'themes':
   $L = themes(true); $n = count($L); ?>
   <div class="tete"><h1>Vitrines</h1><a class="btn-s" href="<?= h(url('admin/?p=theme')) ?>">Ajouter un thème</a></div>

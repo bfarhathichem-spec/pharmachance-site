@@ -22,9 +22,16 @@
 ## Réalisations
 
 <?php foreach (realisations() as $p): ?>
-- [<?= $p['titre'] ?>](<?= $h . url('realisations/' . $p['slug']) ?>) : <?= $p['description'] ?>
+- [<?= $p['titre'] ?>](<?= $h . url(lien_realisation($p)) ?>) : <?= $p['description'] ?>
 
 <?php endforeach; ?>
+<?php if (secteurs_actifs()): ?>
+## Autres secteurs (hors pharmacie)
+
+<?php foreach (realisations_autres() as $p): $sx = trouver(secteurs(), 'slug', $p['secteur']); ?>
+- [<?= $p['titre'] ?>](<?= $h . url(lien_realisation($p)) ?>) (<?= $sx['nom'] ?? '' ?>) : <?= $p['description'] ?? '' ?>
+
+<?php endforeach; endif; ?>
 
 ## Vitrines par thème
 

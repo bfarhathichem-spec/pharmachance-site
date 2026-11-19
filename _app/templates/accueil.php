@@ -28,7 +28,7 @@ if ($perso) $chiffres = array_map(fn($c) => [trim((string)$c['valeur']), trim((s
 if ($heroImg || $phare): ?>
 <div class="xh-visuel" data-zoom>
   <img src="<?= h(media($heroImg ?: ($phare['apres'] ?: $phare['image']))) ?>" alt="<?= h($lien ? $lien['titre'] . ' : réalisation PharmaChance' : 'Pharmacie aménagée par PharmaChance') ?>" fetchpriority="high" style="object-position:<?= h($heroImg ? '50% 50%' : ($phare['cadrage'] ?? '50% 50%')) ?>">
-  <?php if ($lien): ?><a class="xh-etq" href="<?= url('realisations/' . $lien['slug']) ?>"><i></i><?= h($lien['titre']) ?></a><?php endif; ?>
+  <?php if ($lien): ?><a class="xh-etq" href="<?= url(lien_realisation($lien)) ?>"><i></i><?= h($lien['titre']) ?></a><?php endif; ?>
 </div>
 <?php endif; ?>
 <section class="xn" aria-label="PharmaChance en chiffres" style="--n:<?= max(1, min(4, count($chiffres))) ?>">
@@ -39,7 +39,7 @@ if ($heroImg || $phare): ?>
 <section class="xa">
   <?php $manifeste = tr($manifeste); if ($ed): ?><p class="xa-t"><?= h($manifeste) ?></p><?php else: ?><p class="xa-t allume"><?php foreach (preg_split('/\s+/u', $manifeste) as $m) echo '<i>' . h($m) . '</i> '; ?></p><?php endif; ?>
   <div class="xa-col">
-    <?php foreach (array_slice($vedette, 1, 3) as $k => $x): ?><a class="xa-im xa-<?= $k ?>" data-par="<?= [0.10, -0.08, 0.14][$k] ?>" href="<?= url('realisations/' . $x['slug']) ?>"><img src="<?= h(media(miniature($x['image']))) ?>" alt="<?= h($x['titre']) ?>" loading="lazy" style="object-position:<?= h($x['cadrage'] ?? '50% 50%') ?>"></a><?php endforeach; ?>
+    <?php foreach (array_slice($vedette, 1, 3) as $k => $x): ?><a class="xa-im xa-<?= $k ?>" data-par="<?= [0.10, -0.08, 0.14][$k] ?>" href="<?= url(lien_realisation($x)) ?>"><img src="<?= h(media(miniature($x['image']))) ?>" alt="<?= h($x['titre']) ?>" loading="lazy" style="object-position:<?= h($x['cadrage'] ?? '50% 50%') ?>"></a><?php endforeach; ?>
   </div>
 </section>
 <section class="wrap xq"><div><h2 class="xt">L'agenceur <b>des pharmacies</b> en Tunisie</h2><p class="xq-def"><?= h(texte_site('accueil_def')) ?></p></div>
@@ -55,7 +55,7 @@ if ($heroImg || $phare): ?>
 </section>
 <section class="xp"><div class="xp-tete"><h2>De A à Z, <b>avec vous</b></h2><p>Une seule équipe suit votre projet. Vous validez avant chaque étape.</p></div><?= chemin() ?></section>
 <?php if ($aa): ?>
-<section class="wrap xav"><div class="head"><div><h2 class="xt">Le même local, <b>quelques semaines plus tard</b></h2><p><?= h(implode(', ', array_slice($aa['interventions'] ?? [], 0, 4))) ?>.</p></div><a class="lien" href="<?= url('realisations/' . $aa['slug']) ?>">Voir le projet</a></div><?= avap($aa['avant'], $aa['apres'] ?: $aa['image']) ?></section>
+<section class="wrap xav"><div class="head"><div><h2 class="xt">Le même local, <b>quelques semaines plus tard</b></h2><p><?= h(implode(', ', array_slice($aa['interventions'] ?? [], 0, 4))) ?>.</p></div><a class="lien" href="<?= url(lien_realisation($aa)) ?>">Voir le projet</a></div><?= avap($aa['avant'], $aa['apres'] ?: $aa['image']) ?></section>
 <?php endif; ?>
 <section class="xr">
   <div class="xr-pin">

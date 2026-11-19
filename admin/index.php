@@ -14,7 +14,7 @@ function flash_sortie(): never { header('Location: ' . url('admin/?sortie=1')); 
 function flash(string $m): void { $_SESSION['flash'] = $m; }
 function aller(string $q): never { header('Location: ' . url('admin/?' . $q)); exit; }
 function post(string $k, string $d = ''): string { return trim((string)($_POST[$k] ?? $d)); }
-function cle_id(string $nom): string { return in_array($nom, ['services', 'themes', 'articles'], true) ? 'slug' : 'id'; }
+function cle_id(string $nom): string { return in_array($nom, ['services', 'themes', 'articles', 'secteurs'], true) ? 'slug' : 'id'; }
 function deplacer(string $nom, string $id, int $sens): void {
     $l = trier(charger($nom)); $k = cle_id($nom);
     foreach ($l as $i => $x) if ($x[$k] === $id) { $j = $i + $sens; if (isset($l[$j])) { [$l[$i], $l[$j]] = [$l[$j], $l[$i]]; } break; }
@@ -141,11 +141,11 @@ else {
         switch ($a) {
         /* ordre, publication, suppression communs */
         case 'monter': case 'descendre':
-            $nom = post('liste'); if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'articles'], true)) deplacer($nom, $id, $a === 'monter' ? -1 : 1);
+            $nom = post('liste'); if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'articles', 'secteurs'], true)) deplacer($nom, $id, $a === 'monter' ? -1 : 1);
             aller('p=' . $nom);
         case 'basculer':
             $nom = post('liste'); $champ = post('champ');
-            if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'articles'], true) && in_array($champ, ['publie', 'en_avant'], true))
+            if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'articles', 'secteurs'], true) && in_array($champ, ['publie', 'en_avant'], true))
                 maj($nom, $id, function ($x) use ($champ) { $x[$champ] = empty($x[$champ]); return $x; });
             aller('p=' . $nom);
         case 'supprimer':
@@ -155,7 +155,11 @@ else {
                 $util = $s ? array_filter(charger('realisations'), fn($r) => in_array($s['cle'], $r['services'] ?? [], true)) : [];
                 if ($util) { flash('Ce service est utilisé par ' . count($util) . ' réalisation(s). Dépubliez-le plutôt, ou retirez-le de ces réalisations.'); aller('p=services'); }
             }
-            if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'demandes', 'articles'], true)) {
+            if ($nom === 'secteurs') {
+                $util = array_filter(charger('realisations'), fn($r) => ($r['secteur'] ?? '') === $id);
+                if ($util) { flash('Ce secteur contient ' . count($util) . ' projet(s). Changez d\'abord leur secteur, ou mettez le secteur hors ligne.'); aller('p=secteur&id=' . rawurlencode($id)); }
+            }
+            if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'demandes', 'articles', 'secteurs'], true)) {
                 $k = $nom === 'demandes' ? 'id' : cle_id($nom);
                 enregistrer($nom, array_values(array_filter(charger($nom), fn($x) => ($x[$k] ?? '') !== $id)));
                 flash('Élément supprimé.');
@@ -171,6 +175,7 @@ else {
             $r['titre'] = $titre; $r['ville'] = post('ville'); $r['annee'] = post('annee'); $r['surface'] = post('surface');
             $r['description'] = post('description'); $r['interventions'] = lignes(post('interventions'));
             $r['services'] = array_values(array_intersect((array)($_POST['services'] ?? []), array_column(charger('services'), 'cle')));
+            $r['secteur'] = in_array(post('secteur'), array_column(charger('secteurs', []), 'slug'), true) ? post('secteur') : '';
             $r['cadrage'] = in_array(post('cadrage'), ['50% 20%', '50% 50%', '50% 80%', '30% 50%', '70% 50%'], true) ? post('cadrage') : '50% 50%';
             $r['publie'] = !empty($_POST['publie']); $r['en_avant'] = !empty($_POST['en_avant']);
             $r['slug'] = slug_unique('realisations', slugify(post('slug') ?: $titre), $r['id']);
@@ -211,6 +216,16 @@ else {
             aller('p=service&id=' . rawurlencode($s['slug']));
 
         /* thèmes de vitrines */
+        case 'secteur':
+            $l = charger('secteurs', []); $ex = $id ? trouver($l, 'slug', $id) : null;
+            $nom = post('nom'); if ($nom === '') { flash('Le nom est obligatoire.'); aller('p=secteurs'); }
+            $x = $ex ?? ['ordre' => count($l) + 1];
+            $x['nom'] = $nom; $x['intro'] = post('intro'); $x['publie'] = !empty($_POST['publie']);
+            if (!$ex) $x['slug'] = slug_unique('secteurs', slugify($nom));
+            if ($ex) { foreach ($l as &$y) if ($y['slug'] === $id) $y = $x; unset($y); } else $l[] = $x;
+            enregistrer('secteurs', $l); flash($ex ? 'Secteur enregistré.' : 'Secteur créé. Ajoutez-y maintenant un projet.');
+            aller($ex ? 'p=secteur&id=' . rawurlencode($x['slug']) : 'p=secteurs');
+
         case 'theme':
             $l = charger('themes'); $ex = $id ? trouver($l, 'slug', $id) : null;
             $nom = post('nom'); if ($nom === '') { flash('Le nom est obligatoire.'); aller('p=themes'); }

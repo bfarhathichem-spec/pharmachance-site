@@ -1,0 +1,5 @@
+[
+    {"slug": "hotellerie", "nom": "Hôtels", "intro": "", "ordre": 1, "publie": true},
+    {"slug": "ecoles", "nom": "Écoles", "intro": "", "ordre": 2, "publie": true},
+    {"slug": "patisseries", "nom": "Pâtisseries et boulangeries", "intro": "", "ordre": 3, "publie": true}
+]
