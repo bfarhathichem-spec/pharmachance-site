@@ -288,6 +288,7 @@ case 'secteur':
     <section class="bloc">
       <label>Nom du secteur <small>tel qu'il s'affiche sur le site</small><input name="nom" required value="<?= h($sx['nom']) ?>" placeholder="Restaurants et cafés"></label>
       <label>Texte d'introduction <small>facultatif, deux ou trois phrases sur ce que vous faites dans ce secteur</small><textarea name="intro" rows="3"><?= h($sx['intro'] ?? '') ?></textarea></label>
+      <label>Ce que vous faites dans ce secteur <small>une ligne par point, affichées en liste sur la page du secteur</small><textarea name="points" rows="4"><?= h(implode("\n", $sx['points'] ?? [])) ?></textarea></label>
       <label class="case"><input type="checkbox" name="publie" value="1"<?= !empty($sx['publie']) ? ' checked' : '' ?>> En ligne sur le site</label>
     </section>
     <div class="pied-f"><button class="btn"><?= $neuf ? 'Créer le secteur' : 'Enregistrer' ?></button></div>

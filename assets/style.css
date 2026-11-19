@@ -746,3 +746,8 @@ footer.xf .bas{gap:12px 20px}
 .filtre-lien{display:inline-block;font:700 15px 'Comfortaa',sans-serif;padding:12px 20px;border-radius:999px;border:2px solid var(--trait);background:#fff;color:var(--gris);text-decoration:none;margin:0 8px 8px 0}
 .filtre-lien:hover{border-color:var(--logo);color:var(--sauge-f)}
 .secteur-bloc{padding-bottom:72px}.secteur-intro{max-width:70ch;font-size:18px;margin:0 0 28px}
+.sx-offre{padding-bottom:64px}.sx-liste{list-style:none;margin:32px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.sx-liste li{border-top:1.5px solid var(--trait);padding-top:18px}.sx-liste b{display:block;font-size:19px;margin-bottom:8px;color:var(--sauge-f)}.sx-liste span{font-size:16px;line-height:1.6}
+.sx-aussi{padding-bottom:72px}.sx-cartes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px}.sx-carte{background:#fff;border:1px solid var(--trait);border-radius:24px 24px 24px 0;padding:24px}.sx-carte h3{margin:0 0 10px;font-size:20px}.sx-carte p{margin:0;font-size:16px;line-height:1.6}
+@media (max-width:900px){.sx-liste{grid-template-columns:1fr 1fr}.sx-cartes{grid-template-columns:1fr}}@media (max-width:560px){.sx-liste{grid-template-columns:1fr}}
+.secteur-bloc .grille,.sx-page .grille{min-height:0}

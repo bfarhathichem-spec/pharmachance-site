@@ -220,7 +220,7 @@ else {
             $l = charger('secteurs', []); $ex = $id ? trouver($l, 'slug', $id) : null;
             $nom = post('nom'); if ($nom === '') { flash('Le nom est obligatoire.'); aller('p=secteurs'); }
             $x = $ex ?? ['ordre' => count($l) + 1];
-            $x['nom'] = $nom; $x['intro'] = post('intro'); $x['publie'] = !empty($_POST['publie']);
+            $x['nom'] = $nom; $x['intro'] = post('intro'); $x['points'] = lignes(post('points')); $x['publie'] = !empty($_POST['publie']);
             if (!$ex) $x['slug'] = slug_unique('secteurs', slugify($nom));
             if ($ex) { foreach ($l as &$y) if ($y['slug'] === $id) $y = $x; unset($y); } else $l[] = $x;
             enregistrer('secteurs', $l); flash($ex ? 'Secteur enregistré.' : 'Secteur créé. Ajoutez-y maintenant un projet.');

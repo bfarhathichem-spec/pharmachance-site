@@ -67,6 +67,18 @@ function facade_incomplete(array $r): bool {
 /* Corrections de contenu appliquées une seule fois aux données du site en ligne */
 function migrations(): void {
     $fait = charger('migrations', []);
+    if (!in_array('textes-secteurs-1', $fait, true)) {
+        $sec = charger('secteurs', []); $dep = secteurs_textes_depart();
+        foreach ($sec as &$x) if (isset($dep[$x['slug']])) { if (trim($x['intro'] ?? '') === '') $x['intro'] = $dep[$x['slug']][0]; if (empty($x['points'])) $x['points'] = $dep[$x['slug']][1]; }
+        unset($x); enregistrer('secteurs', $sec);
+        $l = charger('realisations');
+        foreach ($l as &$x) if (($x['image'] ?? '') === 'img/facade-magenta.jpg' && str_starts_with((string)($x['description'] ?? ''), 'Une entrée mise en scène')) {
+            $x['description'] = "Pour cette boutique, nous avons mis en scène l'entrée. Une arche florale encadre la porte et attire le regard depuis le trottoir, et des oriflammes assortis signalent le magasin de loin. L'habillage reprend les couleurs de l'enseigne : la façade devient reconnaissable au premier coup d'œil.";
+            $x['interventions'] = ["Habillage de l'entrée", 'Arche et décor floral', 'Oriflammes et signalétique extérieure'];
+        }
+        unset($x); enregistrer('realisations', $l);
+        $fait[] = 'textes-secteurs-1'; enregistrer('migrations', $fait);
+    }
     if (in_array('magenta-autres-secteurs-3', $fait, true)) return;
     $sec = charger('secteurs', []);
     if (!trouver($sec, 'slug', 'commerces')) { $sec[] = ['slug' => 'commerces', 'nom' => 'Commerces et boutiques', 'intro' => '', 'ordre' => count($sec) + 1, 'publie' => true]; enregistrer('secteurs', $sec); }
@@ -79,4 +91,18 @@ function migrations(): void {
         'image' => 'img/facade-magenta.jpg', 'cadrage' => '50% 40%', 'galerie' => ['img/facade-magenta.jpg'], 'avant' => '', 'apres' => '', 'en_avant' => false, 'publie' => true, 'ordre' => count($l) + 1, 'secteur' => 'commerces'];
     enregistrer('realisations', $l);
     $fait[] = 'magenta-autres-secteurs-3'; enregistrer('migrations', $fait);
+}
+
+/* Textes de départ des secteurs hors pharmacie (modifiables ensuite dans l'admin ou en direct) */
+function secteurs_textes_depart(): array {
+    return [
+        'hotellerie' => ["Le hall est la première image que le client garde d'un hôtel. Nous concevons et posons le comptoir de réception, les habillages muraux, l'enseigne et la signalétique, avec des matériaux choisis pour un passage permanent, jour et nuit.",
+            ['Comptoir de réception sur mesure', 'Enseigne et habillage de façade', 'Signalétique des étages, des salles et des services', 'Habillage décoratif du hall et des espaces communs']],
+        'ecoles' => ["Une école doit se repérer facilement, pour les élèves comme pour les parents. Nous réalisons l'enseigne et la façade, l'espace d'accueil, la signalétique des salles et des rangements solides, faits pour servir tous les jours pendant des années.",
+            ["Enseigne et habillage de la façade", "Espace d'accueil et bureau de la vie scolaire", 'Signalétique des salles, des étages et des sorties', 'Rangements et mobilier résistants']],
+        'patisseries' => ["En pâtisserie et en boulangerie, la vitrine et le comptoir font vendre. Nous dessinons un comptoir qui met les produits en valeur, une façade qu'on remarque depuis la rue et un passage simple entre la porte et la caisse, même aux heures d'affluence.",
+            ['Comptoir et présentoirs de vente', 'Façade et enseigne lumineuse', 'Vitrine décorée selon les fêtes et les saisons', 'Rangements et arrière-comptoir']],
+        'commerces' => ["Pour une boutique, c'est la façade qui fait entrer le client. Enseigne, habillage de l'entrée, vitrophanie, décor de vitrine : nous travaillons l'extérieur comme l'intérieur pour que le magasin se remarque dans la rue et donne envie d'entrer.",
+            ["Enseigne lumineuse et habillage de l'entrée", 'Vitrophanie et décor de vitrine', 'Mobilier de présentation et caisse', 'Mise en valeur des produits en magasin']],
+    ];
 }

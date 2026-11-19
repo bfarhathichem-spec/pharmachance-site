@@ -1,6 +1,8 @@
-<?php $P = realisations_autres($sec['slug']); ?>
+<?php $P = realisations_autres($sec['slug']); $pts = (array)($sec['points'] ?? []); ?>
 <section class="entete"><div class="t"><p class="fil"><a href="<?= url() ?>">Accueil</a> / <a href="<?= url('autres-secteurs') ?>">Autres secteurs</a> / <?= h($sec['nom']) ?></p><h1><?= h($sec['nom']) ?></h1></div><p class="intro"><?= h(trim($sec['intro'] ?? '') ?: 'Les projets de PharmaChance dans ce secteur.') ?></p></section>
-<section class="wrap" style="padding-bottom:100px"><div class="grille"><?php foreach ($P as $x) echo carte($x); ?></div>
-<?php if (!$P): ?><p class="vide" style="display:block">Les premiers projets arrivent bientôt.</p><?php endif; ?>
+<?php if ($pts): ?><section class="sec deux"><div><h2 class="h-moy">Ce que nous réalisons</h2><ul class="liste"><?php foreach ($pts as $x): ?><li><?= h($x) ?></li><?php endforeach; ?></ul></div>
+<div><h2 class="h-moy">Comment nous travaillons</h2><p style="font-size:18px">Nous venons voir le lieu, nous relevons les mesures et nous vous montrons le projet en image avant toute fabrication. Le mobilier, les enseignes et les décors sont ensuite fabriqués puis posés par nos équipes, en limitant la gêne pour votre activité.</p><p style="margin-top:24px"><a class="btn plein" href="<?= url('contact') ?>">Demander un devis</a></p></div></section><?php endif; ?>
+<section class="wrap" style="padding-bottom:100px"><?php if ($P): ?><h2 class="h-moy">Nos réalisations</h2><?php endif; ?><div class="grille"><?php foreach ($P as $x) echo carte($x); ?></div>
+<?php if (!$P): ?><p class="vide" style="display:block">Les photos de nos projets dans ce secteur arrivent bientôt. En attendant, parlez-nous du vôtre.</p><?php endif; ?>
 <p style="margin-top:48px;font-size:17px"><a class="lien" href="<?= url('autres-secteurs') ?>">Tous les autres secteurs</a> · <a class="lien" href="<?= url('realisations') ?>">Nos réalisations de pharmacies</a></p></section>
 <?= cta('Un projet similaire ?') ?>
