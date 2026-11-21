@@ -1,5 +1,6 @@
 <?php $ts = array_values(array_filter(themes(), fn($t) => !empty($t['images']))); ?>
 <section class="entete"><div class="t"><p class="fil"><a href="<?= url() ?>">Accueil</a> / <a href="<?= url('services/' . slug_service('vitrines')) ?>">Vitrines thématiques</a> / Thèmes</p><h1>Les thèmes de vitrines</h1></div><p class="intro">Choisissez un thème sur exemple : nous l'adaptons à votre vitrine, puis nous le fabriquons et le posons.</p></section>
+<?php if (!empty($ts[0]['images'][0])) echo visuel_haut($ts[0]['images'][0], 'Vitrine de pharmacie : ' . $ts[0]['nom']); ?>
 <section class="wrap def"><p><?= h(texte_site('vitrines_intro')) ?></p></section>
 <section class="wrap"><div class="themes">
 <?php foreach ($ts as $t): $n = count($t['images'] ?? []); ?><a class="theme" href="#<?= h($t['slug']) ?>"><div class="im"><img src="<?= h(media(miniature($t['images'][0]))) ?>" alt="Vitrine de pharmacie : <?= h($t['nom']) ?>" loading="lazy"></div><h3><?= h($t['nom']) ?></h3><p><?= h($t['periode'] ?? '') ?><?= !empty($t['periode']) ? ' · ' : '' ?><?= $n ?> exemple<?= $n === 1 ? '' : 's' ?></p></a><?php endforeach; ?>

@@ -52,3 +52,9 @@ function temoignages_bloc(array $liste): string {
     }
     return $o . '</div></section>';
 }
+
+/* Grande photo en haut de page, avec la même animation que l'accueil (elle s'ouvre au défilement) */
+function visuel_haut(string $src, string $alt, string $cadrage = '50% 50%'): string {
+    if ($src === '') return '';
+    return '<div class="xh-visuel" data-zoom><img src="' . h(media($src)) . '" alt="' . h($alt) . '" fetchpriority="high" style="object-position:' . h($cadrage ?: '50% 50%') . '"></div>';
+}

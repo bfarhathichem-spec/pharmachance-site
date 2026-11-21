@@ -23,7 +23,7 @@
 <label class="full">Votre besoin<textarea name="message" rows="5" required maxlength="4000"><?= h($v['message'] ?? '') ?></textarea></label>
 <label>Budget indicatif <small>facultatif</small><input name="budget" maxlength="80" placeholder="Ex. : à définir ensemble" value="<?= h($v['budget'] ?? '') ?>"></label>
 <label>Photos ou plans <small>facultatif, 5 fichiers, 10 Mo max. chacun</small><input name="fichiers[]" type="file" multiple accept="image/jpeg,image/png,image/webp,application/pdf"></label>
-<label class="full case"><input type="checkbox" name="accord" value="1" required<?= !empty($v['accord']) ? ' checked' : '' ?>> J'accepte que PharmaChance utilise ces informations pour me recontacter au sujet de ma demande (<a class="lien" href="<?= url('confidentialite') ?>" target="_blank">politique de confidentialité</a>).</label>
+<label class="full case"><input type="checkbox" name="accord" value="1" required<?= !empty($v['accord']) ? ' checked' : '' ?>><span>J'accepte que PharmaChance utilise ces informations pour me recontacter au sujet de ma demande (<a class="lien" href="<?= url('confidentialite') ?>" target="_blank">politique de confidentialité</a>).</span></label>
 <div class="full"><button class="btn plein" type="submit">Envoyer ma demande</button></div>
 </form>
 <?php endif; ?>

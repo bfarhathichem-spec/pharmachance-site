@@ -1,30 +1,54 @@
 [
- {
-  "slug": "hotellerie",
-  "nom": "Hôtels",
-  "intro": "",
-  "ordre": 1,
-  "publie": true
- },
- {
-  "slug": "ecoles",
-  "nom": "Écoles",
-  "intro": "",
-  "ordre": 2,
-  "publie": true
- },
- {
-  "slug": "patisseries",
-  "nom": "Pâtisseries et boulangeries",
-  "intro": "",
-  "ordre": 3,
-  "publie": true
- },
- {
-  "slug": "commerces",
-  "nom": "Commerces et boutiques",
-  "intro": "",
-  "ordre": 4,
-  "publie": true
- }
+    {
+        "slug": "hotellerie",
+        "nom": "Hôtels",
+        "intro": "Le hall est la première image que le client garde d'un hôtel. Nous concevons et posons le comptoir de réception, les habillages muraux, l'enseigne et la signalétique, avec des matériaux choisis pour un passage permanent, jour et nuit.",
+        "ordre": 1,
+        "publie": true,
+        "points": [
+            "Comptoir de réception sur mesure",
+            "Enseigne et habillage de façade",
+            "Signalétique des étages, des salles et des services",
+            "Habillage décoratif du hall et des espaces communs"
+        ]
+    },
+    {
+        "slug": "ecoles",
+        "nom": "Écoles",
+        "intro": "Une école doit se repérer facilement, pour les élèves comme pour les parents. Nous réalisons l'enseigne et la façade, l'espace d'accueil, la signalétique des salles et des rangements solides, faits pour servir tous les jours pendant des années.",
+        "ordre": 2,
+        "publie": true,
+        "points": [
+            "Enseigne et habillage de la façade",
+            "Espace d'accueil et bureau de la vie scolaire",
+            "Signalétique des salles, des étages et des sorties",
+            "Rangements et mobilier résistants"
+        ]
+    },
+    {
+        "slug": "patisseries",
+        "nom": "Pâtisseries et boulangeries",
+        "intro": "En pâtisserie et en boulangerie, la vitrine et le comptoir font vendre. Nous dessinons un comptoir qui met les produits en valeur, une façade qu'on remarque depuis la rue et un passage simple entre la porte et la caisse, même aux heures d'affluence.",
+        "ordre": 3,
+        "publie": true,
+        "points": [
+            "Comptoir et présentoirs de vente",
+            "Façade et enseigne lumineuse",
+            "Vitrine décorée selon les fêtes et les saisons",
+            "Rangements et arrière-comptoir"
+        ]
+    },
+    {
+        "slug": "commerces",
+        "nom": "Commerces et boutiques",
+        "intro": "Pour une boutique, c'est la façade qui fait entrer le client. Enseigne, habillage de l'entrée, vitrophanie, décor de vitrine : nous travaillons l'extérieur comme l'intérieur pour que le magasin se remarque dans la rue et donne envie d'entrer.",
+        "ordre": 4,
+        "publie": true,
+        "points": [
+            "Enseigne lumineuse et habillage de l'entrée",
+            "Vitrophanie et décor de vitrine",
+            "Mobilier de présentation et caisse",
+            "Mise en valeur des produits en magasin"
+        ]
+    }
 ]

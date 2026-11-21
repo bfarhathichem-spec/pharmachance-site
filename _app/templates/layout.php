@@ -84,7 +84,7 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
   <a class="wa-bas" href="<?= h(lien_wa()) ?>" target="_blank" rel="noopener"><?= str_replace('width="30" height="30"', 'width="22" height="22"', WA_SVG) ?>WhatsApp</a>
   <a class="plein" href="<?= url('contact') ?>"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H7l-3 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>Devis</a>
 </nav>
-<div class="visionneuse" role="dialog" aria-modal="true" aria-label="Photo agrandie"><img alt=""><button class="btn plein" type="button">Fermer</button></div>
+<div class="visionneuse" role="dialog" aria-modal="true" aria-label="Photo agrandie"><img alt=""><button class="btn plein vis-fermer" type="button">Fermer</button><button class="vis-nav vis-prec" type="button" aria-label="Photo précédente">‹</button><button class="vis-nav vis-suiv" type="button" aria-label="Photo suivante">›</button><span class="vis-compte" aria-live="polite"></span></div>
 <?php if ($gaId): ?><div class="cookies" role="dialog" aria-live="polite" aria-label="Mesure d'audience" hidden data-ga="<?= h($gaId) ?>"><p>Nous aimerions mesurer la fréquentation du site avec Google Analytics, pour savoir quelles pages vous sont utiles. Rien n'est enregistré sans votre accord. <a class="lien" href="<?= url('cookies') ?>">En savoir plus</a></p><div class="btns"><button type="button" class="btn ligne" data-mesure="non">Refuser</button><button type="button" class="btn plein" data-mesure="oui">Accepter</button></div></div><?php endif; ?>
 <script src="<?= url('assets/site.js') ?>?v=<?= @filemtime(WWW_DIR . '/assets/site.js') ?>" defer></script>
 </body>

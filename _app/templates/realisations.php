@@ -1,5 +1,6 @@
 <?php $sel = preg_replace('/[^a-z-]/', '', (string)($_GET['service'] ?? 'tous')) ?: 'tous'; ?>
 <section class="entete"><div class="t"><p class="fil"><a href="<?= url() ?>">Accueil</a> / Réalisations</p><h1>Nos réalisations</h1></div><p class="intro">Façades, enseignes, vitrines, agencements : une sélection de projets menés partout en Tunisie.</p></section>
+<?php $rv0 = array_values(array_filter(realisations(), fn($x) => !empty($x['en_avant'])))[0] ?? (realisations()[0] ?? null); if ($rv0) echo visuel_haut($rv0['image'], $rv0['titre'], $rv0['cadrage'] ?? '50% 50%'); ?>
 <section class="wrap def"><p><?= h(texte_site('realisations_intro')) ?></p></section>
 <section class="wrap" style="padding-bottom:120px">
 <?php $toutes = realisations(); $compte = []; foreach ($toutes as $x) foreach ($x['services'] ?? [] as $c) $compte[$c] = ($compte[$c] ?? 0) + 1;

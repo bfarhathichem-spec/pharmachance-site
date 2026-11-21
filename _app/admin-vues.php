@@ -138,6 +138,7 @@ case 'realisations':
       <a class="lien-l" href="<?= h(url('admin/?p=realisation&id=' . rawurlencode($r['id']))) ?>"><?= vignette($r['image'] ?? '', $r['titre']) ?>
         <span><b><?= h($r['titre']) ?></b><small><?= h(implode(' · ', array_filter([$r['ville'] ?? '', $r['annee'] ?? '']))) ?><?php if (($r['secteur'] ?? '') !== ''): $sx = trouver(secteurs(true), 'slug', $r['secteur']); ?> <em class="etiq-sec">· <?= h($sx['nom'] ?? $r['secteur']) ?></em><?php endif; ?><?php if (facade_incomplete($r)): ?> <em class="manque">· Avant / après à ajouter</em><?php endif; ?></small></span></a>
       <span class="actions">
+        <?php if (in_array('facades', $r['services'] ?? [], true)): ?><a class="btn-s" href="<?= h(url(lien_realisation($r) . '?edition=1#avant-apres')) ?>" title="Ouvre la page du projet pour déposer la photo avant et la photo après"><?= facade_incomplete($r) ? 'Ajouter avant / après' : 'Changer avant / après' ?></a><?php endif; ?>
         <?= interrupteur('realisations', $r['id'], 'en_avant', !empty($r['en_avant']), 'Mise en avant', 'Pas en avant') ?>
         <?= interrupteur('realisations', $r['id'], 'publie', !empty($r['publie']), 'En ligne', 'Hors ligne') ?>
       </span>

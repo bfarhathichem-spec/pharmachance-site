@@ -1,5 +1,6 @@
 <?php $L = secteurs_actifs(); $tous = secteurs(); ?>
 <section class="entete"><div class="t"><p class="fil"><a href="<?= url() ?>">Accueil</a> / Autres secteurs</p><h1>Nos réalisations dans d'autres secteurs</h1></div><p class="intro">Hôtels, écoles, pâtisseries, boutiques : ce que nous avons appris en aménageant des pharmacies sert aussi à d'autres lieux qui accueillent du public.</p></section>
+<?php $ax = realisations_autres()[0] ?? null; if ($ax) echo visuel_haut($ax['image'], $ax['titre'], $ax['cadrage'] ?? '50% 50%'); ?>
 <section class="wrap def"><p>Une pharmacie demande un accueil clair, des produits faciles à trouver, une façade qu'on voit de la rue et un mobilier qui dure. Ces besoins, on les retrouve dans le hall d'un hôtel, à l'entrée d'une école ou derrière le comptoir d'une pâtisserie. Nous y appliquons la même méthode et la même équipe : visite du lieu, plan, projet en image, puis fabrication et pose.</p></section>
 <section class="wrap sx-offre"><h2 class="xt">Ce que nous réalisons <b>hors pharmacie</b></h2>
   <ul class="sx-liste">

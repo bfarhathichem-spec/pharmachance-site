@@ -1,6 +1,6 @@
 <?php $rel = array_slice(array_values(array_filter(realisations(), fn($x) => in_array($s['cle'], $x['services'] ?? [], true))), 0, 6); ?>
 <section class="entete"><div class="t"><p class="fil"><a href="<?= url() ?>">Accueil</a> / <a href="<?= url('services') ?>">Services</a> / <?= h($s['nom']) ?></p><h1><?= h($s['nom']) ?></h1></div><p class="intro"><?= h($s['intro']) ?></p></section>
-<div class="grand-visuel"><img src="<?= h(media($s['image'])) ?>" alt="<?= h($s['nom']) ?>" style="object-position:<?= h($s['cadrage']) ?>"></div>
+<?= visuel_haut($s['image'], $s['nom'], $s['cadrage'] ?? '50% 50%') ?>
 <?php if (!empty($s['accroche'])): ?><section class="wrap def"><p><?= h($s['accroche']) ?></p></section><?php endif; ?>
 <section class="sec deux">
   <?php if (!empty($s['besoins'])): ?><div><h2 class="h-moy">Pour qui ?</h2><ul class="liste"><?php foreach ($s['besoins'] as $b): ?><li><?= h($b) ?></li><?php endforeach; ?></ul></div><?php endif; ?>

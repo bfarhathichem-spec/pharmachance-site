@@ -1,522 +1,522 @@
 [
- {
-  "id": "r01",
-  "slug": "facade-entree-nord-hilton",
-  "titre": "Rénovation complète d'une façade",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "renovation",
-   "facades"
-  ],
-  "description": "Une façade blanche et une enseigne vieillissante ont laissé place à un bardage rouge, à des lettres découpées et à un encadrement d'entrée vert d'eau qui signale l'officine de loin.",
-  "interventions": [
-   "Bardage de façade",
-   "Enseigne en lettres découpées, en français et en arabe",
-   "Caducée",
-   "Encadrement de l'entrée"
-  ],
-  "image": "img/facade-nord-hilton.jpg",
-  "cadrage": "50% 40%",
-  "galerie": [
-   "img/facade-nord-hilton.jpg"
-  ],
-  "avant": "img/avant-nord-hilton.jpg",
-  "apres": "img/facade-nord-hilton.jpg",
-  "en_avant": true,
-  "publie": true,
-  "ordre": 1
- },
- {
-  "id": "r02",
-  "slug": "encadrement-enseigne-lumineuse",
-  "titre": "Encadrement de façade et enseigne lumineuse",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "facades"
-  ],
-  "description": "Un grand encadrement jaune structure l'entrée et donne à la pharmacie une silhouette reconnaissable dans la rue.",
-  "interventions": [
-   "Encadrement de façade",
-   "Enseigne lumineuse",
-   "Habillage de l'entrée"
-  ],
-  "image": "img/facade-kchaou.jpg",
-  "cadrage": "50% 30%",
-  "galerie": [
-   "img/facade-kchaou.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 2
- },
- {
-  "id": "r05",
-  "slug": "habillage-facade-vitrophanie",
-  "titre": "Habillage de façade et vitrophanie",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "facades",
-   "vitrines"
-  ],
-  "description": "Un habillage jaune qui encadre chaque vitrine, associé à une vitrophanie grand format.",
-  "interventions": [
-   "Habillage de façade",
-   "Vitrophanie grand format"
-  ],
-  "image": "img/facade-jaune.jpg",
-  "cadrage": "50% 50%",
-  "galerie": [
-   "img/facade-jaune.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": true,
-  "publie": true,
-  "ordre": 3
- },
- {
-  "id": "r04",
-  "slug": "enseigne-lumineuse-nuit",
-  "titre": "Enseigne lumineuse bilingue",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "facades"
-  ],
-  "description": "Une enseigne rétroéclairée, en français et en arabe, lisible de jour comme de nuit.",
-  "interventions": [
-   "Enseigne lumineuse bilingue",
-   "Caducée éclairé"
-  ],
-  "image": "img/facade-nuit.jpg",
-  "cadrage": "50% 40%",
-  "galerie": [
-   "img/facade-nuit.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 4
- },
- {
-  "id": "r06",
-  "slug": "enseigne-verte",
-  "titre": "Enseigne lumineuse en angle",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "facades"
-  ],
-  "description": "Une enseigne lumineuse verte en angle, visible depuis les deux rues.",
-  "interventions": [
-   "Enseigne lumineuse",
-   "Habillage de façade"
-  ],
-  "image": "img/facade-ksour.jpg",
-  "cadrage": "50% 35%",
-  "galerie": [
-   "img/facade-ksour.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 5
- },
- {
-  "id": "r03",
-  "slug": "entree-habillage-floral",
-  "titre": "Entrée et habillage floral",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "facades"
-  ],
-  "description": "Une entrée mise en scène avec une arche florale et des oriflammes assortis.",
-  "interventions": [
-   "Habillage de l'entrée",
-   "Décor floral",
-   "Signalétique extérieure"
-  ],
-  "image": "img/facade-magenta.jpg",
-  "cadrage": "50% 40%",
-  "galerie": [
-   "img/facade-magenta.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 6,
-  "secteur": "commerces"
- },
- {
-  "id": "r07",
-  "slug": "espace-de-vente",
-  "titre": "Espace de vente et linéaires",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "agencement"
-  ],
-  "description": "Un espace de vente clair, des comptoirs et des linéaires muraux qui laissent circuler les patients.",
-  "interventions": [
-   "Comptoirs",
-   "Linéaires muraux",
-   "Organisation de l'espace de vente"
-  ],
-  "image": "img/interieur.jpg",
-  "cadrage": "50% 60%",
-  "galerie": [
-   "img/interieur.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": true,
-  "publie": true,
-  "ordre": 7
- },
- {
-  "id": "r08",
-  "slug": "rayonnages-merchandising",
-  "titre": "Rayonnages et merchandising",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "merchandising",
-   "agencement"
-  ],
-  "description": "Des rayonnages organisés par univers pour guider le patient dans l'offre.",
-  "interventions": [
-   "Organisation des rayonnages",
-   "Espaces de présentation"
-  ],
-  "image": "img/rayons.jpg",
-  "cadrage": "50% 50%",
-  "galerie": [
-   "img/rayons.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": true,
-  "publie": true,
-  "ordre": 8
- },
- {
-  "id": "r12",
-  "slug": "releve-plan",
-  "titre": "Du relevé du local au projet en image",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "etude"
-  ],
-  "description": "Avant tout chantier, nous relevons le local au centimètre, puis nous dessinons la future salle de vente pour que le pharmacien la valide sur image.",
-  "interventions": [
-   "Relevé du local",
-   "Plan de la salle de vente",
-   "Visuel du projet (comptoirs et linéaires)"
-  ],
-  "image": "img/plan.jpg",
-  "cadrage": "30% 50%",
-  "galerie": [
-   "img/plan.jpg",
-   "img/comptoirs.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 9
- },
- {
-  "id": "r10",
-  "slug": "vitrines-grippe",
-  "titre": "Campagnes grippe et vaccination",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Plusieurs officines, une même campagne d'hiver : informer sur la vaccination antigrippale depuis la rue.",
-  "interventions": [
-   "Vitrophanie de campagne",
-   "Messages de prévention",
-   "Déclinaison sur plusieurs officines"
-  ],
-  "image": "img/vitrine-grippe.jpg",
-  "cadrage": "50% 25%",
-  "galerie": [
-   "img/vitrine-grippe.jpg",
-   "img/vitrine-grippe2.jpg",
-   "img/vitrine-grippe3.jpg",
-   "img/vitrine-grippe4.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": true,
-  "publie": true,
-  "ordre": 10
- },
- {
-  "id": "r14",
-  "slug": "vitrines-immunite-vitamines",
-  "titre": "Vitrines immunité et vitamines",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Des vitrines pédagogiques pour la saison froide : défenses immunitaires, vitamines et un quiz pour engager la conversation au comptoir.",
-  "interventions": [
-   "Vitrophanie illustrée",
-   "Messages de prévention",
-   "Quiz en vitrine"
-  ],
-  "image": "img/vitrine-immunite.jpg",
-  "cadrage": "50% 40%",
-  "galerie": [
-   "img/vitrine-immunite.jpg",
-   "img/vitrine-immunite2.jpg",
-   "img/vitrine-vitamines.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 11
- },
- {
-  "id": "r09",
-  "slug": "vitrine-printemps",
-  "titre": "Vitrines allergies de printemps",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Des fleurs blanches en vitrophanie et un message sur les allergies : la vitrine annonce la saison et invite à demander conseil.",
-  "interventions": [
-   "Vitrophanie florale",
-   "Décor saisonnier",
-   "Message allergies"
-  ],
-  "image": "img/vitrine-fleurs2.jpg",
-  "cadrage": "50% 55%",
-  "galerie": [
-   "img/vitrine-fleurs2.jpg",
-   "img/vitrine-fleurs.jpg",
-   "img/vitrine-hiver.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 12
- },
- {
-  "id": "r11",
-  "slug": "vitrines-ete",
-  "titre": "Vitrines été et protection solaire",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Plages illustrées et personnages pour les familles : la protection solaire devient visible depuis la rue.",
-  "interventions": [
-   "Vitrophanie illustrée",
-   "Décor saisonnier",
-   "Mise en avant des solaires"
-  ],
-  "image": "img/vitrine-solaire.jpg",
-  "cadrage": "50% 40%",
-  "galerie": [
-   "img/vitrine-solaire.jpg",
-   "img/vitrine-ete.jpg",
-   "img/vitrine-solaire2.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": true,
-  "publie": true,
-  "ordre": 13
- },
- {
-  "id": "r13",
-  "slug": "vitrines-moustiques",
-  "titre": "Campagne anti-moustiques",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Des illustrations simples et drôles pour rappeler, dès les premières chaleurs, de s'équiper contre les moustiques.",
-  "interventions": [
-   "Vitrophanie illustrée",
-   "Message de saison"
-  ],
-  "image": "img/vitrine-moustique.jpg",
-  "cadrage": "50% 40%",
-  "galerie": [
-   "img/vitrine-moustique.jpg",
-   "img/vitrine-moustique2.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 14
- },
- {
-  "id": "r15",
-  "slug": "vitrines-capillaire",
-  "titre": "Vitrines soins capillaires",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Des personnages en bulles de dialogue pour parler des soins capillaires sur un ton léger.",
-  "interventions": [
-   "Vitrophanie illustrée",
-   "Mise en avant d'une gamme"
-  ],
-  "image": "img/vitrine-capillaire.jpg",
-  "cadrage": "50% 45%",
-  "galerie": [
-   "img/vitrine-capillaire.jpg",
-   "img/vitrine-capillaire2.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 15
- },
- {
-  "id": "r16",
-  "slug": "vitrine-ramadan",
-  "titre": "Vitrine du Ramadan",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Arche, motifs géométriques et croissant de lune : une vitrine de fête sobre, aux couleurs de la pharmacie.",
-  "interventions": [
-   "Vitrophanie décorative",
-   "Décor de fête"
-  ],
-  "image": "img/vitrine-ramadan.jpg",
-  "cadrage": "50% 50%",
-  "galerie": [
-   "img/vitrine-ramadan.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 16
- },
- {
-  "id": "r17",
-  "slug": "vitrine-rentree",
-  "titre": "Vitrine de rentrée scolaire",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Énergie, vitamines et anti-poux : la vitrine de septembre parle aux parents comme aux enfants.",
-  "interventions": [
-   "Vitrophanie illustrée",
-   "Encadrement de vitrine"
-  ],
-  "image": "img/vitrine-rentree.jpg",
-  "cadrage": "50% 45%",
-  "galerie": [
-   "img/vitrine-rentree.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 17
- },
- {
-  "id": "r18",
-  "slug": "vitrine-stress-sommeil",
-  "titre": "Vitrine stress et sommeil",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Stress, sommeil, fatigue : une vitrine inspirée d'une œuvre célèbre invite à en parler au pharmacien.",
-  "interventions": [
-   "Vitrophanie",
-   "Message conseil"
-  ],
-  "image": "img/vitrine-rentree2.jpg",
-  "cadrage": "50% 50%",
-  "galerie": [
-   "img/vitrine-rentree2.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 18
- },
- {
-  "id": "r19",
-  "slug": "vitrine-fin-annee",
-  "titre": "Vitrines de fin d'année",
-  "ville": "",
-  "annee": "",
-  "surface": "",
-  "services": [
-   "vitrines"
-  ],
-  "description": "Des vœux illustrés façon art moderne pour fêter la nouvelle année avec les patients du quartier.",
-  "interventions": [
-   "Vitrophanie illustrée",
-   "Décor de fête"
-  ],
-  "image": "img/vitrine-art.jpg",
-  "cadrage": "50% 50%",
-  "galerie": [
-   "img/vitrine-art.jpg"
-  ],
-  "avant": "",
-  "apres": "",
-  "en_avant": false,
-  "publie": true,
-  "ordre": 19
- }
+    {
+        "id": "r01",
+        "slug": "facade-entree-nord-hilton",
+        "titre": "Rénovation complète d'une façade",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "renovation",
+            "facades"
+        ],
+        "description": "Une façade blanche et une enseigne vieillissante ont laissé place à un bardage rouge, à des lettres découpées et à un encadrement d'entrée vert d'eau qui signale l'officine de loin.",
+        "interventions": [
+            "Bardage de façade",
+            "Enseigne en lettres découpées, en français et en arabe",
+            "Caducée",
+            "Encadrement de l'entrée"
+        ],
+        "image": "img/facade-nord-hilton.jpg",
+        "cadrage": "50% 40%",
+        "galerie": [
+            "img/facade-nord-hilton.jpg"
+        ],
+        "avant": "img/avant-nord-hilton.jpg",
+        "apres": "img/facade-nord-hilton.jpg",
+        "en_avant": true,
+        "publie": true,
+        "ordre": 1
+    },
+    {
+        "id": "r02",
+        "slug": "encadrement-enseigne-lumineuse",
+        "titre": "Encadrement de façade et enseigne lumineuse",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "facades"
+        ],
+        "description": "Un grand encadrement jaune structure l'entrée et donne à la pharmacie une silhouette reconnaissable dans la rue.",
+        "interventions": [
+            "Encadrement de façade",
+            "Enseigne lumineuse",
+            "Habillage de l'entrée"
+        ],
+        "image": "img/facade-kchaou.jpg",
+        "cadrage": "50% 30%",
+        "galerie": [
+            "img/facade-kchaou.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 2
+    },
+    {
+        "id": "r05",
+        "slug": "habillage-facade-vitrophanie",
+        "titre": "Habillage de façade et vitrophanie",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "facades",
+            "vitrines"
+        ],
+        "description": "Un habillage jaune qui encadre chaque vitrine, associé à une vitrophanie grand format.",
+        "interventions": [
+            "Habillage de façade",
+            "Vitrophanie grand format"
+        ],
+        "image": "img/facade-jaune.jpg",
+        "cadrage": "50% 50%",
+        "galerie": [
+            "img/facade-jaune.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": true,
+        "publie": true,
+        "ordre": 3
+    },
+    {
+        "id": "r04",
+        "slug": "enseigne-lumineuse-nuit",
+        "titre": "Enseigne lumineuse bilingue",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "facades"
+        ],
+        "description": "Une enseigne rétroéclairée, en français et en arabe, lisible de jour comme de nuit.",
+        "interventions": [
+            "Enseigne lumineuse bilingue",
+            "Caducée éclairé"
+        ],
+        "image": "img/facade-nuit.jpg",
+        "cadrage": "50% 40%",
+        "galerie": [
+            "img/facade-nuit.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 4
+    },
+    {
+        "id": "r06",
+        "slug": "enseigne-verte",
+        "titre": "Enseigne lumineuse en angle",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "facades"
+        ],
+        "description": "Une enseigne lumineuse verte en angle, visible depuis les deux rues.",
+        "interventions": [
+            "Enseigne lumineuse",
+            "Habillage de façade"
+        ],
+        "image": "img/facade-ksour.jpg",
+        "cadrage": "50% 35%",
+        "galerie": [
+            "img/facade-ksour.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 5
+    },
+    {
+        "id": "r03",
+        "slug": "entree-habillage-floral",
+        "titre": "Entrée et habillage floral",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "facades"
+        ],
+        "description": "Pour cette boutique, nous avons mis en scène l'entrée. Une arche florale encadre la porte et attire le regard depuis le trottoir, et des oriflammes assortis signalent le magasin de loin. L'habillage reprend les couleurs de l'enseigne : la façade devient reconnaissable au premier coup d'œil.",
+        "interventions": [
+            "Habillage de l'entrée",
+            "Arche et décor floral",
+            "Oriflammes et signalétique extérieure"
+        ],
+        "image": "img/facade-magenta.jpg",
+        "cadrage": "50% 40%",
+        "galerie": [
+            "img/facade-magenta.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 6,
+        "secteur": "commerces"
+    },
+    {
+        "id": "r07",
+        "slug": "espace-de-vente",
+        "titre": "Espace de vente et linéaires",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "agencement"
+        ],
+        "description": "Un espace de vente clair, des comptoirs et des linéaires muraux qui laissent circuler les patients.",
+        "interventions": [
+            "Comptoirs",
+            "Linéaires muraux",
+            "Organisation de l'espace de vente"
+        ],
+        "image": "img/interieur.jpg",
+        "cadrage": "50% 60%",
+        "galerie": [
+            "img/interieur.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": true,
+        "publie": true,
+        "ordre": 7
+    },
+    {
+        "id": "r08",
+        "slug": "rayonnages-merchandising",
+        "titre": "Rayonnages et merchandising",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "merchandising",
+            "agencement"
+        ],
+        "description": "Des rayonnages organisés par univers pour guider le patient dans l'offre.",
+        "interventions": [
+            "Organisation des rayonnages",
+            "Espaces de présentation"
+        ],
+        "image": "img/rayons.jpg",
+        "cadrage": "50% 50%",
+        "galerie": [
+            "img/rayons.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": true,
+        "publie": true,
+        "ordre": 8
+    },
+    {
+        "id": "r12",
+        "slug": "releve-plan",
+        "titre": "Du relevé du local au projet en image",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "etude"
+        ],
+        "description": "Avant tout chantier, nous relevons le local au centimètre, puis nous dessinons la future salle de vente pour que le pharmacien la valide sur image.",
+        "interventions": [
+            "Relevé du local",
+            "Plan de la salle de vente",
+            "Visuel du projet (comptoirs et linéaires)"
+        ],
+        "image": "img/plan.jpg",
+        "cadrage": "30% 50%",
+        "galerie": [
+            "img/plan.jpg",
+            "img/comptoirs.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 9
+    },
+    {
+        "id": "r10",
+        "slug": "vitrines-grippe",
+        "titre": "Campagnes grippe et vaccination",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Plusieurs officines, une même campagne d'hiver : informer sur la vaccination antigrippale depuis la rue.",
+        "interventions": [
+            "Vitrophanie de campagne",
+            "Messages de prévention",
+            "Déclinaison sur plusieurs officines"
+        ],
+        "image": "img/vitrine-grippe.jpg",
+        "cadrage": "50% 25%",
+        "galerie": [
+            "img/vitrine-grippe.jpg",
+            "img/vitrine-grippe2.jpg",
+            "img/vitrine-grippe3.jpg",
+            "img/vitrine-grippe4.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": true,
+        "publie": true,
+        "ordre": 10
+    },
+    {
+        "id": "r14",
+        "slug": "vitrines-immunite-vitamines",
+        "titre": "Vitrines immunité et vitamines",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Des vitrines pédagogiques pour la saison froide : défenses immunitaires, vitamines et un quiz pour engager la conversation au comptoir.",
+        "interventions": [
+            "Vitrophanie illustrée",
+            "Messages de prévention",
+            "Quiz en vitrine"
+        ],
+        "image": "img/vitrine-immunite.jpg",
+        "cadrage": "50% 40%",
+        "galerie": [
+            "img/vitrine-immunite.jpg",
+            "img/vitrine-immunite2.jpg",
+            "img/vitrine-vitamines.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 11
+    },
+    {
+        "id": "r09",
+        "slug": "vitrine-printemps",
+        "titre": "Vitrines allergies de printemps",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Des fleurs blanches en vitrophanie et un message sur les allergies : la vitrine annonce la saison et invite à demander conseil.",
+        "interventions": [
+            "Vitrophanie florale",
+            "Décor saisonnier",
+            "Message allergies"
+        ],
+        "image": "img/vitrine-fleurs2.jpg",
+        "cadrage": "50% 55%",
+        "galerie": [
+            "img/vitrine-fleurs2.jpg",
+            "img/vitrine-fleurs.jpg",
+            "img/vitrine-hiver.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 12
+    },
+    {
+        "id": "r11",
+        "slug": "vitrines-ete",
+        "titre": "Vitrines été et protection solaire",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Plages illustrées et personnages pour les familles : la protection solaire devient visible depuis la rue.",
+        "interventions": [
+            "Vitrophanie illustrée",
+            "Décor saisonnier",
+            "Mise en avant des solaires"
+        ],
+        "image": "img/vitrine-solaire.jpg",
+        "cadrage": "50% 40%",
+        "galerie": [
+            "img/vitrine-solaire.jpg",
+            "img/vitrine-ete.jpg",
+            "img/vitrine-solaire2.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": true,
+        "publie": true,
+        "ordre": 13
+    },
+    {
+        "id": "r13",
+        "slug": "vitrines-moustiques",
+        "titre": "Campagne anti-moustiques",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Des illustrations simples et drôles pour rappeler, dès les premières chaleurs, de s'équiper contre les moustiques.",
+        "interventions": [
+            "Vitrophanie illustrée",
+            "Message de saison"
+        ],
+        "image": "img/vitrine-moustique.jpg",
+        "cadrage": "50% 40%",
+        "galerie": [
+            "img/vitrine-moustique.jpg",
+            "img/vitrine-moustique2.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 14
+    },
+    {
+        "id": "r15",
+        "slug": "vitrines-capillaire",
+        "titre": "Vitrines soins capillaires",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Des personnages en bulles de dialogue pour parler des soins capillaires sur un ton léger.",
+        "interventions": [
+            "Vitrophanie illustrée",
+            "Mise en avant d'une gamme"
+        ],
+        "image": "img/vitrine-capillaire.jpg",
+        "cadrage": "50% 45%",
+        "galerie": [
+            "img/vitrine-capillaire.jpg",
+            "img/vitrine-capillaire2.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 15
+    },
+    {
+        "id": "r16",
+        "slug": "vitrine-ramadan",
+        "titre": "Vitrine du Ramadan",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Arche, motifs géométriques et croissant de lune : une vitrine de fête sobre, aux couleurs de la pharmacie.",
+        "interventions": [
+            "Vitrophanie décorative",
+            "Décor de fête"
+        ],
+        "image": "img/vitrine-ramadan.jpg",
+        "cadrage": "50% 50%",
+        "galerie": [
+            "img/vitrine-ramadan.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 16
+    },
+    {
+        "id": "r17",
+        "slug": "vitrine-rentree",
+        "titre": "Vitrine de rentrée scolaire",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Énergie, vitamines et anti-poux : la vitrine de septembre parle aux parents comme aux enfants.",
+        "interventions": [
+            "Vitrophanie illustrée",
+            "Encadrement de vitrine"
+        ],
+        "image": "img/vitrine-rentree.jpg",
+        "cadrage": "50% 45%",
+        "galerie": [
+            "img/vitrine-rentree.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 17
+    },
+    {
+        "id": "r18",
+        "slug": "vitrine-stress-sommeil",
+        "titre": "Vitrine stress et sommeil",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Stress, sommeil, fatigue : une vitrine inspirée d'une œuvre célèbre invite à en parler au pharmacien.",
+        "interventions": [
+            "Vitrophanie",
+            "Message conseil"
+        ],
+        "image": "img/vitrine-rentree2.jpg",
+        "cadrage": "50% 50%",
+        "galerie": [
+            "img/vitrine-rentree2.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 18
+    },
+    {
+        "id": "r19",
+        "slug": "vitrine-fin-annee",
+        "titre": "Vitrines de fin d'année",
+        "ville": "",
+        "annee": "",
+        "surface": "",
+        "services": [
+            "vitrines"
+        ],
+        "description": "Des vœux illustrés façon art moderne pour fêter la nouvelle année avec les patients du quartier.",
+        "interventions": [
+            "Vitrophanie illustrée",
+            "Décor de fête"
+        ],
+        "image": "img/vitrine-art.jpg",
+        "cadrage": "50% 50%",
+        "galerie": [
+            "img/vitrine-art.jpg"
+        ],
+        "avant": "",
+        "apres": "",
+        "en_avant": false,
+        "publie": true,
+        "ordre": 19
+    }
 ]

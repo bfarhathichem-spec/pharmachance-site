@@ -91,16 +91,40 @@
     filtrer(fbox.dataset.initial || 'tous');
   }
 
-  // visionneuse photo
+  // visionneuse photo : flèches, clavier et glissement du doigt pour passer d'une photo à l'autre
   var vis = document.querySelector('.visionneuse');
   if (vis) {
-    var vi = vis.querySelector('img'), fermer = vis.querySelector('button');
+    var vi = vis.querySelector('img'), fermer = vis.querySelector('.vis-fermer') || vis.querySelector('button');
+    var bPrec = vis.querySelector('.vis-prec'), bSuiv = vis.querySelector('.vis-suiv'), compte = vis.querySelector('.vis-compte');
+    var liste = [], pos = 0;
+    function montrer(k) {
+      if (!liste.length) return;
+      pos = (k + liste.length) % liste.length;
+      var g = liste[pos]; vi.src = g.dataset.src; vi.alt = (g.querySelector('img') || {}).alt || '';
+      var plusieurs = liste.length > 1;
+      if (bPrec) bPrec.hidden = bSuiv.hidden = !plusieurs;
+      if (compte) { compte.hidden = !plusieurs; compte.textContent = (pos + 1) + ' / ' + liste.length; }
+    }
     document.querySelectorAll('.galerie button').forEach(function (g) {
-      g.addEventListener('click', function () { vi.src = g.dataset.src; vi.alt = g.querySelector('img').alt; vis.classList.add('ouverte'); fermer.focus(); });
+      g.addEventListener('click', function () {
+        liste = Array.prototype.slice.call(g.closest('.galerie').querySelectorAll('button[data-src]'));
+        montrer(liste.indexOf(g)); vis.classList.add('ouverte'); fermer.focus();
+      });
     });
     var fermerVis = function () { vis.classList.remove('ouverte'); };
     fermer.addEventListener('click', fermerVis);
+    if (bPrec) bPrec.addEventListener('click', function (e) { e.stopPropagation(); montrer(pos - 1); });
+    if (bSuiv) bSuiv.addEventListener('click', function (e) { e.stopPropagation(); montrer(pos + 1); });
     vis.addEventListener('click', function (e) { if (e.target === vis) fermerVis(); });
+    document.addEventListener('keydown', function (e) {
+      if (!vis.classList.contains('ouverte')) return;
+      if (e.key === 'ArrowLeft') montrer(pos - 1); else if (e.key === 'ArrowRight') montrer(pos + 1);
+    });
+    var x0 = null;
+    vi.addEventListener('pointerdown', function (e) { x0 = e.clientX; });
+    vi.addEventListener('pointerup', function (e) { if (x0 === null) return; var d = e.clientX - x0; x0 = null; if (Math.abs(d) > 40) montrer(pos + (d < 0 ? 1 : -1)); });
+    vi.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    vi.addEventListener('touchend', function (e) { if (x0 === null) return; var d = e.changedTouches[0].clientX - x0; x0 = null; if (Math.abs(d) > 40) montrer(pos + (d < 0 ? 1 : -1)); });
   }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (vis) vis.classList.remove('ouverte'); fermerMenu(); } });
 })();
