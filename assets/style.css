@@ -768,4 +768,5 @@ footer.xf .bas{gap:12px 20px}
 /* grande photo : à la fin de l'animation, la photo d'origine entière, sans zoom */
 .xh-visuel{height:auto!important;max-height:92vh}
 .xh-visuel img{height:auto;max-height:92vh;transform:scale(calc(1.2 - var(--p) * .2))}
-@media (max-width:1300px){.nav-bureau{display:none!important}.menu-btn{display:flex}}
+@media (max-width:1180px){.nav-bureau{display:none!important}.menu-btn{display:flex}}
+.top .logo{flex-shrink:0}

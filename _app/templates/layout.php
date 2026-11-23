@@ -33,7 +33,6 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
 <header class="top">
   <a class="logo" href="<?= url() ?>" aria-label="PharmaChance, accueil"><img src="<?= h(media('img/logo-couleur.png')) ?>" alt="PharmaChance" width="160" height="56"></a>
   <nav class="nav-bureau" aria-label="Navigation principale">
-    <a href="<?= url() ?>"<?= $cur('accueil') ?>>Accueil</a>
     <div class="sous"><a href="<?= url('services') ?>"<?= $cur('services') ?>>Services<svg width="10" height="7" viewBox="0 0 10 7" aria-hidden="true"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
       <div class="sous-menu"><div class="sm-in">
         <?php foreach ($servs as $s): ?><a href="<?= url('services/' . $s['slug']) ?>"><i></i><span><b><?= h($s['nom']) ?></b><small><?= h($s['court']) ?></small></span></a><?php endforeach; ?>
@@ -45,7 +44,6 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
     <a href="<?= url('produits') ?>"<?= $cur('produits') ?>>Produits</a>
     <a href="<?= url('a-propos') ?>"<?= $cur('apropos') ?>>À propos</a>
     <a href="<?= url('articles') ?>"<?= $cur('articles') ?>>Articles</a>
-    <a href="<?= url('contact') ?>"<?= $cur('contact') ?>>Contact</a>
     <a class="btn plein" href="<?= url('contact') ?>">Demander un devis</a>
   </nav>
   <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Ouvrir le menu"><span></span><span></span></button>
