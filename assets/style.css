@@ -760,3 +760,12 @@ footer.xf .bas{gap:12px 20px}
 .visionneuse .vis-compte{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-weight:700;font-size:15px;background:rgba(0,0,0,.35);padding:6px 14px;border-radius:999px}
 .visionneuse img{touch-action:pan-y;user-select:none}
 @media (max-width:700px){.visionneuse{padding:16px}.visionneuse .vis-nav{width:46px;height:46px;font-size:24px}.visionneuse .vis-prec{left:8px}.visionneuse .vis-suiv{right:8px}}
+
+.carte .carte-vide{position:absolute;inset:0;background:var(--brume)}
+/* légendes des vignettes centrées */
+.carte .cap{justify-content:center;text-align:center}
+.carte .cap b,.carte .cap span{text-align:center}
+/* grande photo : à la fin de l'animation, la photo d'origine entière, sans zoom */
+.xh-visuel{height:auto!important;max-height:92vh}
+.xh-visuel img{height:auto;max-height:92vh;transform:scale(calc(1.2 - var(--p) * .2))}
+@media (max-width:1300px){.nav-bureau{display:none!important}.menu-btn{display:flex}}

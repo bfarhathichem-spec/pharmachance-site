@@ -42,6 +42,7 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
     </div>
     <a href="<?= url('realisations') ?>"<?= $cur('realisations') ?>>Réalisations</a>
     <?php if ($secteursMenu): ?><a href="<?= url('autres-secteurs') ?>"<?= $cur('secteurs') ?>>Autres secteurs</a><?php endif; ?>
+    <a href="<?= url('produits') ?>"<?= $cur('produits') ?>>Produits</a>
     <a href="<?= url('a-propos') ?>"<?= $cur('apropos') ?>>À propos</a>
     <a href="<?= url('articles') ?>"<?= $cur('articles') ?>>Articles</a>
     <a href="<?= url('contact') ?>"<?= $cur('contact') ?>>Contact</a>
@@ -56,6 +57,7 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
     <details<?= $actif === 'services' ? ' open' : '' ?>><summary>Services</summary><div class="mserv"><?php foreach ($servs as $s): ?><a href="<?= url('services/' . $s['slug']) ?>"><?= h($s['nom']) ?></a><?php endforeach; ?><a href="<?= url('services') ?>">Tous les services</a></div></details>
     <a href="<?= url('realisations') ?>"<?= $cur('realisations') ?>>Réalisations</a>
     <?php if ($secteursMenu): ?><a href="<?= url('autres-secteurs') ?>"<?= $cur('secteurs') ?>>Autres secteurs</a><?php endif; ?>
+    <a href="<?= url('produits') ?>"<?= $cur('produits') ?>>Produits</a>
     <a href="<?= url('vitrines') ?>"<?= $cur('vitrines') ?>>Thèmes des vitrines</a>
     <a href="<?= url('a-propos') ?>"<?= $cur('apropos') ?>>À propos</a>
     <a href="<?= url('articles') ?>"<?= $cur('articles') ?>>Articles</a>
@@ -69,7 +71,7 @@ $cur = fn($k) => $actif === $k ? ' aria-current="page"' : '';
 <footer class="xf">
   <div class="xf-haut">
     <div class="xf-acc"><p>Conseils, agencement, merchandising, vitrines.</p><a class="btn plein" href="<?= url('contact') ?>">Demander un devis</a></div>
-    <div><strong>Navigation</strong><a href="<?= url() ?>">Accueil</a><a href="<?= url('services') ?>">Services</a><a href="<?= url('realisations') ?>">Réalisations</a><?php if ($secteursMenu): ?><a href="<?= url('autres-secteurs') ?>">Autres secteurs</a><?php endif; ?><a href="<?= url('vitrines') ?>">Thèmes des vitrines</a><a href="<?= url('a-propos') ?>">À propos</a><a href="<?= url('articles') ?>">Articles</a><a href="<?= url('faq') ?>">Questions fréquentes</a><a href="<?= url('contact') ?>">Contact</a></div>
+    <div><strong>Navigation</strong><a href="<?= url() ?>">Accueil</a><a href="<?= url('services') ?>">Services</a><a href="<?= url('realisations') ?>">Réalisations</a><?php if ($secteursMenu): ?><a href="<?= url('autres-secteurs') ?>">Autres secteurs</a><?php endif; ?><a href="<?= url('produits') ?>">Produits</a><a href="<?= url('vitrines') ?>">Thèmes des vitrines</a><a href="<?= url('a-propos') ?>">À propos</a><a href="<?= url('articles') ?>">Articles</a><a href="<?= url('faq') ?>">Questions fréquentes</a><a href="<?= url('contact') ?>">Contact</a></div>
     <div><strong>Services</strong><?php foreach ($servs as $s): ?><a href="<?= url('services/' . $s['slug']) ?>"><?= h($s['nom']) ?></a><?php endforeach; ?></div>
     <div><strong>Contact</strong><a href="<?= h(tel_lien()) ?>"><?= h($r['telephone'] ?? '') ?></a><a href="<?= h(lien_wa()) ?>" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:<?= h($r['email'] ?? '') ?>"><?= h($r['email'] ?? '') ?></a><span><?= h($r['adresse'] ?? '') ?></span><span>Intervention : <?= h($r['zone'] ?? 'toute la Tunisie') ?></span>
       <?php foreach (['facebook' => 'Facebook', 'instagram' => 'Instagram', 'linkedin' => 'LinkedIn'] as $k => $n) if (!empty($r[$k])): ?><a href="<?= h($r[$k]) ?>" rel="noopener"><?= $n ?></a><?php endif; ?>

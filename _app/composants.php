@@ -58,3 +58,10 @@ function visuel_haut(string $src, string $alt, string $cadrage = '50% 50%'): str
     if ($src === '') return '';
     return '<div class="xh-visuel" data-zoom><img src="' . h(media($src)) . '" alt="' . h($alt) . '" fetchpriority="high" style="object-position:' . h($cadrage ?: '50% 50%') . '"></div>';
 }
+
+function carte_produit(array $x): string {
+    $t = trouver(types_produits(true), 'slug', $x['type'] ?? '');
+    return '<a class="carte" href="' . url('produits/' . ($x['type'] ?? '') . '/' . $x['slug']) . '">'
+        . ($x['image'] ? '<img src="' . h(media(miniature($x['image']))) . '" alt="' . h($x['nom']) . '" loading="lazy" decoding="async" style="object-position:' . h($x['cadrage'] ?? '50% 50%') . '">' : '<span class="carte-vide"></span>')
+        . '<span class="cap"><b>' . h($x['nom']) . '</b>' . ($t ? '<span>' . h($t['nom']) . '</span>' : '') . '</span></a>';
+}

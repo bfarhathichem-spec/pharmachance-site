@@ -1,4 +1,9 @@
-<?php $r = reglages(); $v = $valeurs ?? []; $err = $erreurs ?? []; $pre = $v['projet'] ?? preg_replace('/[^a-z-]/', '', (string)($_GET['projet'] ?? '')); ?>
+<?php $r = reglages(); $v = $valeurs ?? []; $err = $erreurs ?? [];
+$demProd = (string)($_GET['produit'] ?? ''); if ($demProd !== '' && empty($v['message'])) {
+    if (str_starts_with($demProd, 'type:')) { $tq = trouver(types_produits(), 'slug', substr($demProd, 5)); if ($tq) $v['message'] = 'Bonjour, je souhaite un devis pour : ' . mb_strtolower($tq['nom']) . ".\nEmplacement, dimensions approximatives : "; }
+    else { $pq = trouver(produits(), 'slug', $demProd); if ($pq) $v['message'] = 'Bonjour, je souhaite un devis pour le produit « ' . $pq['nom'] . " ».\nQuantité, dimensions ou couleurs souhaitées : "; }
+    if (!empty($v['message'])) $v['projet'] = $v['projet'] ?? 'autre';
+} $pre = $v['projet'] ?? preg_replace('/[^a-z-]/', '', (string)($_GET['projet'] ?? '')); ?>
 <section class="entete"><div class="t"><p class="fil"><a href="<?= url() ?>">Accueil</a> / Contact</p><h1>Parlons de votre pharmacie</h1></div><p class="intro">Décrivez votre projet en quelques lignes et joignez une photo du local : nous vous rappelons.</p></section>
 <section class="wrap ct-etapes"><h2 class="h-moy">Comment se passe votre demande</h2><ol><?php foreach (texte_site('contact_etapes') as $k => [$t, $d]): ?><li><span class="n"><?= $k + 1 ?></span><b><?= h($t) ?></b><span><?= h($d) ?></span></li><?php endforeach; ?></ol></section>
 <section class="wrap deux" style="padding-bottom:120px;align-items:flex-start">

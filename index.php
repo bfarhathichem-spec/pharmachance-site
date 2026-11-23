@@ -40,6 +40,20 @@ case 'realisations':
             'ld' => ld_graphe(['@type' => 'CreativeWork', 'name' => $p['titre'], 'description' => $p['description'] ?? '', 'creator' => ['@id' => hote() . url() . '#entreprise'], 'image' => array_map(fn($g) => hote() . media($g), $p['galerie'] ?: [$p['image']]), 'about' => array_map('nom_service', $p['services'] ?? [])], ld_ariane([['Réalisations', 'realisations'], [$p['titre'], null]]))]);
     } else rendre('realisations', ['titre' => 'Réalisations : façades, vitrines et agencements de pharmacies en Tunisie | PharmaChance', 'desc' => 'Façades, enseignes, vitrines et agencements de pharmacies réalisés par PharmaChance en Tunisie, classés par thématique.', 'actif' => 'realisations', 'ld' => ld_graphe(ld_ariane([['Réalisations', null]]))]);
     break;
+case 'produits':
+    $typ = isset($parts[1]) ? trouver(types_produits(), 'slug', $parts[1]) : null;
+    if (isset($parts[1]) && !$typ) { page404(); break; }
+    if (isset($parts[2])) {
+        $x = trouver(produits(false, $typ['slug']), 'slug', $parts[2]);
+        if (!$x) { page404(); break; }
+        rendre('produit', ['x' => $x, 'titre' => $x['nom'] . ' pour pharmacie, sur devis | PharmaChance', 'desc' => mb_substr(($x['description'] ?? '') ?: $typ['description'], 0, 158), 'actif' => 'produits', 'og_image' => $x['image'] ?? '',
+            'ld' => ld_graphe(['@type' => 'Product', 'name' => $x['nom'], 'description' => $x['description'] ?? '', 'category' => $typ['nom'], 'brand' => ['@type' => 'Brand', 'name' => 'PharmaChance'], 'image' => array_map(fn($g) => hote() . media($g), $x['galerie'] ?: array_filter([$x['image'] ?? '']))], ld_ariane([['Produits', 'produits'], [$typ['nom'], 'produits/' . $typ['slug']], [$x['nom'], null]]))]);
+    } elseif ($typ) {
+        rendre('produit_type', ['typ' => $typ, 'titre' => $typ['nom'] . ' pour pharmacie, sur mesure | PharmaChance', 'desc' => mb_substr($typ['description'] ?? '', 0, 158), 'actif' => 'produits', 'ld' => ld_graphe(ld_ariane([['Produits', 'produits'], [$typ['nom'], null]]))]);
+    } else {
+        rendre('produits', ['titre' => 'Présentoirs, comptoirs et mobilier pour pharmacie, sur devis | PharmaChance', 'desc' => "Présentoirs, comptoirs, gondoles, rangements, enseignes et PLV pour pharmacie, fabriqués sur mesure par PharmaChance en Tunisie. Prix sur devis.", 'actif' => 'produits', 'ld' => ld_graphe(ld_ariane([['Produits', null]]))]);
+    }
+    break;
 case 'autres-secteurs':
     $sec = isset($parts[1]) ? trouver(secteurs(), 'slug', $parts[1]) : null;
     if (isset($parts[1]) && !$sec) { page404(); break; }
@@ -95,13 +109,14 @@ case 'sitemap.xml':
     header('Content-Type: application/xml; charset=utf-8');
     $hote = (((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http') . '://' . ($_SERVER['HTTP_HOST'] ?? 'pharmachance.com'));
     $u = ['', 'a-propos', 'services', 'realisations', 'vitrines', 'articles', 'faq', 'contact', 'plan-du-site'];
+    $u[] = 'produits'; foreach (types_produits() as $t) $u[] = 'produits/' . $t['slug']; foreach (produits() as $x) $u[] = 'produits/' . $x['type'] . '/' . $x['slug'];
     foreach (pages_site() as $x) $u[] = $x['slug'];
     foreach (articles() as $a) $u[] = 'articles/' . $a['slug'];
     foreach (services() as $s) $u[] = 'services/' . $s['slug'];
     foreach (realisations() as $p) $u[] = 'realisations/' . $p['slug'];
     if (secteurs_actifs()) { $u[] = 'autres-secteurs'; foreach (secteurs_actifs() as $x) $u[] = 'autres-secteurs/' . $x['slug']; foreach (realisations_autres() as $p) $u[] = lien_realisation($p); }
     echo '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-    $lm = date('Y-m-d', max(array_map(fn($f) => @filemtime(DATA_DIR . "/$f.json") ?: 0, ['services', 'realisations', 'themes', 'reglages', 'articles', 'pages', 'secteurs'])));
+    $lm = date('Y-m-d', max(array_map(fn($f) => @filemtime(DATA_DIR . "/$f.json") ?: 0, ['services', 'realisations', 'themes', 'reglages', 'articles', 'pages', 'secteurs', 'produits', 'types_produits'])));
     foreach ($u as $x) echo '<url><loc>' . h($hote . url($x)) . '</loc><lastmod>' . $lm . '</lastmod></url>';
     echo '</urlset>';
     break;

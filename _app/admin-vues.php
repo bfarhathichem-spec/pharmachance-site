@@ -1,6 +1,6 @@
 <?php
 /* Vues de l'administration. Variables disponibles : $page, $flash, $erreur, $moi */
-$titres = ['tableau' => 'Tableau de bord', 'realisations' => 'Réalisations', 'realisation' => 'Réalisation', 'secteurs' => 'Autres secteurs', 'secteur' => 'Secteur', 'services' => 'Services', 'service' => 'Service',
+$titres = ['tableau' => 'Tableau de bord', 'realisations' => 'Réalisations', 'realisation' => 'Réalisation', 'secteurs' => 'Autres secteurs', 'secteur' => 'Secteur', 'produits' => 'Produits', 'produit' => 'Produit', 'types-produits' => 'Types de produits', 'type-produit' => 'Type de produit', 'services' => 'Services', 'service' => 'Service',
     'themes' => 'Vitrines', 'theme' => 'Thème de vitrine', 'temoignages' => 'Témoignages', 'temoignage' => 'Témoignage', 'articles' => 'Articles', 'article' => 'Article', 'pages' => 'Pages légales', 'page' => 'Page légale', 'demandes' => 'Demandes de devis',
     'demande' => 'Demande', 'reglages' => 'Réglages', 'compte' => 'Mon compte', 'aide' => 'Aide', 'connexion' => 'Connexion', 'installation' => 'Créer le compte administrateur'];
 $titre = $titres[$page] ?? 'Page introuvable';
@@ -70,7 +70,7 @@ function date_fr(string $iso): string { $t = strtotime($iso); return $t ? date('
   <a class="voir" href="<?= h(url('?edition=0')) ?>" target="_blank" rel="noopener">Voir le site</a>
 </header>
 <nav id="nav" class="nav">
-  <?php foreach (['tableau' => 'Tableau de bord', 'demandes' => 'Demandes de devis', 'realisations' => 'Réalisations', 'secteurs' => 'Autres secteurs', 'services' => 'Services', 'themes' => 'Vitrines', 'articles' => 'Articles', 'temoignages' => 'Témoignages', 'pages' => 'Pages légales', 'reglages' => 'Réglages', 'compte' => 'Mon compte', 'aide' => 'Aide'] as $k => $l):
+  <?php foreach (['tableau' => 'Tableau de bord', 'demandes' => 'Demandes de devis', 'realisations' => 'Réalisations', 'secteurs' => 'Autres secteurs', 'produits' => 'Produits', 'services' => 'Services', 'themes' => 'Vitrines', 'articles' => 'Articles', 'temoignages' => 'Témoignages', 'pages' => 'Pages légales', 'reglages' => 'Réglages', 'compte' => 'Mon compte', 'aide' => 'Aide'] as $k => $l):
     $actif = $page === $k || $page === rtrim($k, 's') || ($k === 'themes' && $page === 'theme'); ?>
     <a href="<?= h(url('admin/?p=' . $k)) ?>"<?= $actif ? ' aria-current="page"' : '' ?>><?= h($l) ?><?= $k === 'demandes' && $nouv ? ' <span class="badge">' . $nouv . '</span>' : '' ?></a>
   <?php endforeach; ?>
@@ -266,6 +266,81 @@ case 'service':
 <?php break;
 
 /* ================= THÈMES DE VITRINES ================= */
+case 'produits':
+  $L = produits(true); $n = count($L); $T = types_produits(true); ?>
+  <div class="tete"><h1>Produits</h1><span class="rangee"><a class="btn" href="<?= h(url('admin/?p=produit')) ?>">Ajouter un produit</a> <a class="btn-s" href="<?= h(url('admin/?p=types-produits')) ?>">Types de produits</a></span></div>
+  <p class="aide">Les produits apparaissent dans le menu « Produits » du site, rangés par type, sans prix : chaque fiche propose « Demander un devis ». Les types (présentoirs, comptoirs…) se gèrent dans <a href="<?= h(url('admin/?p=types-produits')) ?>">Types de produits</a>.</p>
+  <?php if (!$L): ?><p class="vide-msg">Aucun produit pour l'instant. Tant qu'un type n'a pas de produit, la page Produits affiche sa description et un bouton « Demander un devis ».</p><?php endif; ?>
+  <ul class="lignes">
+  <?php foreach ($L as $i => $x): $t = trouver($T, 'slug', $x['type'] ?? ''); ?>
+    <li><?= ordre('produits', $x['slug'], $i === 0, $i === $n - 1) ?>
+      <a class="lien-l" href="<?= h(url('admin/?p=produit&id=' . rawurlencode($x['slug']))) ?>"><?= vignette($x['image'] ?? '', $x['nom']) ?><span><b><?= h($x['nom']) ?></b><small><?= h($t['nom'] ?? 'Sans type') ?></small></span></a>
+      <span class="actions"><?= interrupteur('produits', $x['slug'], 'publie', !empty($x['publie']), 'En ligne', 'Hors ligne') ?></span></li>
+  <?php endforeach; ?>
+  </ul>
+<?php break;
+
+case 'produit':
+  $x = trouver(charger('produits', []), 'slug', (string)($_GET['id'] ?? '')) ?? ['slug' => '', 'nom' => '', 'type' => preg_replace('/[^a-z0-9-]/', '', (string)($_GET['type'] ?? '')), 'description' => '', 'caracteristiques' => [], 'galerie' => [], 'image' => '', 'cadrage' => '50% 50%', 'publie' => true];
+  $neuf = $x['slug'] === ''; ?>
+  <p class="fil"><a href="<?= h(url('admin/?p=produits')) ?>">Produits</a></p>
+  <div class="tete"><h1><?= $neuf ? 'Nouveau produit' : h($x['nom']) ?></h1><?php if (!$neuf && !empty($x['publie'])): ?><a class="btn-s" target="_blank" rel="noopener" href="<?= h(url('produits/' . $x['type'] . '/' . $x['slug'])) ?>">Voir sur le site</a><?php endif; ?></div>
+  <form method="post" enctype="multipart/form-data" class="fiche">
+    <?= champ_csrf() ?><input type="hidden" name="action" value="produit"><input type="hidden" name="id" value="<?= h($x['slug']) ?>">
+    <section class="bloc">
+      <h2>Le produit</h2>
+      <label>Nom du produit<input name="nom" required value="<?= h($x['nom']) ?>" placeholder="Présentoir de comptoir en bois"></label>
+      <label>Type<select name="type" required><?php foreach (types_produits(true) as $t): ?><option value="<?= h($t['slug']) ?>"<?= ($x['type'] ?? '') === $t['slug'] ? ' selected' : '' ?>><?= h($t['nom']) ?></option><?php endforeach; ?></select></label>
+      <p class="aide"><a href="<?= h(url('admin/?p=type-produit')) ?>">Ajouter un type</a> s'il n'est pas dans la liste.</p>
+      <label>Description<textarea name="description" rows="5"><?= h($x['description'] ?? '') ?></textarea></label>
+      <label>Caractéristiques <small>une ligne par point : dimensions, matériaux, finitions, options…</small><textarea name="caracteristiques" rows="4"><?= h(implode("\n", $x['caracteristiques'] ?? [])) ?></textarea></label>
+      <p class="aide">Pas de prix : la fiche affiche « Prix sur devis » et un bouton « Demander un devis pour ce produit ».</p>
+    </section>
+    <section class="bloc">
+      <h2>Photos</h2>
+      <?php if ($x['galerie']): ?><div class="galerie-a">
+        <?php foreach ($x['galerie'] as $g): ?><figure><?= vignette($g) ?><label class="case"><input type="radio" name="principale" value="<?= h($g) ?>"<?= $g === $x['image'] ? ' checked' : '' ?>> Principale</label><label class="case danger"><input type="checkbox" name="retirer[]" value="<?= h($g) ?>"> Retirer</label></figure><?php endforeach; ?>
+      </div><?php endif; ?>
+      <label class="depot">Ajouter des photos <small>plusieurs à la fois</small><input type="file" name="photos[]" accept="image/jpeg,image/png,image/webp" multiple></label>
+      <label>Cadrage de la photo principale<?= choix_cadrage($x['cadrage'] ?? '50% 50%', $cadrages) ?></label>
+    </section>
+    <section class="bloc"><label class="case"><input type="checkbox" name="publie" value="1"<?= !empty($x['publie']) ? ' checked' : '' ?>> En ligne sur le site</label></section>
+    <div class="pied-f"><button class="btn"><?= $neuf ? 'Créer le produit' : 'Enregistrer' ?></button></div>
+  </form>
+  <?php if (!$neuf): ?><div class="zone-danger"><?= bouton_post('supprimer', 'produits', $x['slug'], 'Supprimer ce produit', 'btn-danger', '', 'Supprimer le produit « ' . $x['nom'] . ' » ?') ?></div><?php endif; ?>
+<?php break;
+
+case 'types-produits':
+  $L = types_produits(true); $n = count($L); $Pr = charger('produits', []); ?>
+  <p class="fil"><a href="<?= h(url('admin/?p=produits')) ?>">Produits</a></p>
+  <div class="tete"><h1>Types de produits</h1><a class="btn" href="<?= h(url('admin/?p=type-produit')) ?>">Ajouter un type</a></div>
+  <p class="aide">Chaque type forme une rubrique de la page Produits, dans cet ordre. Sa description s'affiche sur le site.</p>
+  <ul class="lignes">
+  <?php foreach ($L as $i => $t): $nb = count(array_filter($Pr, fn($x) => ($x['type'] ?? '') === $t['slug'])); ?>
+    <li><?= ordre('types_produits', $t['slug'], $i === 0, $i === $n - 1) ?>
+      <a class="lien-l" href="<?= h(url('admin/?p=type-produit&id=' . rawurlencode($t['slug']))) ?>"><span><b><?= h($t['nom']) ?></b><small><?= $nb ?> produit<?= $nb > 1 ? 's' : '' ?></small></span></a>
+      <span class="actions"><a class="btn-s" href="<?= h(url('admin/?p=produit&type=' . rawurlencode($t['slug']))) ?>">Ajouter un produit</a><?= interrupteur('types_produits', $t['slug'], 'publie', !empty($t['publie']), 'En ligne', 'Hors ligne') ?></span></li>
+  <?php endforeach; ?>
+  </ul>
+<?php break;
+
+case 'type-produit':
+  $t = trouver(charger('types_produits', []), 'slug', (string)($_GET['id'] ?? '')) ?? ['slug' => '', 'nom' => '', 'description' => '', 'publie' => true];
+  $neuf = $t['slug'] === ''; ?>
+  <p class="fil"><a href="<?= h(url('admin/?p=types-produits')) ?>">Types de produits</a></p>
+  <h1><?= $neuf ? 'Nouveau type de produit' : h($t['nom']) ?></h1>
+  <form method="post" class="fiche">
+    <?= champ_csrf() ?><input type="hidden" name="action" value="type-produit"><input type="hidden" name="id" value="<?= h($t['slug']) ?>">
+    <section class="bloc">
+      <label>Nom du type<input name="nom" required value="<?= h($t['nom']) ?>" placeholder="Présentoirs"></label>
+      <label>Description <small>affichée sur la page Produits</small><textarea name="description" rows="3"><?= h($t['description'] ?? '') ?></textarea></label>
+      <label class="case"><input type="checkbox" name="publie" value="1"<?= !empty($t['publie']) ? ' checked' : '' ?>> En ligne sur le site</label>
+    </section>
+    <div class="pied-f"><button class="btn"><?= $neuf ? 'Créer le type' : 'Enregistrer' ?></button></div>
+  </form>
+  <?php if (!$neuf): ?><div class="zone-danger"><?= bouton_post('supprimer', 'types_produits', $t['slug'], 'Supprimer ce type', 'btn-danger', '', 'Supprimer le type « ' . $t['nom'] . ' » ?') ?></div><?php endif; ?>
+<?php break;
+
 case 'secteurs':
   $L = secteurs(true); $n = count($L); $R = charger('realisations'); ?>
   <div class="tete"><h1>Autres secteurs</h1><a class="btn" href="<?= h(url('admin/?p=secteur')) ?>">Ajouter un secteur</a></div>

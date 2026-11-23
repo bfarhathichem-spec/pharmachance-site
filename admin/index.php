@@ -14,7 +14,7 @@ function flash_sortie(): never { header('Location: ' . url('admin/?sortie=1')); 
 function flash(string $m): void { $_SESSION['flash'] = $m; }
 function aller(string $q): never { header('Location: ' . url('admin/?' . $q)); exit; }
 function post(string $k, string $d = ''): string { return trim((string)($_POST[$k] ?? $d)); }
-function cle_id(string $nom): string { return in_array($nom, ['services', 'themes', 'articles', 'secteurs'], true) ? 'slug' : 'id'; }
+function cle_id(string $nom): string { return in_array($nom, ['services', 'themes', 'articles', 'secteurs', 'produits', 'types_produits'], true) ? 'slug' : 'id'; }
 function deplacer(string $nom, string $id, int $sens): void {
     $l = trier(charger($nom)); $k = cle_id($nom);
     foreach ($l as $i => $x) if ($x[$k] === $id) { $j = $i + $sens; if (isset($l[$j])) { [$l[$i], $l[$j]] = [$l[$j], $l[$i]]; } break; }
@@ -141,13 +141,13 @@ else {
         switch ($a) {
         /* ordre, publication, suppression communs */
         case 'monter': case 'descendre':
-            $nom = post('liste'); if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'articles', 'secteurs'], true)) deplacer($nom, $id, $a === 'monter' ? -1 : 1);
-            aller('p=' . $nom);
+            $nom = post('liste'); if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'articles', 'secteurs', 'produits', 'types_produits'], true)) deplacer($nom, $id, $a === 'monter' ? -1 : 1);
+            aller('p=' . str_replace('_', '-', $nom));
         case 'basculer':
             $nom = post('liste'); $champ = post('champ');
-            if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'articles', 'secteurs'], true) && in_array($champ, ['publie', 'en_avant'], true))
+            if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'articles', 'secteurs', 'produits', 'types_produits'], true) && in_array($champ, ['publie', 'en_avant'], true))
                 maj($nom, $id, function ($x) use ($champ) { $x[$champ] = empty($x[$champ]); return $x; });
-            aller('p=' . $nom);
+            aller('p=' . str_replace('_', '-', $nom));
         case 'supprimer':
             $nom = post('liste');
             if ($nom === 'services') {
@@ -159,12 +159,13 @@ else {
                 $util = array_filter(charger('realisations'), fn($r) => ($r['secteur'] ?? '') === $id);
                 if ($util) { flash('Ce secteur contient ' . count($util) . ' projet(s). Changez d\'abord leur secteur, ou mettez le secteur hors ligne.'); aller('p=secteur&id=' . rawurlencode($id)); }
             }
-            if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'demandes', 'articles', 'secteurs'], true)) {
+            if ($nom === 'types_produits' && array_filter(charger('produits', []), fn($x) => ($x['type'] ?? '') === $id)) { flash('Ce type contient des produits. Changez d\'abord leur type, ou mettez le type hors ligne.'); aller('p=type-produit&id=' . rawurlencode($id)); }
+            if (in_array($nom, ['realisations', 'services', 'themes', 'temoignages', 'demandes', 'articles', 'secteurs', 'produits', 'types_produits'], true)) {
                 $k = $nom === 'demandes' ? 'id' : cle_id($nom);
                 enregistrer($nom, array_values(array_filter(charger($nom), fn($x) => ($x[$k] ?? '') !== $id)));
                 flash('Élément supprimé.');
             }
-            aller('p=' . $nom);
+            aller('p=' . str_replace('_', '-', $nom));
 
         /* réalisations */
         case 'realisation':
@@ -216,6 +217,34 @@ else {
             aller('p=service&id=' . rawurlencode($s['slug']));
 
         /* thèmes de vitrines */
+        case 'produit':
+            $l = charger('produits', []); $ex = $id ? trouver($l, 'slug', $id) : null;
+            $nom = post('nom'); if ($nom === '') { flash('Le nom du produit est obligatoire.'); aller('p=produit&id=' . rawurlencode($id)); }
+            $x = $ex ?? ['ordre' => count($l) + 1, 'galerie' => [], 'image' => ''];
+            $x['nom'] = $nom; $x['description'] = post('description'); $x['caracteristiques'] = lignes(post('caracteristiques'));
+            $x['type'] = in_array(post('type'), array_column(charger('types_produits', []), 'slug'), true) ? post('type') : (charger('types_produits', [])[0]['slug'] ?? '');
+            $x['cadrage'] = in_array(post('cadrage'), ['50% 20%', '50% 50%', '50% 80%', '30% 50%', '70% 50%'], true) ? post('cadrage') : '50% 50%';
+            $x['publie'] = !empty($_POST['publie']);
+            if (!$ex) $x['slug'] = slug_unique('produits', slugify($nom));
+            $retirer = (array)($_POST['retirer'] ?? []);
+            $x['galerie'] = array_values(array_filter($x['galerie'] ?? [], fn($g) => !in_array($g, $retirer, true)));
+            foreach (fichiers_multiples('photos') as $f) if ($src = traiter_image($f, 'produit-' . $x['slug'])) $x['galerie'][] = $src;
+            $pr = post('principale'); if ($pr && in_array($pr, $x['galerie'], true)) $x['image'] = $pr;
+            if (empty($x['image']) || !in_array($x['image'], $x['galerie'], true)) $x['image'] = $x['galerie'][0] ?? '';
+            if ($ex) { foreach ($l as &$y) if ($y['slug'] === $id) $y = $x; unset($y); } else $l[] = $x;
+            enregistrer('produits', $l); flash($ex ? 'Produit enregistré.' : 'Produit créé.');
+            aller('p=produit&id=' . rawurlencode($x['slug']));
+
+        case 'type-produit':
+            $l = charger('types_produits', []); $ex = $id ? trouver($l, 'slug', $id) : null;
+            $nom = post('nom'); if ($nom === '') { flash('Le nom est obligatoire.'); aller('p=types-produits'); }
+            $x = $ex ?? ['ordre' => count($l) + 1];
+            $x['nom'] = $nom; $x['description'] = post('description'); $x['publie'] = !empty($_POST['publie']);
+            if (!$ex) $x['slug'] = slug_unique('types_produits', slugify($nom));
+            if ($ex) { foreach ($l as &$y) if ($y['slug'] === $id) $y = $x; unset($y); } else $l[] = $x;
+            enregistrer('types_produits', $l); flash($ex ? 'Type enregistré.' : 'Type créé.');
+            aller('p=types-produits');
+
         case 'secteur':
             $l = charger('secteurs', []); $ex = $id ? trouver($l, 'slug', $id) : null;
             $nom = post('nom'); if ($nom === '') { flash('Le nom est obligatoire.'); aller('p=secteurs'); }

@@ -1,0 +1,8 @@
+[
+ {"slug": "presentoirs", "nom": "Présentoirs", "description": "Présentoirs de comptoir, de sol ou muraux pour mettre en avant une gamme, une nouveauté ou une offre de saison, au plus près du passage des clients.", "ordre": 1, "publie": true},
+ {"slug": "comptoirs", "nom": "Comptoirs et caisses", "description": "Comptoirs de conseil et postes de caisse fabriqués sur mesure, avec rangements intégrés et espace de confidentialité.", "ordre": 2, "publie": true},
+ {"slug": "gondoles", "nom": "Gondoles et linéaires", "description": "Gondoles centrales, linéaires muraux et têtes de gondole, réglables en hauteur pour suivre l'évolution de vos gammes.", "ordre": 3, "publie": true},
+ {"slug": "rangements", "nom": "Rangements et tiroirs", "description": "Tiroirs à médicaments, rangements d'arrière-boutique et meubles de réserve, pensés pour gagner du temps au quotidien.", "ordre": 4, "publie": true},
+ {"slug": "enseignes", "nom": "Enseignes et croix lumineuses", "description": "Croix de pharmacie, enseignes lumineuses et lettres en relief, visibles de jour comme de nuit.", "ordre": 5, "publie": true},
+ {"slug": "plv", "nom": "PLV et accessoires de vitrine", "description": "Supports de vitrine, kakémonos, stop-trottoirs et accessoires de mise en avant pour animer le point de vente.", "ordre": 6, "publie": true}
+]

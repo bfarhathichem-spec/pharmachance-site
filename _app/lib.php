@@ -83,6 +83,8 @@ function realisations_autres(string $secteur = ''): array { return array_values(
 function secteurs(bool $tous = false): array { $s = charger('secteurs', []); return $tous ? trier($s) : publies($s); }
 /* secteurs en ligne qui ont au moins un projet publié */
 function secteurs_actifs(): array { $a = realisations_autres(); return array_values(array_filter(secteurs(), fn($s) => (bool)array_filter($a, fn($x) => $x['secteur'] === $s['slug']))); }
+function produits(bool $tous = false, string $type = ''): array { $s = charger('produits', []); $l = $tous ? trier($s) : publies($s); return $type === '' ? $l : array_values(array_filter($l, fn($x) => ($x['type'] ?? '') === $type)); }
+function types_produits(bool $tous = false): array { $s = charger('types_produits', []); return $tous ? trier($s) : publies($s); }
 function lien_realisation(array $r): string { return ($r['secteur'] ?? '') === '' ? 'realisations/' . $r['slug'] : 'autres-secteurs/' . $r['secteur'] . '/' . $r['slug']; }
 function themes(bool $tous = false): array { $s = charger('themes'); return $tous ? trier($s) : publies($s); }
 function temoignages(bool $tous = false): array { $s = charger('temoignages'); return $tous ? trier($s) : publies($s); }
